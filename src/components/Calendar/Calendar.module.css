@@ -1,0 +1,136 @@
+.root {
+  --rdp-accent-color: var(--color-primary-500);
+  --rdp-accent-background-color: var(--color-primary-50);
+  --rdp-today-color: var(--color-primary-500);
+  --rdp-day-height: 36px;
+  --rdp-day-width: 36px;
+  --rdp-day_button-height: 34px;
+  --rdp-day_button-width: 34px;
+  --rdp-day_button-border-radius: var(--r-md);
+  --rdp-selected-border: 1px solid var(--color-primary-300);
+  --rdp-outside-opacity: 0.4;
+  --rdp-disabled-opacity: 0.35;
+  --rdp-nav_button-height: 32px;
+  --rdp-nav_button-width: 32px;
+  --rdp-nav-height: 36px;
+  --rdp-weekday-opacity: 1;
+
+  font-family: inherit;
+  font-size: var(--text-body2-size);
+  line-height: var(--text-body2-line-height);
+  color: var(--color-gray-900);
+  background: var(--color-white);
+}
+
+.root :global(.rdp-month_caption) {
+  font-size: var(--text-subtitle3-size);
+  line-height: var(--text-subtitle3-line-height);
+  font-weight: var(--text-subtitle3-weight);
+  letter-spacing: var(--text-subtitle3-letter-spacing);
+  margin-bottom: 12px;
+}
+
+.root :global(.rdp-weekday) {
+  font-size: var(--text-caption1-size);
+  line-height: var(--text-caption1-line-height);
+  font-weight: var(--text-caption1-weight);
+  color: var(--color-text-secondary);
+  padding: 4px 0;
+}
+
+.root :global(.rdp-button_previous),
+.root :global(.rdp-button_next) {
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--r-md);
+  background: var(--color-white);
+}
+
+.root :global(.rdp-button_previous):hover:not(:disabled),
+.root :global(.rdp-button_next):hover:not(:disabled) {
+  background: var(--color-gray-50);
+  border-color: var(--color-gray-200);
+}
+
+.root :global(.rdp-chevron) {
+  width: 16px;
+  height: 16px;
+  fill: var(--color-text-secondary);
+}
+
+.root :global(.rdp-button_previous:hover:not(:disabled) .rdp-chevron),
+.root :global(.rdp-button_next:hover:not(:disabled) .rdp-chevron) {
+  fill: var(--color-gray-900);
+}
+
+.root :global(.rdp-selected .rdp-day_button) {
+  background: var(--color-primary-50);
+  color: var(--color-primary-500);
+  font-size: var(--text-subtitle3-size);
+  line-height: var(--text-subtitle3-line-height);
+  letter-spacing: var(--text-subtitle3-letter-spacing);
+}
+
+.root :global(.rdp-today:not(.rdp-selected) .rdp-day_button) {
+  font-weight: 600;
+  color: var(--color-primary-500);
+}
+
+.root :global(.rdp-day_button:hover:not(:disabled):not([aria-selected="true"])) {
+  background: var(--color-gray-50);
+}
+
+.monthRoot {
+  width: fit-content;
+  min-width: 252px;
+}
+
+.monthNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.monthCaption {
+  font-size: var(--text-subtitle3-size);
+  line-height: var(--text-subtitle3-line-height);
+  font-weight: var(--text-subtitle3-weight);
+  letter-spacing: var(--text-subtitle3-letter-spacing);
+}
+
+.monthGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.monthCell {
+  font-family: inherit;
+  font-size: var(--text-body2-size);
+  line-height: var(--text-body2-line-height);
+  font-weight: var(--text-body2-weight);
+  letter-spacing: var(--text-body2-letter-spacing);
+  padding: 10px 8px;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--r-md);
+  background: var(--color-white);
+  color: var(--color-gray-900);
+  cursor: pointer;
+}
+
+.monthCell:hover {
+  background: var(--color-gray-50);
+  border-color: var(--color-gray-200);
+}
+
+.monthSelected {
+  background: var(--color-primary-50);
+  border-color: var(--color-primary-300);
+  color: var(--color-primary-500);
+  font-weight: bold;
+}
+
+.monthSelected:hover {
+  background: var(--color-primary-100);
+}
