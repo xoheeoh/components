@@ -1,0 +1,71 @@
+{
+  "name": "@xoheeoh/components",
+  "version": "0.1.0",
+  "description": "React + TypeScript UI component library (CSS Modules + design tokens)",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xoheeoh/components.git"
+  },
+  "homepage": "https://github.com/xoheeoh/components#readme",
+  "bugs": {
+    "url": "https://github.com/xoheeoh/components/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "rm -rf dist && vite build && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "prepublishOnly": "npm run build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "dependencies": {
+    "@mdi/js": "^7.4.47",
+    "date-fns": "^4.4.0",
+    "react-day-picker": "^10.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^7.0.2",
+    "vite": "^5.4.10",
+    "storybook": "^10.5.8",
+    "@storybook/react-vite": "^10.5.8",
+    "@chromatic-com/storybook": "latest",
+    "@storybook/addon-vitest": "^10.5.8",
+    "@storybook/addon-a11y": "^10.5.8",
+    "@storybook/addon-docs": "^10.5.8",
+    "@storybook/addon-mcp": "latest",
+    "vitest": "latest",
+    "playwright": "latest",
+    "@vitest/browser-playwright": "latest",
+    "@vitest/coverage-v8": "latest"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
