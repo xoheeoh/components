@@ -1,4 +1,4 @@
-import { forwardRef, type ButtonHTMLAttributes, type CSSProperties } from "react";
+import { forwardRef, type ButtonHTMLAttributes, type CSSProperties, type ReactNode } from "react";
 import styles from "./Button.module.css";
 
 export type ButtonVariant =
@@ -14,6 +14,8 @@ export type ButtonVariant =
 export type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** 버튼 내용. 필수 */
+  children: ReactNode;
   variant?: ButtonVariant;
   /** size=icon은 icon 단독으로 쓰이는 경우(정사각형) */
   size?: ButtonSize;
