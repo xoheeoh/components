@@ -1,0 +1,86 @@
+.textButton {
+  padding: 4px 8px;
+  border: none;
+  background-color: transparent;
+  border-radius: var(--r-md);
+  transition: background 100ms ease, border-color 100ms ease, color 100ms ease, transform 80ms ease;
+  cursor: pointer;
+  height: var(--btn-height);
+  color: var(--btn-color);
+  font-size: var(--btn-font-size);
+  line-height: var(--btn-line-height);
+  letter-spacing: var(--btn-letter-spacing);
+  font-weight: var(--btn-font-weight);
+  font-family: var(--font-sans);
+}
+
+.textButton:hover:not(:disabled) {
+  background: var(--btn-hover-bg);
+  color: var(--btn-hover-color);
+}
+
+.textButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.textButton:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.labelHidden {
+  visibility: hidden;
+}
+
+.label .loadingSpinner {
+  position: absolute;
+}
+
+.labelContent {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ===== Colors ===== */
+.primary {
+  --btn-color: var(--semantic-primary-fg);
+  --btn-hover-bg: var(--semantic-primary-bg);
+  --btn-hover-color: var(--semantic-primary-fg);
+}
+
+.neutral {
+  --btn-color: var(--semantic-neutral-fg);
+  --btn-hover-bg: var(--semantic-neutral-hover-bg);
+  --btn-hover-color: var(--semantic-neutral-fg);
+}
+
+.destructive {
+  --btn-color: var(--semantic-error-fg);
+  --btn-hover-bg: var(--semantic-error-bg);
+  --btn-hover-color: var(--semantic-error-fg);
+}
+
+/* ===== Sizes ===== */
+.sm {
+  --btn-height: 28px;
+  --btn-font-size: var(--text-body2-size);
+  --btn-line-height: var(--text-body2-line-height);
+  --btn-letter-spacing: var(--text-body2-letter-spacing);
+  --btn-font-weight: var(--text-body2-weight);
+}
+
+.md {
+  --btn-height: 32px;
+  --btn-font-size: var(--text-body1-size);
+  --btn-line-height: var(--text-body1-line-height);
+  --btn-letter-spacing: var(--text-body1-letter-spacing);
+  --btn-font-weight: var(--text-body1-weight);
+}
