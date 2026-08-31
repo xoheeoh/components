@@ -10,6 +10,9 @@ export type { ButtonProps, ButtonVariant, ButtonSize } from "./Button";
 export { TextButton } from "./TextButton";
 export type { TextButtonProps, TextButtonColor } from "./TextButton";
 
+export { IconButton } from "./IconButton";
+export type { IconButtonProps, IconButtonVariant, IconButtonColor, IconButtonSize } from "./IconButton";
+
 export { Input } from "./Input";
 export type { InputProps, InputSize, InputIconPlacement } from "./Input";
 
