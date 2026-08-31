@@ -37,6 +37,23 @@
   --spinner-border: 4px;
 }
 
+/* ===== Colors ===== */
+.primary {
+  --spinner-color: var(--semantic-primary-fg);
+}
+
+.neutral {
+  --spinner-color: var(--semantic-neutral-fg);
+}
+
+.destructive {
+  --spinner-color: var(--semantic-error-fg);
+}
+
+.current {
+  --spinner-color: currentColor;
+}
+
 .visuallyHidden {
   position: absolute;
   width: 1px;

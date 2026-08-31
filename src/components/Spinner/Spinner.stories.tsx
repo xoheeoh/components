@@ -14,9 +14,10 @@ const meta = {
   title: "Components/Spinner",
   component: Spinner,
   tags: ["autodocs"],
-  args: { size: "md" },
+  args: { size: "md", color: "primary" },
   argTypes: {
     size: { control: "select", options: ["xs", "sm", "md", "lg"] },
+    color: { control: "select", options: ["primary", "neutral", "destructive", "current"] },
     label: { table: { disable: true } },
   },
   decorators: [
@@ -32,6 +33,16 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const Colors: Story = {
+  render: () => (
+    <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+      <Spinner color="primary" />
+      <Spinner color="neutral" />
+      <Spinner color="destructive" />
+    </div>
+  ),
+};
 
 export const Sizes: Story = {
   render: () => (
