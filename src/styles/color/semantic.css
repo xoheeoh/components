@@ -1,0 +1,66 @@
+/**
+ * Semantic color tokens
+ *
+ * 역할과 맥락에 따라 정의된 색상
+ * 값은 hex가 아니라 atomic 토큰을 가리킴
+ *
+ * 컴포넌트 CSS는 반드시 이 레이어만 참조해 사용
+ */
+
+:root {
+  /* ===== Static ===== */
+  --semantic-static-white: var(--atomic-common-0);
+  --semantic-static-black: var(--atomic-common-1000);
+
+  /* ===== Dimmer — 모달 등 뒤 배경을 가림 ===== */
+  --semantic-dimmer: color-mix(in srgb, var(--atomic-gray-900) 50%, transparent);
+
+  /* ===== Primary ===== */
+  --semantic-primary-bg: var(--atomic-blue-50);
+  --semantic-primary-fg: var(--atomic-blue-500);
+  --semantic-primary-border: var(--atomic-blue-300);
+  --semantic-primary-hover-bg: var(--atomic-blue-100);
+  --semantic-primary-hover-fg: var(--atomic-blue-600);
+  --semantic-primary-hover-border: var(--atomic-blue-400);
+
+  /* ===== Neutral ===== */
+  --semantic-neutral-bg: var(--atomic-common-0);
+  --semantic-neutral-fg: var(--atomic-gray-900);
+  --semantic-neutral-border: var(--atomic-gray-200);
+  --semantic-neutral-hover-bg: var(--atomic-gray-50);
+  --semantic-neutral-hover-fg: var(--atomic-gray-700);
+  --semantic-neutral-hover-border: var(--atomic-gray-300);
+
+  /* ===== Error ===== */
+  --semantic-error-bg: var(--atomic-red-50);
+  --semantic-error-fg: var(--atomic-red-500);
+  --semantic-error-border: var(--atomic-red-200);
+  --semantic-error-hover-bg: var(--atomic-red-100);
+  --semantic-error-hover-fg: var(--atomic-red-600);
+  --semantic-error-hover-border: var(--atomic-red-300);
+
+  /* ===== Positive ===== */
+  --semantic-positive-bg: var(--atomic-green-50);
+  --semantic-positive-fg: var(--atomic-green-600);
+  --semantic-positive-border: var(--atomic-green-400);
+
+  /* ===== Info ===== */
+  --semantic-info-bg: var(--atomic-blue-50);
+  --semantic-info-fg: var(--atomic-blue-500);
+  --semantic-info-border: var(--atomic-blue-200);
+
+  /* ===== Warning ===== */
+  --semantic-warning-bg: var(--atomic-orange-50);
+  --semantic-warning-fg: var(--atomic-orange-500);
+  --semantic-warning-border: var(--atomic-orange-300);
+
+  /* ===== Disabled ===== */
+  --semantic-disabled-bg: var(--atomic-gray-50);
+  --semantic-disabled-fg: var(--atomic-gray-400);
+  --semantic-disabled-border: var(--atomic-gray-200);
+
+  /* ===== Label ===== */
+  --semantic-label-normal: var(--atomic-gray-900);
+  --semantic-label-alternative: var(--atomic-gray-600);
+  --semantic-label-assistive: var(--atomic-gray-400);
+}

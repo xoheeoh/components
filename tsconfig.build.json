@@ -8,5 +8,6 @@
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/**/*.stories.ts", "src/**/*.stories.tsx", "src/styles/color/ColorPalette.tsx"]
 }

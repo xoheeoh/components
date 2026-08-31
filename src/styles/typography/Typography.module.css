@@ -1,0 +1,117 @@
+.page {
+  padding: 32px;
+  min-height: 100vh;
+  background: var(--atomic-gray-50);
+  color: var(--atomic-gray-900);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-heading2-size);
+  font-weight: var(--text-heading2-weight);
+  letter-spacing: var(--text-heading2-letter-spacing);
+  line-height: var(--text-heading2-line-height);
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: var(--text-body2-size);
+  font-weight: var(--text-body2-weight);
+  letter-spacing: var(--text-body2-letter-spacing);
+  line-height: var(--text-body2-line-height);
+  color: var(--atomic-gray-600);
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 0 0 40px;
+  padding: 16px 20px;
+  border-radius: var(--r-md);
+  background: var(--atomic-common-0);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.factName,
+.meta,
+.role {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: -0.24px;
+}
+
+.factName {
+  font-weight: 600;
+}
+
+.factValue {
+  overflow: hidden;
+  font-size: 12px;
+  color: var(--atomic-gray-500);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.group {
+  margin-bottom: 40px;
+}
+
+.groupTitle {
+  margin: 0 0 12px;
+  font-size: var(--text-subtitle2-size);
+  font-weight: var(--text-subtitle2-weight);
+  letter-spacing: var(--text-subtitle2-letter-spacing);
+  line-height: var(--text-subtitle2-line-height);
+}
+
+.row {
+  appearance: none;
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 16px 24px;
+  align-items: baseline;
+  width: 100%;
+  margin: 0;
+  padding: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--atomic-gray-200);
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.group .row:last-child {
+  border-bottom: 1px solid var(--atomic-gray-200);
+}
+
+.role {
+  font-weight: 600;
+}
+
+.sample {
+  margin: 0;
+  font-family: var(--font-sans);
+}
+
+.meta {
+  margin-top: 4px;
+  font-weight: 400;
+  color: var(--atomic-gray-500);
+}

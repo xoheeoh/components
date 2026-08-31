@@ -1,0 +1,102 @@
+.page {
+  padding: 32px;
+  min-height: 100vh;
+  background: var(--atomic-gray-50);
+  color: var(--atomic-gray-900);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-heading2-size);
+  font-weight: var(--text-heading2-weight);
+  letter-spacing: var(--text-heading2-letter-spacing);
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: var(--text-body2-size);
+  color: var(--atomic-gray-600);
+}
+
+.group {
+  margin-bottom: 48px;
+}
+
+.groupTitle {
+  margin: 0 0 20px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 40px;
+  padding: 8px 4px 24px;
+}
+
+.spread {
+  gap: 72px;
+  padding: 48px 24px 72px;
+}
+
+.item {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 112px;
+  border-radius: var(--r-lg);
+  background: var(--atomic-common-0);
+}
+
+.spread .card {
+  height: 140px;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.24px;
+}
+
+.value {
+  overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: -0.22px;
+  color: var(--atomic-gray-500);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

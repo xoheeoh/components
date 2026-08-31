@@ -1,41 +1,77 @@
-import { forwardRef, type ButtonHTMLAttributes, type CSSProperties, type ReactNode } from "react";
+import { forwardRef, ReactNode, type ButtonHTMLAttributes, type CSSProperties } from "react";
 import styles from "./Button.module.css";
+import { Spinner } from "../Spinner";
 
-export type ButtonVariant =
-  | "primary"
-  | "primary-soft"
-  | "secondary"
-  | "outline"
-  | "text"
-  | "destructive"
-  | "destructive-soft"
-  | "excel"
-  | "link";
-export type ButtonSize = "sm" | "md" | "lg" | "icon";
+export type ButtonVariant = "solid" | "outlined";
+export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonColor = "primary" | "neutral" | "destructive";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** 버튼 내용. 필수 */
-  children: ReactNode;
-  variant?: ButtonVariant;
-  /** size=icon은 icon 단독으로 쓰이는 경우(정사각형) */
-  size?: ButtonSize;
+  /** 버튼 라벨 (필수) */
+  label: string;
   type?: "button" | "submit" | "reset";
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  color?: ButtonColor;
   onClick?: () => void;
   disabled?: boolean;
   /** inline style. 예: `{ minWidth: 100 }` */
   style?: CSSProperties;
+  className?: string;
+
+  loading?: boolean;
+  /** 버튼 아이콘. 버튼 라벨 옆에 표시됨 */
+  icon?: ReactNode;
+  iconPosition?: "left" | "right";
+  iconOnly?: boolean;
 }
 
-/** 공용 버튼 컴포넌트 — Input, Select와 size(height) 동일하게 가져감 */
+/** 공용 버튼 컴포넌트 — Input, Select와 size(height) 동일 */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = "primary", size = "md", type = "button", onClick, disabled, className, style, children, ...rest },
+  {
+    label,
+    type = "button",
+    variant = "solid",
+    size = "md",
+    color = "primary",
+    onClick,
+    disabled,
+    style,
+    className,
+    loading,
+    icon,
+    iconPosition = "left",
+    iconOnly = false,
+    ...rest
+  },
   ref
 ) {
-  const classes = [styles.button, styles[variant], styles[size], className].filter(Boolean).join(" ");
+  const classes = [styles.button, styles[variant], styles[size], styles[color], iconOnly && styles.iconOnly, className]
+    .filter(Boolean)
+    .join(" ");
+  const spinnerSize = size === "lg" ? "md" : size === "sm" ? "xs" : "sm";
 
   return (
-    <button ref={ref} type={type} className={classes} style={style} onClick={onClick} disabled={disabled} {...rest}>
-      {children}
+    <button
+      ref={ref}
+      type={type}
+      className={classes}
+      style={style}
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={iconOnly ? label : undefined}
+      {...rest}>
+      <span className={styles.label}>
+        {loading ? (
+          <Spinner size={spinnerSize} className={styles.loadingSpinner} />
+        ) : (
+          <>
+            {icon && iconPosition === "left" && icon}
+            {iconOnly ? null : label}
+            {icon && iconPosition === "right" && icon}
+          </>
+        )}
+      </span>
     </button>
   );
 });

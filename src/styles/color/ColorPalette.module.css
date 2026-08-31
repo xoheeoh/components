@@ -1,0 +1,114 @@
+.page {
+  padding: 32px;
+  min-height: 100vh;
+  background: var(--color-semantic-bg-normal);
+  color: var(--color-semantic-label-normal);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-heading2-size);
+  font-weight: var(--text-heading2-weight);
+  letter-spacing: var(--text-heading2-letter-spacing);
+  color: var(--color-semantic-label-strong);
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: var(--text-body2-size);
+  color: var(--color-semantic-label-alternative);
+}
+
+.group {
+  margin-bottom: 40px;
+}
+
+.groupTitle {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  color: var(--color-semantic-label-strong);
+}
+
+.ramp {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.swatch {
+  appearance: none;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 72px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.chip {
+  position: relative;
+  height: 88px;
+}
+
+.ramp .swatch:first-child .chip {
+  border-radius: 8px 0 0 8px;
+}
+
+.ramp .swatch:last-child .chip {
+  border-radius: 0 8px 8px 0;
+}
+
+.ramp .swatch:only-child .chip {
+  border-radius: 8px;
+}
+
+.dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 12%);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 4px 0 0;
+}
+
+.name {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.24px;
+  color: var(--color-semantic-label-strong);
+  white-space: nowrap;
+}
+
+.value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.24px;
+  color: var(--color-semantic-label-alternative);
+  white-space: nowrap;
+}

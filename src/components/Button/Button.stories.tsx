@@ -1,90 +1,74 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { mdiDownload, mdiPlus } from "@mdi/js";
 import { fn } from "storybook/test";
+import { mdiPlus } from "@mdi/js";
 import { Icon } from "../Icon";
 import { Button } from "./Button";
 
 const meta = {
-  title: "Components/Button",
+  title: "Components/Action/Button",
   component: Button,
   tags: ["autodocs"],
-  args: { onClick: fn(), children: "버튼" },
+  args: {
+    onClick: fn(),
+    label: "버튼",
+    type: "button",
+    variant: "solid",
+    size: "md",
+    color: "primary",
+    disabled: false,
+  },
   argTypes: {
+    label: { control: "text" },
+    type: { control: "inline-radio", options: ["button", "submit", "reset"] },
     variant: {
       control: "select",
-      options: [
-        "primary",
-        "primary-soft",
-        "secondary",
-        "outline",
-        "text",
-        "destructive",
-        "destructive-soft",
-        "excel",
-        "link",
-      ],
+      options: ["solid", "outlined"],
     },
-    size: { control: "select", options: ["sm", "md", "lg", "icon"] },
+    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+    color: { control: "select", options: ["primary", "neutral", "destructive"] },
+    disabled: { control: "boolean" },
+    style: { table: { disable: true } },
+    className: { table: { disable: true } },
+    loading: { table: { disable: true } },
+    icon: { table: { disable: true } },
+    iconPosition: { table: { disable: true } },
+    iconOnly: { table: { disable: true } },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: { variant: "primary" },
-};
-
-export const Secondary: Story = {
-  args: { variant: "secondary" },
-};
-
-export const Outline: Story = {
-  args: { variant: "outline" },
-};
-
-export const Destructive: Story = {
-  args: { variant: "destructive", children: "삭제" },
-};
-
-export const Disabled: Story = {
-  args: { disabled: true },
+export const Default: Story = {
+  render: (args) => <Button {...args} />,
 };
 
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-      <Button size="sm">Small</Button>
-      <Button size="md">Medium</Button>
-      <Button size="lg">Large</Button>
+      <Button variant="outlined" color="neutral" size="sm" label="Small" />
+      <Button variant="outlined" color="neutral" size="md" label="Medium" />
+      <Button variant="outlined" color="neutral" size="lg" label="Large" />
     </div>
   ),
 };
 
+export const Loading: Story = {
+  render: (args) => <Button {...args} loading />,
+};
+
 export const WithIcon: Story = {
-  render: () => (
-    <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-      <Button>
-        <Icon path={mdiPlus} size={18} />
-        추가
-      </Button>
-      <Button variant="secondary">
-        <Icon path={mdiDownload} size={18} />
-        다운로드
-      </Button>
-      <Button variant="excel">
-        엑셀 다운로드
-        <Icon path={mdiDownload} size={18} />
-      </Button>
-    </div>
+  render: (args) => (
+    <Button
+      {...args}
+      size="md"
+      label="추가하기"
+      icon={<Icon path={mdiPlus} size={20} style={{ marginBottom: 1 }} />}
+      iconPosition="right"
+    />
   ),
 };
 
 export const IconOnly: Story = {
-  args: {
-    size: "icon",
-    variant: "outline",
-    "aria-label": "추가",
-    children: <Icon path={mdiPlus} size={20} />,
-  },
+  render: (args) => <Button {...args} iconOnly icon={<Icon path={mdiPlus} size={20} />} />,
 };
