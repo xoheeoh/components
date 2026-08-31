@@ -62,15 +62,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       aria-label={iconOnly ? label : undefined}
       {...rest}>
       <span className={styles.label}>
-        {loading ? (
-          <Spinner size={spinnerSize} className={styles.loadingSpinner} />
-        ) : (
-          <>
-            {icon && iconPosition === "left" && icon}
-            {iconOnly ? null : label}
-            {icon && iconPosition === "right" && icon}
-          </>
-        )}
+        <span className={loading ? styles.labelHidden : undefined} aria-hidden={loading || undefined}>
+          {icon && iconPosition === "left" && icon}
+          {iconOnly ? null : label}
+          {icon && iconPosition === "right" && icon}
+        </span>
+        {loading ? <Spinner size={spinnerSize} color="current" className={styles.loadingSpinner} /> : null}
       </span>
     </button>
   );

@@ -39,14 +39,20 @@
 }
 
 .label {
+  position: relative;
   margin-inline: var(--btn-label-margin);
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
 }
 
+.labelHidden {
+  visibility: hidden;
+}
+
 .label .loadingSpinner {
-  --spinner-color: currentColor;
+  position: absolute;
 }
 
 .iconOnly {
