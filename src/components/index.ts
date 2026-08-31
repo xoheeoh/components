@@ -7,6 +7,9 @@ export type { BannerProps, BannerType } from "./Banner";
 export { Button } from "./Button";
 export type { ButtonProps, ButtonVariant, ButtonSize } from "./Button";
 
+export { TextButton } from "./TextButton";
+export type { TextButtonProps, TextButtonColor } from "./TextButton";
+
 export { Input } from "./Input";
 export type { InputProps, InputSize, InputIconPlacement } from "./Input";
 
@@ -17,7 +20,7 @@ export { Calendar } from "./Calendar";
 export type { CalendarProps, CalendarMode, DateCalendarProps, MonthCalendarProps } from "./Calendar";
 
 export { Spinner } from "./Spinner";
-export type { SpinnerProps, SpinnerSize } from "./Spinner";
+export type { SpinnerProps, SpinnerSize, SpinnerColor } from "./Spinner";
 
 export { Dialog } from "./Dialog";
 export type { DialogProps, DialogSize } from "./Dialog";
