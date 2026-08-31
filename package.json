@@ -46,24 +46,25 @@
     "react-day-picker": "^10.0.1"
   },
   "devDependencies": {
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^4.3.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "typescript": "^7.0.2",
-    "vite": "^5.4.10",
-    "storybook": "^10.5.8",
-    "@storybook/react-vite": "^10.5.8",
     "@chromatic-com/storybook": "latest",
-    "@storybook/addon-vitest": "^10.5.8",
     "@storybook/addon-a11y": "^10.5.8",
     "@storybook/addon-docs": "^10.5.8",
     "@storybook/addon-mcp": "latest",
-    "vitest": "latest",
-    "playwright": "latest",
+    "@storybook/addon-vitest": "^10.5.8",
+    "@storybook/react-vite": "^10.5.8",
+    "@types/node": "^26.4.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.3.3",
     "@vitest/browser-playwright": "latest",
-    "@vitest/coverage-v8": "latest"
+    "@vitest/coverage-v8": "latest",
+    "playwright": "latest",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "storybook": "^10.5.8",
+    "typescript": "^7.0.2",
+    "vite": "^5.4.10",
+    "vitest": "latest"
   },
   "publishConfig": {
     "access": "public"

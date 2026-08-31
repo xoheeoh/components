@@ -1,45 +1,95 @@
-import { type CSSProperties, type ReactNode } from "react";
-import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from "@mdi/js";
-import { Icon } from "../Icon";
-import styles from "./Alert.module.css";
+import { type ReactNode } from "react";
+import { Button } from "../Button";
+import { Dialog } from "../Dialog";
 
-export type AlertType = "success" | "info" | "warning" | "error";
-
-export interface AlertProps {
-  /** 표시할 메시지. 없이 children 내용만 보여줄 수도 있음. */
-  message?: string;
-  type: AlertType;
-  /** 메시지 아래 상세 내용(응답 본문 등) */
-  children?: ReactNode;
-  className?: string;
-  style?: CSSProperties;
+export interface AlertAction {
+  label: string;
+  onClick?: () => void;
 }
 
-const ICON_BY_TYPE: Record<AlertType, string> = {
-  success: mdiCheckCircle,
-  info: mdiInformation,
-  warning: mdiAlert,
-  error: mdiAlertCircle,
-};
+export interface AlertProps {
+  open: boolean;
+  onClose: () => void;
 
-const ICON_CLASS_BY_TYPE: Record<AlertType, string> = {
-  success: styles.iconSuccess,
-  info: styles.iconInfo,
-  warning: styles.iconWarning,
-  error: styles.iconError,
-};
+  /** 제목. 없으면 본문과 액션만 표시 */
+  title?: string;
+  /** 본문 메시지 */
+  message?: ReactNode;
 
-/** 화면 레이아웃에 고정되는 인라인 알림 — Toast와 동일 비주얼, 자동 사라짐 없음 */
-export function Alert({ message, type, children, className, style }: AlertProps) {
-  const alertClass = [styles.alert, styles[type], className].filter(Boolean).join(" ");
+  /** 보조행동(닫기/취소 등) */
+  secondaryAction?: AlertAction;
+  /** 권장행동(확인, 이동 등) */
+  primaryAction?: AlertAction;
+  /** 부정행동(해제, 탈퇴 등) */
+  destructiveAction?: AlertAction;
+}
+
+/** window.alert / confirm을 대체하는 모달 알림 */
+export function Alert({
+  open,
+  onClose,
+  title,
+  message,
+  secondaryAction,
+  primaryAction,
+  destructiveAction,
+}: AlertProps) {
+  const run = (action?: AlertAction) => {
+    action?.onClick?.();
+    onClose();
+  };
+
+  const hasThreeActions = Boolean(secondaryAction && primaryAction && destructiveAction);
+  const destructiveVariant = hasThreeActions ? "outlined" : "solid";
+
+  const body =
+    message == null || message === false || message === "" ? undefined : typeof message === "string" ? (
+      <p style={{ margin: 0, whiteSpace: "pre-line" }}>{message}</p>
+    ) : (
+      message
+    );
 
   return (
-    <div role="status" aria-live="polite" className={alertClass} style={style}>
-      <Icon path={ICON_BY_TYPE[type]} size={20} className={[styles.icon, ICON_CLASS_BY_TYPE[type]].join(" ")} />
-      <div className={styles.body}>
-        {message && <p className={styles.message}>{message}</p>}
-        {children != null && children !== false && <div className={styles.detail}>{children}</div>}
-      </div>
-    </div>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      title={title}
+      size="sm"
+      role="alertdialog"
+      showCloseButton={false}
+      closeOnOverlayClick={false}
+      footer={
+        <>
+          {secondaryAction ? (
+            <Button
+              variant="outlined"
+              color="neutral"
+              label={secondaryAction.label}
+              onClick={() => run(secondaryAction)}
+              autoFocus={!primaryAction}
+            />
+          ) : null}
+          {destructiveAction ? (
+            <Button
+              variant={destructiveVariant}
+              color="destructive"
+              label={destructiveAction.label}
+              onClick={() => run(destructiveAction)}
+              autoFocus={!primaryAction && !secondaryAction}
+            />
+          ) : null}
+          {primaryAction ? (
+            <Button
+              variant="solid"
+              color="primary"
+              label={primaryAction.label}
+              onClick={() => run(primaryAction)}
+              autoFocus
+            />
+          ) : null}
+        </>
+      }>
+      {body}
+    </Dialog>
   );
 }

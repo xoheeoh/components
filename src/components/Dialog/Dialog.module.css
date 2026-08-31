@@ -1,0 +1,128 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--semantic-dimmer);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: min(100%, calc(100vh - 48px));
+  background: var(--semantic-neutral-bg);
+  color: var(--semantic-label-normal);
+  font-family: var(--font-sans);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-normal-lg);
+  overflow: hidden;
+  outline: none;
+}
+
+.sm {
+  max-width: 400px;
+}
+
+.md {
+  max-width: 640px;
+}
+
+.lg {
+  max-width: 880px;
+}
+
+.header {
+  display: flex;
+  align-items: first baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+  padding: 24px 24px 16px;
+}
+
+.heading {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-subtitle1-size);
+  font-weight: var(--text-subtitle1-weight);
+  letter-spacing: var(--text-subtitle1-letter-spacing);
+  line-height: var(--text-subtitle1-line-height);
+  color: var(--semantic-label-normal);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--text-body2-size);
+  font-weight: var(--text-body2-weight);
+  letter-spacing: var(--text-body2-letter-spacing);
+  line-height: var(--text-body2-line-height);
+  color: var(--semantic-label-assistive);
+  white-space: pre-line;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.closeButton {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin: 0 -4px 0 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--semantic-label-alternative);
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background: var(--semantic-disabled-bg);
+  color: var(--semantic-label-normal);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.content {
+  flex: 1;
+  min-height: 40px;
+  overflow: auto;
+  padding: 0 24px 16px;
+  font-size: var(--text-body2-size);
+  font-weight: var(--text-body2-weight);
+  letter-spacing: var(--text-body2-letter-spacing);
+  line-height: var(--text-body2-line-height);
+  color: var(--semantic-label-alternative);
+}
+
+.content:first-child,
+.footer:first-child {
+  padding-top: 24px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 0 24px 24px;
+}

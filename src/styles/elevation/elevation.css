@@ -1,0 +1,16 @@
+/**
+ * Elevation tokens
+ *
+ * box-shadow 값
+ */
+
+:root {
+  --shadow-normal-xs: 0px 1px 2px -1px #1717171a;
+  --shadow-normal-sm: 0px 2px 4px -2px #1717170f, 0px 4px 6px -1px #1717170f;
+  --shadow-normal-md: 0px 4px 6px -2px #17171712, 0px 10px 15px -3px #17171712;
+  --shadow-normal-lg: 0px 6px 10px -4px #17171714, 0px 16px 24px -6px #17171714;
+  --shadow-normal-xl: 0px 10px 15px -5px #1717171a, 0px 24px 38px -10px #1717171f;
+
+  --shadow-spread-sm: 0px 0px 60px 0px #1717171a;
+  --shadow-spread-md: 0px 15px 75px 0px #17171729;
+}

@@ -1,0 +1,134 @@
+/**
+ * Atomic color tokens
+ *
+ * 일관된 시각적 스타일을 유지하기 위해 정의된 색상 모음
+ * 단계 번호가 작을수록 밝고(50~100), 클수록 어두움(900)
+ * 기준 값은 500
+ *
+ */
+
+:root {
+  /* ===== Common ===== */
+  --atomic-common-0: #ffffff;
+  --atomic-common-1000: #000000;
+
+  /* ===== Gray ===== */
+  --atomic-gray-50: #f4f4f5;
+  --atomic-gray-100: #eaebec;
+  --atomic-gray-200: #dbdcdf;
+  --atomic-gray-300: #c2c4c8;
+  --atomic-gray-400: #aeb0b6;
+  --atomic-gray-500: #989ba2;
+  --atomic-gray-600: #7a7d85;
+  --atomic-gray-700: #46474c;
+  --atomic-gray-800: #2e2f33;
+  --atomic-gray-900: #141415;
+
+  /* ===== Blue ===== */
+  --atomic-blue-50: #eaf2fe;
+  --atomic-blue-100: #c9defe;
+  --atomic-blue-200: #9ec5ff;
+  --atomic-blue-300: #69a5ff;
+  --atomic-blue-400: #3385ff;
+  --atomic-blue-500: #0066ff;
+  --atomic-blue-600: #0054d1;
+  --atomic-blue-700: #003e9c;
+  --atomic-blue-800: #002966;
+  --atomic-blue-900: #001536;
+
+  /* ===== Red ===== */
+  --atomic-red-50: #fff5f5;
+  --atomic-red-100: #ffdadb;
+  --atomic-red-200: #ffbfbf;
+  --atomic-red-300: #ff8585;
+  --atomic-red-400: #ff5454;
+  --atomic-red-500: #ef2b2a;
+  --atomic-red-600: #da120d;
+  --atomic-red-700: #bf0a03;
+  --atomic-red-800: #9f0a01;
+  --atomic-red-900: #7d0800;
+
+  /* ===== Green ===== */
+  --atomic-green-50: #f1fcd1;
+  --atomic-green-100: #e1faa4;
+  --atomic-green-200: #c7f075;
+  --atomic-green-300: #abe151;
+  --atomic-green-400: #85ce1e;
+  --atomic-green-500: #6ab115;
+  --atomic-green-600: #51940f;
+  --atomic-green-700: #3c7709;
+  --atomic-green-800: #2c6205;
+  --atomic-green-900: #1d4301;
+
+  /* ===== Orange ===== */
+  --atomic-orange-50: #fef4e6;
+  --atomic-orange-100: #fee6c6;
+  --atomic-orange-200: #ffd49c;
+  --atomic-orange-300: #ffc06e;
+  --atomic-orange-400: #ffa938;
+  --atomic-orange-500: #ff9200;
+  --atomic-orange-600: #d47800;
+  --atomic-orange-700: #9c5800;
+  --atomic-orange-800: #663a00;
+  --atomic-orange-900: #361e00;
+
+  /* ===== Red Orange ===== */
+  --atomic-redOrange-50: #feeee5;
+  --atomic-redOrange-100: #fed9c4;
+  --atomic-redOrange-200: #ffbd96;
+  --atomic-redOrange-300: #ff9b61;
+  --atomic-redOrange-400: #ff7b2e;
+  --atomic-redOrange-500: #ff5e00;
+  --atomic-redOrange-600: #c94a00;
+  --atomic-redOrange-700: #913500;
+  --atomic-redOrange-800: #592100;
+  --atomic-redOrange-900: #290f00;
+
+  /* ===== Cyan ===== */
+  --atomic-cyan-50: #eaf9fa;
+  --atomic-cyan-100: #d1f5f8;
+  --atomic-cyan-200: #b8f0f6;
+  --atomic-cyan-300: #89e5ee;
+  --atomic-cyan-400: #62d4e2;
+  --atomic-cyan-500: #43bed0;
+  --atomic-cyan-600: #2da2b8;
+  --atomic-cyan-700: #1d7f97;
+  --atomic-cyan-800: #125a6f;
+  --atomic-cyan-900: #0a3545;
+
+  /* ===== Indigo ===== */
+  --atomic-indigo-50: #f5f5ff;
+  --atomic-indigo-100: #e4e4ff;
+  --atomic-indigo-200: #d2d2ff;
+  --atomic-indigo-300: #ababff;
+  --atomic-indigo-400: #8a8aff;
+  --atomic-indigo-500: #706ff7;
+  --atomic-indigo-600: #5855e2;
+  --atomic-indigo-700: #4741c7;
+  --atomic-indigo-800: #3931a8;
+  --atomic-indigo-900: #2d2587;
+
+  /* ===== Purple ===== */
+  --atomic-purple-50: #fbf5ff;
+  --atomic-purple-100: #f0dcfe;
+  --atomic-purple-200: #e5c4fc;
+  --atomic-purple-300: #ce95f8;
+  --atomic-purple-400: #b66ef0;
+  --atomic-purple-500: #9d50e5;
+  --atomic-purple-600: #823ad5;
+  --atomic-purple-700: #662ac0;
+  --atomic-purple-800: #4c1fa7;
+  --atomic-purple-900: #37188c;
+
+  /* ===== Pink ===== */
+  --atomic-pink-50: #fff2fc;
+  --atomic-pink-100: #fecff2;
+  --atomic-pink-200: #fcade9;
+  --atomic-pink-300: #f76dd9;
+  --atomic-pink-400: #ef39cc;
+  --atomic-pink-500: #e413c3;
+  --atomic-pink-600: #d300be;
+  --atomic-pink-700: #bd00b8;
+  --atomic-pink-800: #9c00a3;
+  --atomic-pink-900: #64009a;
+}
