@@ -13,8 +13,8 @@ export type { TextButtonProps, TextButtonColor } from "./TextButton";
 export { IconButton } from "./IconButton";
 export type { IconButtonProps, IconButtonVariant, IconButtonColor, IconButtonSize } from "./IconButton";
 
-export { Input } from "./Input";
-export type { InputProps, InputSize, InputIconPlacement } from "./Input";
+export { TextInput } from "./TextInput";
+export type { TextInputProps, TextInputSize } from "./TextInput";
 
 export { Icon } from "./Icon";
 export type { IconProps, IconPath } from "./Icon";
