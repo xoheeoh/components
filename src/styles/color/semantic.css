@@ -18,10 +18,10 @@
   /* ===== Primary ===== */
   --semantic-primary-bg: var(--atomic-blue-50);
   --semantic-primary-fg: var(--atomic-blue-500);
-  --semantic-primary-border: var(--atomic-blue-300);
+  --semantic-primary-border: var(--atomic-blue-200);
   --semantic-primary-hover-bg: var(--atomic-blue-100);
   --semantic-primary-hover-fg: var(--atomic-blue-600);
-  --semantic-primary-hover-border: var(--atomic-blue-400);
+  --semantic-primary-hover-border: var(--atomic-blue-300);
 
   /* ===== Neutral ===== */
   --semantic-neutral-bg: var(--atomic-common-0);
@@ -58,6 +58,7 @@
   --semantic-disabled-bg: var(--atomic-gray-50);
   --semantic-disabled-fg: var(--atomic-gray-400);
   --semantic-disabled-border: var(--atomic-gray-200);
+  --semantic-disabled-fg-assistive: var(--atomic-gray-300);
 
   /* ===== Label ===== */
   --semantic-label-normal: var(--atomic-gray-900);
