@@ -68,7 +68,7 @@ export interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   placeholder?: string;
 }
 
-/** 공통 입력 필드 컴포넌트 */
+/** 짧은 텍스트용 공통 입력 필드 컴포넌트 */
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
   {
     label,
