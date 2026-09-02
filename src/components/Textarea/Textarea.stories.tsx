@@ -29,6 +29,8 @@ const meta = {
     fixedHeight: { control: "number" },
     characterCount: { control: "boolean" },
     maxLength: { control: "number" },
+    style: { table: { disable: true } },
+    className: { table: { disable: true } },
   },
 } satisfies Meta<typeof Textarea>;
 
@@ -51,4 +53,8 @@ export const FixedHeight: Story = {
 
 export const Disabled: Story = {
   args: { label: "비활성", disabled: true, value: "수정할 수 없습니다", description: "", rows: 3 },
+};
+
+export const FixedWidth: Story = {
+  args: { style: { width: 400 }, rows: 3 },
 };
