@@ -41,3 +41,6 @@ export type {
 
 export { Textarea } from "./Textarea";
 export type { TextareaProps, TextareaSize } from "./Textarea";
+
+export { Select } from "./Select";
+export type { SelectProps, SelectSingleProps, SelectMultipleProps, SelectOption, SelectSize } from "./Select";
