@@ -26,6 +26,8 @@ const meta = {
     description: { control: "text" },
     disabled: { table: { disable: true } },
     type: { control: "text" },
+    style: { table: { disable: true } },
+    className: { table: { disable: true } },
   },
 } satisfies Meta<typeof TextInput>;
 
@@ -51,4 +53,8 @@ export const TypePassword: Story = {
     placeholder: "비밀번호를 입력하세요.",
     description: "영문, 숫자, 특수문자 조합 8자 이상",
   },
+};
+
+export const FixedWidth: Story = {
+  args: { style: { width: 200 } },
 };

@@ -4,6 +4,7 @@ import {
   useRef,
   useState,
   type ChangeEvent,
+  type CSSProperties,
   type HTMLInputTypeAttribute,
   type InputHTMLAttributes,
 } from "react";
@@ -66,6 +67,9 @@ export interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   disabled?: boolean;
   type?: HTMLInputTypeAttribute;
   placeholder?: string;
+  /** inline style. 예: `{ width: 200 }` */
+  style?: CSSProperties;
+  className?: string;
 }
 
 /** 짧은 텍스트용 공통 입력 필드 컴포넌트 */
@@ -84,6 +88,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
     value,
     defaultValue,
     onChange,
+    style,
+    className,
     ...rest
   },
   ref
@@ -179,7 +185,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
     ) : null;
 
   return (
-    <div className={styles.field}>
+    <div className={[styles.field, className].filter(Boolean).join(" ")} style={style}>
       {label && (
         <span className={labelClass}>
           {label}

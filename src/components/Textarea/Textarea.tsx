@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
   type ChangeEvent,
+  type CSSProperties,
   type TextareaHTMLAttributes,
 } from "react";
 import styles from "./Textarea.module.css";
@@ -43,6 +44,9 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   /** 최대 글자 수 카운트 표시 여부. maxLength와 함께 사용해야 0 / maxLength 형태로 표시됨 */
   characterCount?: boolean;
   maxLength?: number;
+  /** inline style. 예: `{ width: 200 }` */
+  style?: CSSProperties;
+  className?: string;
 }
 
 function syncTextareaHeight(el: HTMLTextAreaElement) {
@@ -75,6 +79,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
     defaultValue,
     onChange,
     style,
+    className,
     ...rest
   },
   ref
@@ -114,7 +119,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
   const badgeClass = [styles.statusBadge, styles[size], styles[status]].filter(Boolean).join(" ");
 
   return (
-    <div className={styles.field}>
+    <div className={[styles.field, className].filter(Boolean).join(" ")} style={style}>
       {label && (
         <span className={labelClass}>
           {label}
@@ -132,10 +137,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
           defaultValue={defaultValue}
           {...rest}
           maxLength={maxLength}
-          style={{
-            ...style,
-            ...(resize === "fixed" && fixedHeight != null ? { height: fixedHeight } : undefined),
-          }}
+          style={resize === "fixed" && fixedHeight != null ? { height: fixedHeight } : undefined}
           onChange={handleChange}
         />
 
