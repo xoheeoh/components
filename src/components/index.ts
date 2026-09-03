@@ -44,3 +44,12 @@ export type { TextareaProps, TextareaSize } from "./Textarea";
 
 export { Select } from "./Select";
 export type { SelectProps, SelectSingleProps, SelectMultipleProps, SelectOption, SelectSize } from "./Select";
+
+export { Checkbox, CheckboxGroup } from "./Checkbox";
+export type {
+  CheckboxProps,
+  CheckboxGroupProps,
+  CheckboxGroupDirection,
+  CheckboxSize,
+  CheckboxGroupOption,
+} from "./Checkbox";
