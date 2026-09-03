@@ -53,3 +53,6 @@ export type {
   CheckboxSize,
   CheckboxGroupOption,
 } from "./Checkbox";
+
+export { Radio, RadioGroup } from "./Radio";
+export type { RadioProps, RadioSize, RadioGroupProps, RadioGroupDirection, RadioGroupOption } from "./Radio";
