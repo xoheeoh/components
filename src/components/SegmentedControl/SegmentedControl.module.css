@@ -1,0 +1,218 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.fullWidth .control {
+  display: grid;
+  width: 100%;
+}
+
+.label {
+  font-size: var(--label-font-size);
+  font-weight: var(--label-font-weight);
+  letter-spacing: var(--label-letter-spacing);
+  line-height: var(--label-line-height);
+  color: var(--semantic-label-normal);
+}
+
+.control {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(100px, 1fr);
+  align-items: stretch;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 100%;
+  height: var(--control-height);
+  padding: var(--control-padding);
+  gap: 2px;
+  background-color: var(--control-bg);
+  border: 0;
+  border-radius: var(--r-md);
+}
+
+.segment {
+  min-width: 100px;
+  width: 100%;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 var(--segment-padding-x);
+  height: 100%;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: var(--segment-bg);
+  font: inherit;
+  font-size: var(--segment-font-size);
+  font-weight: var(--segment-font-weight);
+  letter-spacing: var(--segment-letter-spacing);
+  line-height: var(--segment-line-height);
+  color: var(--segment-color);
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: var(--segment-shadow);
+  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.segmentIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.segmentIcon :global(.mdi-icon),
+.segmentIcon svg {
+  display: block;
+  width: var(--segment-icon-size) !important;
+  height: var(--segment-icon-size) !important;
+}
+
+.segment:hover:not([aria-checked="true"]) {
+  color: var(--segment-hover-color);
+  background-color: var(--segment-hover-bg);
+}
+
+.segment[aria-checked="true"] {
+  background-color: var(--segment-selected-bg);
+  color: var(--segment-selected-color);
+  font-weight: var(--text-subtitle3-weight);
+  box-shadow: var(--segment-selected-shadow);
+}
+
+.segment:focus {
+  outline: none;
+}
+
+.segment:focus-visible {
+  outline: 2px solid var(--semantic-primary-border);
+  outline-offset: 2px;
+}
+
+/* ===== Types ===== */
+.solid {
+  --control-bg: var(--semantic-disabled-bg);
+  --control-border: transparent;
+  --segment-bg: transparent;
+  --segment-color: var(--semantic-label-alternative);
+  --segment-shadow: none;
+  --segment-hover-bg: var(--semantic-neutral-hover-bg);
+  --segment-hover-color: var(--semantic-label-normal);
+  --segment-selected-bg: var(--semantic-static-white);
+  --segment-selected-color: var(--semantic-label-normal);
+  --segment-selected-shadow: var(--shadow-normal-xs);
+}
+
+.outlined {
+  --control-bg: var(--semantic-static-white);
+  --control-border: transparent;
+  --segment-bg: transparent;
+  --segment-color: var(--semantic-label-alternative);
+  --segment-shadow: none;
+  --segment-hover-bg: transparent;
+  --segment-hover-color: var(--semantic-label-normal);
+  --segment-selected-bg: var(--semantic-primary-bg);
+  --segment-selected-color: var(--semantic-primary-fg);
+  --segment-selected-shadow: inset 0 0 0 1px var(--semantic-primary-fg);
+}
+
+.outlined .control {
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--semantic-neutral-border);
+}
+
+.outlined .segment {
+  position: relative;
+  border-radius: 0;
+}
+
+.outlined .segment:first-child {
+  border-start-start-radius: var(--r-md);
+  border-end-start-radius: var(--r-md);
+}
+
+.outlined .segment:last-child {
+  border-start-end-radius: var(--r-md);
+  border-end-end-radius: var(--r-md);
+}
+
+.outlined .segment[aria-checked="true"] {
+  z-index: 1;
+}
+
+.outlined .segment:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: 0;
+  width: 1px;
+  background-color: var(--semantic-neutral-border);
+}
+
+.outlined .segment[aria-checked="true"]::before,
+.outlined .segment[aria-checked="true"] + .segment::before {
+  opacity: 0;
+}
+
+/* ===== Sizes ===== */
+.sm {
+  --label-font-size: var(--text-subtitle4-size);
+  --label-font-weight: var(--text-subtitle4-weight);
+  --label-letter-spacing: var(--text-subtitle4-letter-spacing);
+  --label-line-height: var(--text-subtitle4-line-height);
+
+  --control-height: 32px;
+  --control-padding: 3px;
+  --segment-padding-x: 10px;
+  --segment-font-size: var(--text-caption1-size);
+  --segment-font-weight: var(--text-caption1-weight);
+  --segment-letter-spacing: var(--text-caption1-letter-spacing);
+  --segment-line-height: var(--text-caption1-line-height);
+  --segment-icon-size: 14px;
+}
+
+.md {
+  --label-font-size: var(--text-subtitle3-size);
+  --label-font-weight: var(--text-subtitle3-weight);
+  --label-letter-spacing: var(--text-subtitle3-letter-spacing);
+  --label-line-height: var(--text-subtitle3-line-height);
+
+  --control-height: 40px;
+  --control-padding: 3px;
+  --segment-padding-x: 12px;
+  --segment-font-size: var(--text-body2-size);
+  --segment-font-weight: var(--text-body2-weight);
+  --segment-letter-spacing: var(--text-body2-letter-spacing);
+  --segment-line-height: var(--text-body2-line-height);
+  --segment-icon-size: 16px;
+}
+
+.lg {
+  --label-font-size: var(--text-subtitle3-size);
+  --label-font-weight: var(--text-subtitle3-weight);
+  --label-letter-spacing: var(--text-subtitle3-letter-spacing);
+  --label-line-height: var(--text-subtitle3-line-height);
+
+  --control-height: 48px;
+  --control-padding: 3px;
+  --segment-padding-x: 16px;
+  --segment-font-size: var(--text-body1-size);
+  --segment-font-weight: var(--text-body1-weight);
+  --segment-letter-spacing: var(--text-body1-letter-spacing);
+  --segment-line-height: var(--text-body1-line-height);
+  --segment-icon-size: 18px;
+}

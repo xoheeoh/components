@@ -59,3 +59,11 @@ export type { RadioProps, RadioSize, RadioGroupProps, RadioGroupDirection, Radio
 
 export { Switch } from "./Switch";
 export type { SwitchProps, SwitchSize } from "./Switch";
+
+export { SegmentedControl } from "./SegmentedControl";
+export type {
+  SegmentedControlProps,
+  SegmentedControlSize,
+  SegmentedControlType,
+  SegmentedControlOption,
+} from "./SegmentedControl";
