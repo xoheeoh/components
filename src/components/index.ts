@@ -56,3 +56,6 @@ export type {
 
 export { Radio, RadioGroup } from "./Radio";
 export type { RadioProps, RadioSize, RadioGroupProps, RadioGroupDirection, RadioGroupOption } from "./Radio";
+
+export { Switch } from "./Switch";
+export type { SwitchProps, SwitchSize } from "./Switch";
