@@ -1,0 +1,195 @@
+.root {
+  --tooltip-gap: 8px;
+  --arrow-size: 8px;
+  --arrow-inset: 12px;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 50;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 350px;
+  font-family: var(--font-sans);
+  background: var(--tooltip-background-color);
+  border: 1px solid var(--tooltip-border-color);
+  color: var(--tooltip-text-color);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  box-shadow: var(--shadow-normal-sm);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 120ms ease, visibility 120ms ease;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  box-sizing: border-box;
+  background: var(--tooltip-arrow-color);
+  border: 1px solid var(--tooltip-border-color);
+  transform: rotate(45deg);
+}
+
+.root:hover .tooltip,
+.root:focus-within .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== Theme ===== */
+.light {
+  --tooltip-background-color: var(--semantic-static-white);
+  --tooltip-arrow-color: var(--semantic-static-white);
+  --tooltip-border-color: var(--semantic-neutral-border);
+  --tooltip-text-color: var(--semantic-label-normal);
+}
+
+.dark {
+  --tooltip-background-color: var(--semantic-neutral-fg);
+  --tooltip-arrow-color: var(--semantic-neutral-fg);
+  --tooltip-border-color: var(--semantic-neutral-fg);
+  --tooltip-text-color: var(--semantic-static-white);
+}
+
+/* ===== Sizes ===== */
+.md {
+  padding: 8px 12px;
+  font-size: var(--text-body2-size);
+  font-weight: var(--text-body2-weight);
+  letter-spacing: var(--text-body2-letter-spacing);
+  line-height: var(--text-body2-line-height);
+  border-radius: var(--r-md);
+}
+
+.sm {
+  padding: 5px 8px;
+  font-size: var(--text-caption1-size);
+  font-weight: var(--text-caption1-weight);
+  letter-spacing: var(--text-caption1-letter-spacing);
+  line-height: var(--text-caption1-line-height);
+  border-radius: var(--r-sm);
+}
+
+/* ===== Position ===== */
+.top {
+  bottom: calc(100% + var(--tooltip-gap));
+}
+
+.bottom {
+  top: calc(100% + var(--tooltip-gap));
+}
+
+.right {
+  left: calc(100% + var(--tooltip-gap));
+}
+
+.left {
+  right: calc(100% + var(--tooltip-gap));
+}
+
+.top::after {
+  top: 100%;
+  margin-top: calc(var(--arrow-size) / -2);
+  border-top: none;
+  border-left: none;
+}
+
+.bottom::after {
+  bottom: 100%;
+  margin-bottom: calc(var(--arrow-size) / -2);
+  border-bottom: none;
+  border-right: none;
+}
+
+.right::after {
+  right: 100%;
+  margin-right: calc(var(--arrow-size) / -2);
+  border-right: none;
+  border-top: none;
+}
+
+.left::after {
+  left: 100%;
+  margin-left: calc(var(--arrow-size) / -2);
+  border-left: none;
+  border-bottom: none;
+}
+
+.top[data-align="leading"],
+.bottom[data-align="leading"] {
+  left: 50%;
+  transform: translateX(calc(-1 * (var(--arrow-inset) + var(--arrow-size) / 2)));
+}
+
+.top[data-align="center"],
+.bottom[data-align="center"] {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.top[data-align="trailing"],
+.bottom[data-align="trailing"] {
+  left: 50%;
+  transform: translateX(calc(-100% + var(--arrow-inset) + var(--arrow-size) / 2));
+}
+
+.right[data-align="top"],
+.left[data-align="top"] {
+  top: 50%;
+  transform: translateY(calc(-1 * (var(--arrow-inset) + var(--arrow-size) / 2)));
+}
+
+.right[data-align="center"],
+.left[data-align="center"] {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.right[data-align="bottom"],
+.left[data-align="bottom"] {
+  top: 50%;
+  transform: translateY(calc(-100% + var(--arrow-inset) + var(--arrow-size) / 2));
+}
+
+.top[data-align="leading"]::after,
+.bottom[data-align="leading"]::after {
+  left: var(--arrow-inset);
+}
+
+.top[data-align="center"]::after,
+.bottom[data-align="center"]::after {
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.top[data-align="trailing"]::after,
+.bottom[data-align="trailing"]::after {
+  right: var(--arrow-inset);
+  left: auto;
+}
+
+.right[data-align="top"]::after,
+.left[data-align="top"]::after {
+  top: var(--arrow-inset);
+}
+
+.right[data-align="center"]::after,
+.left[data-align="center"]::after {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.right[data-align="bottom"]::after,
+.left[data-align="bottom"]::after {
+  bottom: var(--arrow-inset);
+  top: auto;
+}
