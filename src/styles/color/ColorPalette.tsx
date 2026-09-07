@@ -64,7 +64,7 @@ function rgbToHex(rgb: string): string {
 
 function tokenFamily(name: string, prefix: string): string {
   const rest = name.slice(prefix.length);
-  if (prefix === "--color-atomic-") return rest.replace(/-\d+$/, "");
+  if (prefix === "--atomic-") return rest.replace(/-\d+$/, "");
   const dash = rest.indexOf("-");
   return dash === -1 ? rest : rest.slice(0, dash);
 }

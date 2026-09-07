@@ -16,7 +16,6 @@
   max-height: min(100%, calc(100vh - 48px));
   background: var(--semantic-neutral-bg);
   color: var(--semantic-label-normal);
-  font-family: var(--font-sans);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-normal-lg);
   overflow: hidden;
@@ -96,8 +95,7 @@
 }
 
 .closeButton:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 1px;
+  outline: none;
 }
 
 .content {

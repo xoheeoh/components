@@ -1,8 +1,6 @@
 .page {
   padding: 32px;
   min-height: 100vh;
-  background: var(--color-semantic-bg-normal);
-  color: var(--color-semantic-label-normal);
 }
 
 .header {
@@ -18,13 +16,13 @@
   font-size: var(--text-heading2-size);
   font-weight: var(--text-heading2-weight);
   letter-spacing: var(--text-heading2-letter-spacing);
-  color: var(--color-semantic-label-strong);
+  color: var(--semantic-label-normal);
 }
 
 .subtitle {
   margin: 8px 0 0;
   font-size: var(--text-body2-size);
-  color: var(--color-semantic-label-alternative);
+  color: var(--semantic-label-alternative);
 }
 
 .group {
@@ -36,7 +34,7 @@
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.32px;
-  color: var(--color-semantic-label-strong);
+  color: var(--semantic-label-normal);
 }
 
 .ramp {
@@ -85,7 +83,7 @@
   height: 8px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 12%);
+  box-shadow: var(--shadow-normal-md);
 }
 
 .meta {
@@ -100,7 +98,7 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: -0.24px;
-  color: var(--color-semantic-label-strong);
+  color: var(--semantic-label-normal);
   white-space: nowrap;
 }
 
@@ -109,6 +107,6 @@
   font-size: 12px;
   font-weight: 400;
   letter-spacing: -0.24px;
-  color: var(--color-semantic-label-alternative);
+  color: var(--semantic-label-assistive);
   white-space: nowrap;
 }
