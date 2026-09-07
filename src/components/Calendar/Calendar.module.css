@@ -1,13 +1,13 @@
 .root {
-  --rdp-accent-color: var(--color-primary-500);
-  --rdp-accent-background-color: var(--color-primary-50);
-  --rdp-today-color: var(--color-primary-500);
+  --rdp-accent-color: var(--semantic-primary-fg);
+  --rdp-accent-background-color: var(--semantic-primary-bg);
+  --rdp-today-color: var(--semantic-primary-fg);
   --rdp-day-height: 36px;
   --rdp-day-width: 36px;
   --rdp-day_button-height: 34px;
   --rdp-day_button-width: 34px;
   --rdp-day_button-border-radius: var(--r-md);
-  --rdp-selected-border: 1px solid var(--color-primary-300);
+  --rdp-selected-border: 1px solid var(--semantic-primary-border);
   --rdp-outside-opacity: 0.4;
   --rdp-disabled-opacity: 0.35;
   --rdp-nav_button-height: 32px;
@@ -15,16 +15,13 @@
   --rdp-nav-height: 36px;
   --rdp-weekday-opacity: 1;
 
-  font-family: inherit;
   font-size: var(--text-body2-size);
-  line-height: var(--text-body2-line-height);
-  color: var(--color-gray-900);
-  background: var(--color-white);
+  color: var(--semantic-label-normal);
+  background: var(--semantic-static-white);
 }
 
 .root :global(.rdp-month_caption) {
   font-size: var(--text-subtitle3-size);
-  line-height: var(--text-subtitle3-line-height);
   font-weight: var(--text-subtitle3-weight);
   letter-spacing: var(--text-subtitle3-letter-spacing);
   margin-bottom: 12px;
@@ -32,51 +29,52 @@
 
 .root :global(.rdp-weekday) {
   font-size: var(--text-caption1-size);
-  line-height: var(--text-caption1-line-height);
   font-weight: var(--text-caption1-weight);
-  color: var(--color-text-secondary);
+  color: var(--semantic-label-alternative);
   padding: 4px 0;
 }
 
 .root :global(.rdp-button_previous),
 .root :global(.rdp-button_next) {
-  border: 1px solid var(--color-border-default);
+  border: 1px solid var(--semantic-neutral-border);
   border-radius: var(--r-md);
-  background: var(--color-white);
+  background: var(--semantic-static-white);
 }
 
 .root :global(.rdp-button_previous):hover:not(:disabled),
 .root :global(.rdp-button_next):hover:not(:disabled) {
-  background: var(--color-gray-50);
-  border-color: var(--color-gray-200);
+  background: var(--semantic-neutral-hover-bg);
+  border-color: var(--semantic-neutral-hover-border);
 }
 
 .root :global(.rdp-chevron) {
-  width: 16px;
-  height: 16px;
-  fill: var(--color-text-secondary);
+  color: var(--semantic-label-alternative);
 }
 
 .root :global(.rdp-button_previous:hover:not(:disabled) .rdp-chevron),
 .root :global(.rdp-button_next:hover:not(:disabled) .rdp-chevron) {
-  fill: var(--color-gray-900);
+  color: var(--semantic-label-normal);
+}
+
+.root :global(.rdp-button_previous:disabled .rdp-chevron),
+.root :global(.rdp-button_next:disabled .rdp-chevron) {
+  color: var(--semantic-disabled-fg);
 }
 
 .root :global(.rdp-selected .rdp-day_button) {
-  background: var(--color-primary-50);
-  color: var(--color-primary-500);
+  background: var(--semantic-primary-bg);
+  color: var(--semantic-primary-fg);
   font-size: var(--text-subtitle3-size);
-  line-height: var(--text-subtitle3-line-height);
   letter-spacing: var(--text-subtitle3-letter-spacing);
 }
 
 .root :global(.rdp-today:not(.rdp-selected) .rdp-day_button) {
   font-weight: 600;
-  color: var(--color-primary-500);
+  color: var(--semantic-primary-fg);
 }
 
 .root :global(.rdp-day_button:hover:not(:disabled):not([aria-selected="true"])) {
-  background: var(--color-gray-50);
+  background: var(--semantic-neutral-hover-bg);
 }
 
 .monthRoot {
@@ -94,7 +92,6 @@
 
 .monthCaption {
   font-size: var(--text-subtitle3-size);
-  line-height: var(--text-subtitle3-line-height);
   font-weight: var(--text-subtitle3-weight);
   letter-spacing: var(--text-subtitle3-letter-spacing);
 }
@@ -106,31 +103,29 @@
 }
 
 .monthCell {
-  font-family: inherit;
   font-size: var(--text-body2-size);
-  line-height: var(--text-body2-line-height);
   font-weight: var(--text-body2-weight);
   letter-spacing: var(--text-body2-letter-spacing);
   padding: 10px 8px;
-  border: 1px solid var(--color-border-default);
+  border: 1px solid var(--semantic-neutral-border);
   border-radius: var(--r-md);
-  background: var(--color-white);
-  color: var(--color-gray-900);
+  background: var(--semantic-static-white);
+  color: var(--semantic-label-normal);
   cursor: pointer;
 }
 
 .monthCell:hover {
-  background: var(--color-gray-50);
-  border-color: var(--color-gray-200);
+  background: var(--semantic-neutral-hover-bg);
+  border-color: var(--semantic-neutral-hover-border);
 }
 
 .monthSelected {
-  background: var(--color-primary-50);
-  border-color: var(--color-primary-300);
-  color: var(--color-primary-500);
-  font-weight: bold;
+  background: var(--semantic-primary-bg);
+  border-color: var(--semantic-primary-border);
+  color: var(--semantic-primary-fg);
+  font-weight: var(--text-subtitle3-weight);
 }
 
 .monthSelected:hover {
-  background: var(--color-primary-100);
+  background: var(--semantic-primary-hover-bg);
 }

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { ko as dateFnsKo } from "date-fns/locale";
-import { Chevron, DayPicker, type PropsBase, type PropsSingle } from "react-day-picker";
+import { mdiChevronDown, mdiChevronLeft, mdiChevronRight, mdiChevronUp } from "@mdi/js";
+import { DayPicker, type ChevronProps, type PropsBase, type PropsSingle } from "react-day-picker";
 import { ko } from "react-day-picker/locale";
 import "react-day-picker/style.css";
+import { Icon } from "../Icon";
 import styles from "./Calendar.module.css";
 
 export type CalendarMode = "date" | "month";
@@ -28,9 +30,21 @@ export type CalendarProps = DateCalendarProps | MonthCalendarProps;
 
 const MONTHS = Array.from({ length: 12 }, (_, i) => i);
 
+const CHEVRON_PATH = {
+  left: mdiChevronLeft,
+  right: mdiChevronRight,
+  up: mdiChevronUp,
+  down: mdiChevronDown,
+} as const;
+
+function CalendarChevron({ className, orientation = "left", size = 16 }: ChevronProps) {
+  return <Icon path={CHEVRON_PATH[orientation]} size={size} className={className} />;
+}
+
 function DateCalendar({
   className,
   classNames,
+  components,
   locale = ko,
   showOutsideDays = true,
   mode: _mode,
@@ -38,6 +52,7 @@ function DateCalendar({
 }: DateCalendarProps) {
   return (
     <DayPicker
+      {...rest}
       mode="single"
       locale={locale}
       showOutsideDays={showOutsideDays}
@@ -45,7 +60,7 @@ function DateCalendar({
       classNames={{
         ...classNames,
       }}
-      {...rest}
+      components={{ Chevron: CalendarChevron, ...components }}
     />
   );
 }
@@ -64,11 +79,11 @@ function MonthCalendar({ selected, onSelect, year: controlledYear, onYearChange,
     <div className={[styles.root, styles.monthRoot, className].filter(Boolean).join(" ")}>
       <div className={styles.monthNav}>
         <button type="button" className="rdp-button_previous" aria-label="이전 해" onClick={() => setYear(year - 1)}>
-          <Chevron orientation="left" className="rdp-chevron" />
+          <CalendarChevron orientation="left" className="rdp-chevron" />
         </button>
         <span className={styles.monthCaption}>{year}년</span>
         <button type="button" className="rdp-button_next" aria-label="다음 해" onClick={() => setYear(year + 1)}>
-          <Chevron orientation="right" className="rdp-chevron" />
+          <CalendarChevron orientation="right" className="rdp-chevron" />
         </button>
       </div>
       <div className={styles.monthGrid} role="listbox" aria-label="월 선택">
