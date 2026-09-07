@@ -31,7 +31,6 @@
   border-radius: var(--r-md);
   background: var(--semantic-neutral-bg);
   color: var(--semantic-neutral-fg);
-  font-family: var(--font-sans);
   border: 1px solid var(--semantic-neutral-border);
   box-sizing: border-box;
   box-shadow: var(--shadow-normal-md);
@@ -139,8 +138,7 @@
 }
 
 .action:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
+  outline: none;
 }
 
 @keyframes toast-enter-bottom {

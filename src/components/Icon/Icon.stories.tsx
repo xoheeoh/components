@@ -18,5 +18,5 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const Custom: Story = {
-  args: { path: mdiAccount, color: "var(--color-primary-500)", size: 36 },
+  args: { path: mdiAccount, color: "var(--semantic-primary-fg)", size: 36 },
 };
