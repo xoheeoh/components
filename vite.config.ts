@@ -13,6 +13,7 @@ const dirname = typeof __dirname !== "undefined" ? __dirname : path.dirname(file
 function emitPretendardFont(): Plugin {
   const fileName = "assets/PretendardVariable.woff2";
   const sourcePath = resolve(dirname, "src/styles/fonts/PretendardVariable.woff2");
+  const fontsCssPath = resolve(dirname, "src/styles/fonts.css");
   return {
     name: "emit-pretendard-font",
     apply: "build",
@@ -22,6 +23,11 @@ function emitPretendardFont(): Plugin {
         type: "asset",
         fileName,
         source: readFileSync(sourcePath),
+      });
+      this.emitFile({
+        type: "asset",
+        fileName: "fonts.css",
+        source: readFileSync(fontsCssPath, "utf8").replace("./fonts/PretendardVariable.woff2", `./${fileName}`),
       });
       for (const item of Object.values(bundle)) {
         if (item.type !== "asset" || !item.fileName.endsWith(".css")) continue;
@@ -54,6 +60,7 @@ export default defineConfig({
       ],
       output: {
         assetFileNames: (assetInfo) => {
+          if (assetInfo.names?.includes("fonts.css") || assetInfo.name === "fonts.css") return "fonts.css";
           if (assetInfo.name?.endsWith(".css")) return "styles.css";
           return "assets/[name][extname]";
         },

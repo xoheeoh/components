@@ -1,6 +1,7 @@
 /// <reference path="./env.d.ts" />
 import type { Preview } from "@storybook/react-vite";
 import "../src/styles/styles.css";
+import "../src/styles/fonts.css";
 
 const preview: Preview = {
   decorators: [
