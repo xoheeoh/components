@@ -73,3 +73,13 @@ export type { TabsProps, TabListProps, TabProps, TabPanelProps } from "./Tabs";
 
 export { Pagination } from "./Pagination";
 export type { PaginationProps, PaginationType, PaginationDotSize, PaginationDotColor } from "./Pagination";
+
+export { Tooltip } from "./Tooltip";
+export type {
+  TooltipProps,
+  TooltipPosition,
+  TooltipSize,
+  ArrowPosition,
+  VerticalAlign,
+  HorizontalAlign,
+} from "./Tooltip";
