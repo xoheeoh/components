@@ -70,3 +70,6 @@ export type {
 
 export { Tabs, TabList, Tab, TabPanel } from "./Tabs";
 export type { TabsProps, TabListProps, TabProps, TabPanelProps } from "./Tabs";
+
+export { Pagination } from "./Pagination";
+export type { PaginationProps, PaginationType, PaginationDotSize, PaginationDotColor } from "./Pagination";
