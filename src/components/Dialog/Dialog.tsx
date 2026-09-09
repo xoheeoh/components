@@ -7,12 +7,48 @@ import styles from "./Dialog.module.css";
 export type DialogSize = "sm" | "md" | "lg";
 
 const FOCUSABLE =
-  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function isFocusable(el: HTMLElement): boolean {
+  if (el.tabIndex === -1) return false;
+  const style = getComputedStyle(el);
+  if (style.visibility === "hidden" || style.display === "none") return false;
+  // 조상에 display:none이 걸린 경우와 레이아웃 박스가 아예 없는 경우까지 걸러낸다.
+  // Checkbox·Radio처럼 1px + clip으로 숨긴 input은 박스가 남아 포커스 대상으로 유지된다.
+  return el.getClientRects().length > 0;
+}
 
 function getFocusable(container: HTMLElement): HTMLElement[] {
-  return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
-    (el) => el.tabIndex !== -1 && getComputedStyle(el).visibility !== "hidden"
-  );
+  return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(isFocusable);
+}
+
+/**
+ * 열린 Dialog 스택. 두 가지를 담당한다.
+ * - 겹쳐 열렸을 때 키보드 이벤트를 최상단 하나만 처리하게 한다.
+ * - body 스크롤 락을 참조 카운트로 관리해, 먼저 열린 쪽이 닫혀도 락이 풀리지 않게 한다.
+ */
+const openDialogs: string[] = [];
+let bodyOverflowBeforeLock: string | null = null;
+
+function pushDialog(id: string) {
+  openDialogs.push(id);
+  if (openDialogs.length === 1) {
+    bodyOverflowBeforeLock = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function popDialog(id: string) {
+  const index = openDialogs.lastIndexOf(id);
+  if (index !== -1) openDialogs.splice(index, 1);
+  if (openDialogs.length === 0 && bodyOverflowBeforeLock !== null) {
+    document.body.style.overflow = bodyOverflowBeforeLock;
+    bodyOverflowBeforeLock = null;
+  }
+}
+
+function isTopDialog(id: string): boolean {
+  return openDialogs[openDialogs.length - 1] === id;
 }
 
 export interface DialogProps {
@@ -31,6 +67,8 @@ export interface DialogProps {
   size?: DialogSize;
   /** 오버레이 클릭 시 닫기. 기본값 true */
   closeOnOverlayClick?: boolean;
+  /** Escape 키로 닫기. 기본값 true */
+  closeOnEscape?: boolean;
   /** 헤더 오른쪽 닫기 버튼. 기본값 true */
   showCloseButton?: boolean;
   role?: "dialog" | "alertdialog";
@@ -46,6 +84,7 @@ export function Dialog({
   children,
   size = "md",
   closeOnOverlayClick = true,
+  closeOnEscape = true,
   showCloseButton = true,
   role = "dialog",
   className,
@@ -53,6 +92,7 @@ export function Dialog({
   const titleId = useId();
   const descriptionId = useId();
   const contentId = useId();
+  const instanceId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   const restoreFocusRef = useRef<HTMLElement | null>(null);
   const hasTitle = title != null && title !== "";
@@ -63,37 +103,51 @@ export function Dialog({
   useEffect(() => {
     if (!open) return;
     restoreFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    pushDialog(instanceId);
 
     const id = window.requestAnimationFrame(() => {
       const panel = panelRef.current;
       if (!panel) return;
       const autofocus = panel.querySelector<HTMLElement>("[autofocus]");
-      const target = autofocus ?? getFocusable(panel)[0] ?? panel;
+      const target = (autofocus && isFocusable(autofocus) ? autofocus : null) ?? getFocusable(panel)[0] ?? panel;
       target.focus();
+      // 대상이 실제로 포커스를 받지 못했으면 패널로 되돌린다.
+      // 그러지 않으면 포커스가 오버레이 뒤 요소에 남는다.
+      if (!panel.contains(document.activeElement)) panel.focus();
     });
 
     return () => {
       window.cancelAnimationFrame(id);
-      document.body.style.overflow = previousOverflow;
+      popDialog(instanceId);
       restoreFocusRef.current?.focus();
     };
-  }, [open]);
+  }, [open, instanceId]);
 
   useEffect(() => {
     if (!open) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== "Tab") return;
+      // 안쪽 컴포넌트가 이미 처리한 키는 건너뛴다 (예: 팝오버가 Escape를 소비한 경우).
+      if (event.defaultPrevented) return;
+      // 겹쳐 열렸을 때는 최상단 다이얼로그만 반응한다.
+      if (!isTopDialog(instanceId)) return;
       const panel = panelRef.current;
       if (!panel) return;
-      const nodes = getFocusable(panel);
-      if (nodes.length === 0) {
+
+      if (event.key === "Escape") {
+        if (!closeOnEscape) return;
         event.preventDefault();
-        panel.focus();
+        onClose();
         return;
       }
+
+      if (event.key !== "Tab") return;
+
+      const nodes = getFocusable(panel);
+      // 포커스 가능 요소가 없으면 Tab을 가로채지 않는다. 가로채면 키가 영구히 삼켜져
+      // 키보드만으로 빠져나갈 수 없다 (WCAG 2.1.2 키보드 트랩).
+      if (nodes.length === 0) return;
+
       const first = nodes[0];
       const last = nodes[nodes.length - 1];
       const active = document.activeElement;
@@ -108,7 +162,7 @@ export function Dialog({
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [open]);
+  }, [open, closeOnEscape, onClose, instanceId]);
 
   const handleOverlayClick = useCallback(() => {
     if (closeOnOverlayClick) onClose();
@@ -162,6 +216,6 @@ export function Dialog({
         {footer != null && footer !== false ? <div className={styles.footer}>{footer}</div> : null}
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }
