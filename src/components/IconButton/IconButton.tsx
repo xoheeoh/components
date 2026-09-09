@@ -14,6 +14,7 @@ export type IconButtonSize = "sm" | "md";
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
+  type?: "button" | "submit" | "reset";
   variant?: IconButtonVariant;
   /** sm(32) / md(40). `48px`처럼 길이 값도 가능 */
   size?: IconButtonSize | (string & {});
@@ -49,7 +50,18 @@ function toCssLength(value: number | string): string {
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
-  { icon, variant = "default", size = "md", iconSize, color = "neutral", disabled = false, className, style, ...rest },
+  {
+    icon,
+    type = "button",
+    variant = "default",
+    size = "md",
+    iconSize,
+    color = "neutral",
+    disabled = false,
+    className,
+    style,
+    ...rest
+  },
   ref
 ) {
   const isPreset = size === "sm" || size === "md";
@@ -77,7 +89,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(functio
     : icon;
 
   return (
-    <button ref={ref} className={classes} style={mergedStyle} disabled={disabled} {...rest}>
+    <button ref={ref} type={type} className={classes} style={mergedStyle} disabled={disabled} {...rest}>
       <span className={styles.icon}>{renderedIcon}</span>
     </button>
   );
