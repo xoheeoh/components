@@ -13,6 +13,11 @@
   font-weight: var(--btn-font-weight);
 }
 
+.textButton:focus-visible {
+  outline: 2px solid var(--focus-ring, var(--semantic-focus-ring-primary));
+  outline-offset: 2px;
+}
+
 .textButton:hover:not(:disabled) {
   background: var(--btn-hover-bg);
   color: var(--btn-hover-color);
@@ -53,18 +58,21 @@
   --btn-color: var(--semantic-primary-fg);
   --btn-hover-bg: var(--semantic-primary-bg);
   --btn-hover-color: var(--semantic-primary-fg);
+  --focus-ring: var(--semantic-focus-ring-primary);
 }
 
 .neutral {
   --btn-color: var(--semantic-neutral-fg);
   --btn-hover-bg: var(--semantic-neutral-hover-bg);
   --btn-hover-color: var(--semantic-neutral-fg);
+  --focus-ring: var(--semantic-focus-ring-neutral);
 }
 
 .destructive {
   --btn-color: var(--semantic-error-fg);
   --btn-hover-bg: var(--semantic-error-bg);
   --btn-hover-color: var(--semantic-error-fg);
+  --focus-ring: var(--semantic-focus-ring-error);
 }
 
 /* ===== Sizes ===== */

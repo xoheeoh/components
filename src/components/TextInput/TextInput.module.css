@@ -53,7 +53,7 @@
 }
 
 .input:focus-visible {
-  outline: 2px solid var(--focus-border-color);
+  outline: 2px solid var(--focus-ring, var(--semantic-focus-ring-primary));
   outline-offset: 2px;
 }
 
@@ -231,19 +231,19 @@
 .default {
   --input-border-color: var(--semantic-neutral-border);
   --desc-text-color: var(--semantic-label-alternative);
-  --focus-border-color: var(--semantic-primary-border);
+  --focus-ring: var(--semantic-focus-ring-primary);
 }
 
 .positive {
   --input-border-color: var(--semantic-neutral-border);
   --desc-text-color: var(--semantic-label-alternative);
-  --focus-border-color: var(--semantic-primary-border);
+  --focus-ring: var(--semantic-focus-ring-primary);
   --status-badge-color: var(--semantic-primary-fg);
 }
 
 .negative {
   --input-border-color: var(--semantic-error-border);
   --desc-text-color: var(--semantic-error-fg);
-  --focus-border-color: var(--semantic-error-border);
+  --focus-ring: var(--semantic-focus-ring-error);
   --status-badge-color: var(--semantic-error-fg);
 }

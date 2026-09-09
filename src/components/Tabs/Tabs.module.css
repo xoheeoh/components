@@ -47,7 +47,9 @@
 }
 
 .tab:focus-visible {
-  outline: 2px solid var(--semantic-primary-border);
+  /* .list가 overflow-x: auto이고 탭이 gap 없이 붙어 있어, 링을 안쪽으로 넣어
+     양끝 탭이 잘리거나 이웃 탭·선택 밑줄과 겹치지 않게 한다. */
+  outline: 2px solid var(--semantic-focus-ring-primary);
   outline-offset: -2px;
   border-radius: var(--r-xs);
 }

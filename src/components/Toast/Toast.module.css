@@ -127,6 +127,7 @@
   line-height: var(--text-subtitle3-line-height);
   cursor: pointer;
   white-space: nowrap;
+  border-radius: var(--r-xs);
 }
 
 .action:hover:not(:disabled) {
@@ -137,8 +138,11 @@
   cursor: default;
 }
 
+/* 링이 토스트 표면 위에 올라간다. info 타입은 배경이 blue-50이라
+   primary 링을 쓰면 대비가 2.91:1로 떨어지므로, 레이블 색과 같은 neutral을 쓴다. */
 .action:focus-visible {
-  outline: none;
+  outline: 2px solid var(--semantic-focus-ring-neutral);
+  outline-offset: 2px;
 }
 
 @keyframes toast-enter-bottom {

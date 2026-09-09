@@ -13,12 +13,17 @@
   padding: var(--btn-padding-size);
   border-radius: var(--r-md);
   box-sizing: border-box;
-  transition: background 100ms ease, border-color 100ms ease, color 100ms ease, transform 80ms ease;
+  transition:
+    background 100ms ease,
+    border-color 100ms ease,
+    color 100ms ease,
+    transform 80ms ease;
   cursor: pointer;
 }
 
 .button:focus-visible {
-  outline: none;
+  outline: 2px solid var(--focus-ring, var(--semantic-focus-ring-primary));
+  outline-offset: 2px;
 }
 
 .button:hover:not(:disabled) {
@@ -76,6 +81,7 @@
   --btn-hover-bg: var(--semantic-primary-hover-fg);
   --btn-hover-color: var(--semantic-primary-hover-bg);
   --btn-hover-border: transparent;
+  --focus-ring: var(--semantic-focus-ring-primary);
 }
 
 .outlined.primary {
@@ -85,6 +91,7 @@
   --btn-hover-bg: var(--semantic-primary-hover-bg);
   --btn-hover-color: var(--semantic-primary-hover-fg);
   --btn-hover-border: var(--semantic-primary-hover-border);
+  --focus-ring: var(--semantic-focus-ring-primary);
 }
 
 .solid.neutral {
@@ -94,6 +101,7 @@
   --btn-hover-bg: var(--semantic-neutral-hover-fg);
   --btn-hover-color: var(--semantic-neutral-hover-bg);
   --btn-hover-border: transparent;
+  --focus-ring: var(--semantic-focus-ring-neutral);
 }
 
 .outlined.neutral {
@@ -103,6 +111,7 @@
   --btn-hover-bg: var(--semantic-neutral-hover-bg);
   --btn-hover-color: var(--semantic-neutral-hover-fg);
   --btn-hover-border: var(--semantic-neutral-hover-border);
+  --focus-ring: var(--semantic-focus-ring-neutral);
 }
 
 .solid.destructive {
@@ -112,6 +121,7 @@
   --btn-hover-bg: var(--semantic-error-hover-fg);
   --btn-hover-color: var(--semantic-error-bg);
   --btn-hover-border: transparent;
+  --focus-ring: var(--semantic-focus-ring-error);
 }
 
 .outlined.destructive {
@@ -121,6 +131,7 @@
   --btn-hover-bg: var(--semantic-error-hover-bg);
   --btn-hover-color: var(--semantic-error-hover-fg);
   --btn-hover-border: var(--semantic-error-hover-border);
+  --focus-ring: var(--semantic-focus-ring-error);
 }
 
 /* ===== Sizes ===== */
