@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { fn } from "storybook/test";
+import { expect, fn, screen, userEvent, waitFor } from "storybook/test";
 import { Button } from "../Button";
 import { Dialog } from "./Dialog";
 
@@ -8,6 +8,15 @@ const meta = {
   title: "Components/Dialog",
   component: Dialog,
   tags: ["autodocs"],
+  parameters: {
+    a11y: {
+      // 이 컴포넌트는 접근성 문제를 `npm test` 실패로 잡는다 (전역 기본값은 "todo" — 보고만 하고 통과).
+      test: "error",
+      // color-contrast(색 대비)는 의도적으로 검사하지 않는다 (프로젝트 결정).
+      // 여기서 막는 것은 구조적 접근성 — 라벨 연결, 역할, 접근 가능한 이름이다.
+      config: { rules: [{ id: "color-contrast", enabled: false }] },
+    },
+  },
   args: {
     open: false,
     onClose: fn(),
@@ -94,5 +103,123 @@ export const Sizes: Story = {
         ) : null}
       </>
     );
+  },
+};
+
+/*
+ * ===== 동작 보장 테스트 =====
+ * 문서용 예시가 아니라, 고쳐놓은 동작이 그대로 유지되는지 자동으로 확인하는 스토리다.
+ * `npm test`로 실행된다. 문서(autodocs)에는 나오지 않는다.
+ */
+
+/**
+ * handleKeyDown이 `if (event.key !== "Tab") return`으로 Tab 외 모든 키를 무시해서
+ * Escape로 닫을 수 없었다. role="dialog"에는 Escape 닫기가 기대 동작이다.
+ */
+export const ClosesOnEscape: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  render: function Render(args) {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button label="다이얼로그 열기" onClick={() => setOpen(true)} />
+        <Dialog {...args} open={open} onClose={() => setOpen(false)} title="Escape 확인" />
+      </>
+    );
+  },
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "다이얼로그 열기" }));
+    // Dialog는 document.body로 포털되므로 canvas가 아니라 screen으로 조회한다.
+    const dialog = await screen.findByRole("dialog");
+
+    await userEvent.keyboard("{Escape}");
+    await expect(dialog).not.toBeInTheDocument();
+  },
+};
+
+/**
+ * 포커스 가능 요소가 0개일 때 매 Tab마다 preventDefault + panel.focus()가 실행돼
+ * Tab이 영구히 삼켜졌다 (WCAG 2.1.2 키보드 트랩).
+ * Tab을 가로채지 않아야 키보드만으로 빠져나갈 수 있다.
+ */
+export const DoesNotTrapKeyboard: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  render: function Render(args) {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button label="다이얼로그 열기" onClick={() => setOpen(true)} />
+        <Dialog
+          {...args}
+          open={open}
+          onClose={() => setOpen(false)}
+          showCloseButton={false}
+          title="포커스 가능 요소 없음"
+          footer={undefined}>
+          <p style={{ margin: 0 }}>텍스트만 있습니다.</p>
+        </Dialog>
+      </>
+    );
+  },
+  play: async ({ canvas }) => {
+    const opener = canvas.getByRole("button", { name: "다이얼로그 열기" });
+    await userEvent.click(opener);
+
+    // Dialog는 document.body로 포털되므로 canvas가 아니라 screen으로 조회한다.
+    const dialog = await screen.findByRole("dialog");
+    // 포커스 가능 요소가 없으면 패널 자체가 포커스를 받는다.
+    // 초기 포커스는 requestAnimationFrame에서 일어나므로 기다린다.
+    await waitFor(() => expect(dialog).toHaveFocus());
+
+    // Tab이 삼켜지지 않아야 한다. 가로채면 포커스가 패널에 그대로 머문다.
+    await userEvent.tab();
+    await expect(dialog).not.toHaveFocus();
+
+    // Escape도 여전히 동작해야 한다 — 닫기 컨트롤이 없으므로 유일한 탈출로다.
+    await userEvent.keyboard("{Escape}");
+    await expect(dialog).not.toBeInTheDocument();
+  },
+};
+
+/**
+ * FOCUSABLE 셀렉터가 input[type=hidden]을 매치하고 가시성 검사가 display:none을 놓쳐서,
+ * 첫 필드가 hidden input인 폼에서 초기 포커스가 no-op이 되고 포커스가 오버레이 뒤에 남았다.
+ */
+export const FocusesFirstVisibleField: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  render: function Render(args) {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button label="폼 열기" onClick={() => setOpen(true)} />
+        <Dialog
+          {...args}
+          open={open}
+          onClose={() => setOpen(false)}
+          showCloseButton={false}
+          title="hidden 필드가 앞에 있는 폼">
+          <form onSubmit={(event) => event.preventDefault()}>
+            <input type="hidden" name="csrf" />
+            <div style={{ display: "none" }}>
+              <input aria-label="display none 필드" />
+            </div>
+            <input aria-label="visibility hidden 필드" style={{ visibility: "hidden" }} />
+            <input aria-label="disabled 필드" disabled />
+            <input aria-label="첫 보이는 필드" />
+          </form>
+        </Dialog>
+      </>
+    );
+  },
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "폼 열기" }));
+    await screen.findByRole("dialog");
+
+    // hidden / display:none / visibility:hidden / disabled 를 모두 건너뛰어야 한다.
+    // 초기 포커스는 requestAnimationFrame에서 일어나므로 기다린다.
+    await waitFor(() => expect(screen.getByRole("textbox", { name: "첫 보이는 필드" })).toHaveFocus());
   },
 };
