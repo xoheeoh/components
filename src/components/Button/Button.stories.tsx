@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
+import { expect, fn, userEvent } from "storybook/test";
 import { mdiPlus } from "@mdi/js";
 import { Icon } from "../Icon";
 import { Button } from "./Button";
@@ -8,6 +8,15 @@ const meta = {
   title: "Components/Action/Button",
   component: Button,
   tags: ["autodocs"],
+  parameters: {
+    a11y: {
+      // 이 컴포넌트는 접근성 문제를 `npm test` 실패로 잡는다 (전역 기본값은 "todo" — 보고만 하고 통과).
+      test: "error",
+      // color-contrast(색 대비)는 의도적으로 검사하지 않는다 (프로젝트 결정).
+      // 여기서 막는 것은 구조적 접근성 — 라벨 연결, 역할, 접근 가능한 이름이다.
+      config: { rules: [{ id: "color-contrast", enabled: false }] },
+    },
+  },
   args: {
     onClick: fn(),
     label: "버튼",
@@ -71,4 +80,34 @@ export const WithIcon: Story = {
 
 export const IconOnly: Story = {
   render: (args) => <Button {...args} iconOnly icon={<Icon path={mdiPlus} size={20} />} />,
+};
+
+/*
+ * ===== 동작 보장 테스트 =====
+ * 문서용 예시가 아니라, 고쳐놓은 동작이 그대로 유지되는지 자동으로 확인하는 스토리다.
+ * `npm test`로 실행된다. 문서(autodocs)에는 나오지 않는다.
+ */
+
+/**
+ * `.button:focus-visible { outline: none }`이 키보드 포커스 표시를 지우고 있었다 (WCAG 2.4.7).
+ * 키보드 포커스 시 실제로 링이 그려지는지 확인한다.
+ */
+export const KeepsFocusRing: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  render: (args) => <Button {...args} label="포커스 대상" />,
+  play: async ({ canvas }) => {
+    const button = canvas.getByRole("button", { name: "포커스 대상" });
+
+    // 마우스 클릭이 아니라 키보드로 포커스를 줘야 :focus-visible이 매칭된다.
+    await userEvent.tab();
+    await expect(button).toHaveFocus();
+
+    const ring = getComputedStyle(button);
+    await expect(ring.outlineStyle).toBe("solid");
+    await expect(ring.outlineWidth).toBe("2px");
+    // outline: none이면 색이 비거나 style이 none이 된다.
+    await expect(ring.outlineColor).not.toBe("transparent");
+    await expect(ring.outlineColor).not.toBe("");
+  },
 };

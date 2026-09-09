@@ -33,6 +33,9 @@
     "dev": "vite build --watch",
     "build": "rm -rf dist && vite build && tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "test": "vitest --project=storybook --run",
+    "test:watch": "vitest --project=storybook",
+    "test:install": "playwright install chromium",
     "prepublishOnly": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
