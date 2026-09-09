@@ -95,13 +95,14 @@
   outline-offset: 2px;
 }
 
-.select:disabled {
+/* 트리거는 <div role="combobox">라서 :disabled에 매칭되지 않는다. aria-disabled로 판정한다. */
+.select[aria-disabled="true"] {
   background: var(--semantic-disabled-bg);
   border-color: var(--semantic-disabled-border);
   cursor: not-allowed;
 }
 
-.select:disabled .value {
+.select[aria-disabled="true"] .value {
   color: var(--semantic-disabled-fg);
 }
 
@@ -148,26 +149,42 @@
   line-height: 1;
 }
 
+/* 실제 <button>이라 UA 기본 테두리·배경·padding을 지워야 한다.
+   TextInput의 .fileTrigger/.actionButton과 같은 리셋 집합. */
 .chipRemove {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   line-height: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
   color: var(--semantic-label-alternative);
   cursor: pointer;
+}
+
+.chipRemove:hover:not(:disabled) {
+  color: var(--semantic-label-normal);
+}
+
+/* .chips가 overflow: hidden이라 바깥쪽 오프셋 링은 잘린다. 칩 padding 안쪽에 그린다. */
+.chipRemove:focus-visible {
+  outline: 2px solid var(--focus-ring, var(--semantic-focus-ring-primary));
+  outline-offset: 0;
+  border-radius: var(--r-xs);
 }
 
 .chipRemoveIcon {
   display: block;
 }
 
-.select:disabled .chip,
-.select:disabled .chipRemove {
+.select[aria-disabled="true"] .chip,
+.chipRemove:disabled {
   color: var(--semantic-disabled-fg);
 }
 
-.select:disabled .chipRemove {
+.chipRemove:disabled {
   pointer-events: none;
   cursor: not-allowed;
 }
@@ -226,6 +243,16 @@
 
 .optionSelected {
   background-color: var(--semantic-primary-bg);
+}
+
+/*
+ * aria-activedescendant로 표시되는 활성 옵션. 옵션은 실제 포커스를 받지 않는다.
+ * .optionSelected 뒤에 두고 배경이 아닌 inset 링으로 만들어, 이미 선택된 항목 위에서도
+ * 보이게 한다 (:hover 규칙은 .optionSelected를 제외해서 선택된 항목에 피드백이 없다).
+ */
+.optionActive {
+  outline: 2px solid var(--semantic-focus-ring-primary);
+  outline-offset: -2px;
 }
 
 .optionDisabled {
