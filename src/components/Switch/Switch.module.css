@@ -74,7 +74,7 @@
 }
 
 .root:focus-visible .track {
-  outline: 2px solid var(--semantic-primary-border);
+  outline: 2px solid var(--semantic-focus-ring-primary);
   outline-offset: 2px;
 }
 

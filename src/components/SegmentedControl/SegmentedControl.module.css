@@ -95,7 +95,7 @@
 }
 
 .segment:focus-visible {
-  outline: 2px solid var(--semantic-primary-border);
+  outline: 2px solid var(--semantic-focus-ring-primary);
   outline-offset: 2px;
 }
 
@@ -137,6 +137,13 @@
 .outlined .segment {
   position: relative;
   border-radius: 0;
+}
+
+/* .outlined는 .control이 overflow: hidden으로 클리핑하고 세그먼트가 컨트롤을
+   빈틈없이 채워서, 바깥 링은 위·아래 변이 잘려 세로선만 남는다.
+   안쪽으로 넣어 네 변이 모두 보이게 한다. (.solid는 컨트롤에 padding이 있어 그대로 둔다) */
+.outlined .segment:focus-visible {
+  outline-offset: -2px;
 }
 
 .outlined .segment:first-child {

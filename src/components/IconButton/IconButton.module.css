@@ -17,6 +17,11 @@
   transition: background 100ms ease, border-color 100ms ease, color 100ms ease, transform 80ms ease;
 }
 
+.iconButton:focus-visible {
+  outline: 2px solid var(--focus-ring, var(--semantic-focus-ring-primary));
+  outline-offset: 2px;
+}
+
 .iconButton:hover:not(:disabled) {
   background: var(--btn-hover-bg);
   color: var(--icon-hover-color, var(--icon-color));
@@ -79,6 +84,7 @@
   --btn-border-color: var(--semantic-primary-border);
   --btn-bg-color: var(--semantic-primary-fg);
   --btn-hover-bg: var(--semantic-primary-bg);
+  --focus-ring: var(--semantic-focus-ring-primary);
 }
 
 .neutral {
@@ -86,6 +92,7 @@
   --btn-border-color: var(--semantic-neutral-border);
   --btn-bg-color: var(--semantic-neutral-fg);
   --btn-hover-bg: var(--semantic-neutral-hover-bg);
+  --focus-ring: var(--semantic-focus-ring-neutral);
 }
 
 .destructive {
@@ -93,6 +100,7 @@
   --btn-border-color: var(--semantic-error-border);
   --btn-bg-color: var(--semantic-error-fg);
   --btn-hover-bg: var(--semantic-error-bg);
+  --focus-ring: var(--semantic-focus-ring-error);
 }
 
 .solid.primary {

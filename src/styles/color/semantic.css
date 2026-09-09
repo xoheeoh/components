@@ -64,4 +64,18 @@
   --semantic-label-normal: var(--atomic-gray-900);
   --semantic-label-alternative: var(--atomic-gray-600);
   --semantic-label-assistive: var(--atomic-gray-400);
+
+  /*
+   * ===== Focus ring — :focus-visible 링 색 =====
+   *
+   * 강조색을 흰색과 섞어 연한 톤으로 만든다.
+   * 컴포넌트의 color 옵션에 맞춰 골라 쓴다 (primary → primary, negative/destructive → error).
+   *
+   * 75%는 흰 배경에서 대비 3:1(WCAG 1.4.11)을 지키는 하한선이므로 더 내리지 않는다.
+   * error가 3.16:1로 가장 빠듯해 먼저 깨진다.
+   * 어두운 배경은 현재 지원 대상이 아니며, 도입 시 neutral(2.25:1)부터 재검토가 필요하다.
+   */
+  --semantic-focus-ring-primary: color-mix(in srgb, var(--semantic-primary-fg) 75%, var(--semantic-static-white));
+  --semantic-focus-ring-neutral: color-mix(in srgb, var(--semantic-neutral-fg) 75%, var(--semantic-static-white));
+  --semantic-focus-ring-error: color-mix(in srgb, var(--semantic-error-fg) 75%, var(--semantic-static-white));
 }

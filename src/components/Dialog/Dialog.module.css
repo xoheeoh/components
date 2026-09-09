@@ -95,7 +95,8 @@
 }
 
 .closeButton:focus-visible {
-  outline: none;
+  outline: 2px solid var(--semantic-focus-ring-neutral);
+  outline-offset: 2px;
 }
 
 .content {

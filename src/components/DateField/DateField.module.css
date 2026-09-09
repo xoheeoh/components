@@ -4,7 +4,6 @@
   gap: 8px;
 
   --input-border-color: var(--semantic-neutral-border);
-  --focus-border-color: var(--semantic-primary-border);
 }
 
 .single {
@@ -71,7 +70,7 @@
 }
 
 .input:focus-visible {
-  outline: 2px solid var(--focus-border-color);
+  outline: 2px solid var(--semantic-focus-ring-primary);
   outline-offset: 2px;
 }
 
