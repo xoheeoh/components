@@ -105,7 +105,11 @@ export const DateFieldInput = forwardRef<HTMLInputElement, DateFieldInputProps>(
         setOpen(false);
       };
       const onKeyDown = (event: KeyboardEvent) => {
-        if (event.key === "Escape") setOpen(false);
+        if (event.key !== "Escape") return;
+        // Dialog가 event.defaultPrevented로 "안쪽 팝오버가 소비했는지"를 판단하므로,
+        // preventDefault를 호출해야 감싸는 Dialog까지 닫히지 않는다. (Select와 동일)
+        event.preventDefault();
+        setOpen(false);
       };
 
       document.addEventListener("pointerdown", onPointerDown);
@@ -130,7 +134,6 @@ export const DateFieldInput = forwardRef<HTMLInputElement, DateFieldInputProps>(
             ref={inputRef}
             id={id}
             type="text"
-            inputMode="numeric"
             autoComplete="off"
             placeholder={resolvedPlaceholder}
             className={inputClass}

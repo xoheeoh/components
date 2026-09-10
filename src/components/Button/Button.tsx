@@ -64,8 +64,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       type={type}
       className={classes}
       style={style}
-      onClick={onClick}
+      // loading 중에는 클릭(Enter/Space 포함)과 폼 제출을 막는다.
+      // disabled를 쓰지 않는 이유: 버튼이 흐려져 스피너가 안 보이고, 포커스도 잃는다.
+      onClick={(event) => {
+        if (loading) {
+          event.preventDefault();
+          return;
+        }
+        onClick?.();
+      }}
       disabled={disabled}
+      aria-busy={loading || undefined}
       aria-label={iconOnly ? label : undefined}
       {...rest}
     >
