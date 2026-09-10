@@ -2,7 +2,7 @@ export type ArrowKeyAxis = "horizontal" | "both";
 
 /**
  * 화살표·Home·End 키로 그룹 안의 다음 요소를 찾는다. 양끝에서는 반대편으로 순환한다.
- * 탭·라디오 그룹처럼 "Tab 정지점은 하나, 안에서는 화살표로 이동"하는 패턴(roving tabindex)용.
+ * 탭·라디오 그룹처럼 "Tab 정지점은 하나, 안에서는 화살표로 이동"하는 패턴(roving tabindex)에 쓴다.
  *
  * - horizontal: ←→만 (탭 목록)
  * - both: ←→↑↓ 모두 (라디오 그룹)

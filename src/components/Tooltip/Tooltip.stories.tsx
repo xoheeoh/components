@@ -11,7 +11,7 @@ import {
   type VerticalAlign,
 } from "./Tooltip";
 
-/** Tooltip이 넘기는 aria-describedby를 실제 span에 전달하고, 키보드로도 띄울 수 있게 포커스를 받는다 */
+/** Tooltip이 넘기는 aria-describedby를 실제 span에 전달하고, 키보드로도 띄울 수 있게 포커스를 받는다. */
 function DemoTrigger({
   children,
   ...rest

@@ -24,17 +24,17 @@ export interface CheckboxProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "type" | "size"
 > {
-  /** 옵션 라벨. 빈 값인 경우 숨김 처리. */
+  /** 옵션 라벨. 빈 값이면 숨긴다. */
   label?: ReactNode;
   size?: CheckboxSize;
   /** 체크박스 상태가 부분적으로 체크된 상태인지 여부 */
   indeterminate?: boolean;
 
-  /** 라벨 color, fontWeight 등의 변경이 필요한 경우 */
+  /** 라벨 color, fontWeight 등을 바꿀 때 쓴다. */
   labelStyle?: CSSProperties;
   labelClassName?: string;
 
-  /** 체크박스 + 라벨 전체 스타일 변경이 필요한 경우 */
+  /** 체크박스 + 라벨 전체 스타일을 바꿀 때 쓴다. */
   style?: CSSProperties;
   className?: string;
 }

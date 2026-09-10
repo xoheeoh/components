@@ -100,10 +100,10 @@ export const KeyboardCalendar: Story = {
     // 팝오버는 document.body로 포털되므로 canvas가 아니라 screen으로 조회한다.
     let dialog = await screen.findByRole("dialog", { name: "날짜 선택" });
     await expect(opener).toHaveAttribute("aria-expanded", "true");
-    // 열리면 포커스가 달력 안(오늘 날짜)으로 들어간다
+    // 열리면 포커스가 달력 안(오늘 날짜)으로 들어간다.
     await waitFor(() => expect(dialog.contains(document.activeElement)).toBe(true));
 
-    // Tab을 여러 번 눌러도 팝오버 안에서 순환한다
+    // Tab을 여러 번 눌러도 팝오버 안에서 순환한다.
     for (let i = 0; i < 6; i += 1) {
       await userEvent.tab();
       await expect(dialog.contains(document.activeElement)).toBe(true);

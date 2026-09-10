@@ -10,7 +10,7 @@ export interface IconProps extends Omit<SVGAttributes<SVGSVGElement>, "children"
   color?: string;
 }
 
-/** @mdi/js path 상수 — https://pictogrammers.com/library/mdi/ 에서 검색 후 import해서 사용
+/** @mdi/js path 상수 — https://pictogrammers.com/library/mdi/ 에서 검색 후 import해서 쓴다.
  * - ex) `import { mdiHome } from "@mdi/js";`
  */
 export function Icon({ path, size = 24, className = "", color, style, ...rest }: IconProps) {

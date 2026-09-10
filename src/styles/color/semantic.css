@@ -2,9 +2,9 @@
  * Semantic color tokens
  *
  * 역할과 맥락에 따라 정의된 색상
- * 값은 hex가 아니라 atomic 토큰을 가리킴
+ * 값은 hex가 아니라 atomic 토큰을 가리킨다.
  *
- * 컴포넌트 CSS는 반드시 이 레이어만 참조해 사용
+ * 컴포넌트 CSS는 반드시 이 레이어만 참조한다.
  */
 
 :root {

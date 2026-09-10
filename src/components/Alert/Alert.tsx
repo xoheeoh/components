@@ -11,7 +11,7 @@ export interface AlertProps {
   open: boolean;
   onClose: () => void;
 
-  /** 제목. 없으면 본문과 액션만 표시 */
+  /** 제목. 없으면 본문과 액션만 표시한다. */
   title?: string;
   /** 본문 메시지 */
   message?: ReactNode;

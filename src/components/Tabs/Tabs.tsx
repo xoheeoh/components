@@ -40,13 +40,13 @@ export interface TabsProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   "onChange" | "defaultValue"
 > {
-  /** hug는 라벨 너비, fill은 목록을 탭 개수만큼 균등 분할 */
+  /** hug는 라벨 너비에 맞추고, fill은 목록을 탭 개수만큼 균등 분할한다. */
   resize: TabsResize;
   /** 탭 버튼 크기. 기본값 md */
   size?: TabsSize;
-  /** 제어 모드 선택값. 상태를 부모가 관리할 때 사용 */
+  /** 제어 모드 선택값. 상태를 부모가 관리할 때 쓴다. */
   value?: string;
-  /** 비제어 모드 초기 선택값. value/onChange를 안 쓸 때만 사용 */
+  /** 비제어 모드 초기 선택값. value/onChange를 안 쓸 때만 쓴다. */
   defaultValue?: string;
   /** 탭 변경 시 새 value 전달. 예) onChange={setTab} */
   onChange?: (value: string) => void;
@@ -134,7 +134,7 @@ export interface TabProps extends Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   "value" | "onClick"
 > {
-  /** 탭 식별값. 같은 value의 TabPanel과 짝을 이룸 */
+  /** 탭 식별값. 같은 value의 TabPanel과 짝을 이룬다. */
   value: string;
   children?: ReactNode;
 }
@@ -172,7 +172,7 @@ export function Tab({ value, disabled, className, children, ...rest }: TabProps)
 }
 
 export interface TabPanelProps extends HTMLAttributes<HTMLDivElement> {
-  /** 대응되는 Tab의 value와 동일해야 함 */
+  /** 대응되는 Tab의 value와 같아야 한다. */
   value: string;
   /** true면 숨긴 패널도 DOM에 유지. 기본값 false */
   forceMount?: boolean;

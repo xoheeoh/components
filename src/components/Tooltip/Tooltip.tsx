@@ -36,7 +36,7 @@ export type TooltipHorizontalProps = TooltipBaseProps & {
 
 export type TooltipProps = TooltipVerticalProps | TooltipHorizontalProps;
 
-/** 호버/포커스 시 트리거 옆에 안내 문구를 띄움 */
+/** 호버/포커스 시 트리거 옆에 안내 문구를 띄운다. */
 export function Tooltip({
   content,
   children,

@@ -21,7 +21,7 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   "aria-label": string;
   type?: "button" | "submit" | "reset";
   variant?: IconButtonVariant;
-  /** sm(32) / md(40). `48px`처럼 길이 값도 가능 */
+  /** sm(32) / md(40). `48px`처럼 길이 값도 된다. */
   size?: IconButtonSize | (string & {});
   /** 아이콘 한 변. 없으면 size에 맞춰 자동 (프리셋은 18/24, 커스텀은 버튼의 60%) */
   iconSize?: number | (string & {});

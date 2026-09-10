@@ -16,7 +16,7 @@ import { Icon } from "../Icon";
 import styles from "./Toast.module.css";
 
 export type ToastType = "default" | "success" | "info" | "warning" | "error";
-/** 등장 위치. bottom이면 아래에서 위로, top이면 위에서 아래로 */
+/** 등장 위치. bottom이면 아래에서 위로, top이면 위에서 아래로 나타난다. */
 export type ToastPosition = "bottom" | "top";
 
 export interface ToastAction {
@@ -31,7 +31,7 @@ export interface ToastOptions {
   type?: ToastType;
   /** 자동 닫힘 시간(ms). 0이면 dismiss로만 닫힘. 액션이 있으면 기본값 6000, 없으면 3000 */
   duration?: number;
-  /** 오른쪽 액션 버튼. 있으면 호버/포커스 중에는 시간이 끝나도 닫히지 않음 */
+  /** 오른쪽 액션 버튼. 있으면 호버/포커스 중에는 시간이 끝나도 닫히지 않는다. */
   action?: ToastAction;
 }
 
@@ -52,13 +52,13 @@ type ToastTypedShowFn = (
 ) => string;
 
 export interface ToastApi {
-  /** 메시지 표시. type 기본값 default(아이콘 없음) */
+  /** 메시지를 표시한다. type 기본값은 default(아이콘 없음). */
   (message: string, options?: Omit<ToastOptions, "message">): string;
   success: ToastTypedShowFn;
   info: ToastTypedShowFn;
   warning: ToastTypedShowFn;
   error: ToastTypedShowFn;
-  /** id 지정 시 해당 토스트만, 없으면 전체 닫기 */
+  /** id를 넘기면 해당 토스트만, 없으면 전체를 닫는다. */
   dismiss: (id?: string) => void;
 }
 
@@ -100,7 +100,7 @@ export interface ToastProps {
 }
 
 /**
- * 단일 토스트 UI — 보통 ToastProvider + useToast로 사용.
+ * 단일 토스트 UI — 보통 ToastProvider + useToast로 쓴다.
  * 스크린리더 읽어주기(aria-live)는 ToastProvider의 viewport가 맡는다.
  * 라이브 영역은 미리 존재해야 그 안의 변화를 확실히 읽으므로, 토스트마다 새로 만들지 않는다.
  */
@@ -173,7 +173,7 @@ export function Toast({
 
 export interface ToastProviderProps {
   children?: ReactNode;
-  /** 기본 자동 닫힘 시간(ms). 개별 toast 호출에서 덮어쓸 수 있음 */
+  /** 기본 자동 닫힘 시간(ms). 개별 toast 호출에서 덮어쓸 수 있다. */
   defaultDuration?: number;
   /** 토스트 등장 위치. 기본값 top */
   position?: ToastPosition;
@@ -336,7 +336,7 @@ export function ToastProvider({
   );
 }
 
-/** ToastProvider 하위에서 토스트를 띄울 때 사용 */
+/** ToastProvider 하위에서 토스트를 띄울 때 쓴다. */
 export function useToast(): ToastApi {
   const ctx = useContext(ToastContext);
   if (!ctx) {

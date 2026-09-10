@@ -49,11 +49,11 @@ type SelectBaseProps = Omit<
   HTMLAttributes<HTMLDivElement>,
   "children" | "value" | "defaultValue" | "onClick" | "className" | "style"
 > & {
-  /** 라벨값. 빈 값인 경우 자동 숨김처리 */
+  /** 라벨값. 빈 값이면 자동으로 숨긴다. */
   label?: string;
   /** 입력 필드 상태값. (예: error 발생 시 negative 사용) */
   status?: SelectStatus;
-  /** 상태값에 따른 뱃지. status가 default인 경우엔 보이지 않음 */
+  /** 상태값에 따른 뱃지. status가 default면 보이지 않는다. */
   statusBadge?: boolean;
   size?: SelectSize;
   /** 필수 입력 필드 여부 */
@@ -76,7 +76,7 @@ type SelectBaseProps = Omit<
 };
 
 export interface SelectSingleProps extends SelectBaseProps {
-  /** 단일 선택은 text만 사용. chip을 넘겨도 텍스트로 표시됨 */
+  /** 단일 선택은 text만 쓴다. chip을 넘겨도 텍스트로 표시된다. */
   type?: "text";
   multiple?: false;
   /**
@@ -86,7 +86,7 @@ export interface SelectSingleProps extends SelectBaseProps {
   value?: string;
   /** 초기 선택값 (비제어 모드). 이후 선택은 컴포넌트가 내부에서 기억한다. value와 함께 쓰지 않는다. */
   defaultValue?: string;
-  /** 옵션 선택 시 호출. 부모 state를 갱신할 때 사용 */
+  /** 옵션 선택 시 호출된다. 부모 state를 갱신할 때 쓴다. */
   onValueChange?: (value: string) => void;
 }
 
@@ -98,7 +98,7 @@ export type SelectMultipleProps = SelectBaseProps & {
   value?: string[];
   /** 초기 선택값 목록 (비제어 모드). value와 함께 쓰지 않는다. */
   defaultValue?: string[];
-  /** 옵션 선택/해제 시 호출 */
+  /** 옵션 선택/해제 시 호출된다. */
   onValueChange?: (value: string[]) => void;
 } & ({ type?: "text"; multiple: true } | { type: "chip"; multiple?: true });
 
@@ -389,7 +389,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
     [description ? descriptionId : null, ariaDescribedBy].filter(Boolean).join(" ") || undefined;
 
   /**
-   * 트리거가 <div role="combobox">라 <label htmlFor>로는 이름이 연결되지 않는다
+   * 트리거가 <div role="combobox">라 <label htmlFor>로는 이름이 연결되지 않는다.
    * (label은 input·button 같은 폼 요소에만 붙는다). 필드명과 선택값을 함께 읽히게 하려면
    * aria-labelledby로 직접 엮어야 한다.
    *
@@ -504,7 +504,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
       {label && (
         <label className={labelClass} id={labelId} htmlFor={triggerId}>
           {label}
-          {/* 필수 여부는 aria-required가 전달하므로 별표는 읽히지 않게 한다 */}
+          {/* 필수 여부는 aria-required가 전달하므로 별표는 읽히지 않게 한다. */}
           {required && (
             <span className={styles.required} aria-hidden>
               *

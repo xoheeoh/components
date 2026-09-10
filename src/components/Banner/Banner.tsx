@@ -6,7 +6,7 @@ import styles from "./Banner.module.css";
 export type BannerType = "success" | "info" | "warning" | "error";
 
 export interface BannerProps {
-  /** 표시할 메시지. */
+  /** 표시할 메시지 */
   message: string;
   type: BannerType;
   /** 메시지 아래 상세 내용(응답 본문 등) */
@@ -29,7 +29,7 @@ const ICON_CLASS_BY_TYPE: Record<BannerType, string> = {
   error: styles.iconError,
 };
 
-/** 화면 레이아웃에 고정되는 인라인 안내 — Toast와 동일 비주얼, 자동 사라짐 없음 */
+/** 화면 레이아웃에 고정되는 인라인 안내 — Toast와 같은 비주얼이며 자동으로 사라지지 않는다. */
 export function Banner({ message, type, detailMessage, className, style }: BannerProps) {
   const bannerClass = [styles.banner, styles[type], className].filter(Boolean).join(" ");
 
