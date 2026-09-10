@@ -9,5 +9,10 @@
     "rootDir": "./src"
   },
   "include": ["src"],
-  "exclude": ["src/**/*.stories.ts", "src/**/*.stories.tsx", "src/styles/color/ColorPalette.tsx"]
+  "exclude": [
+    "src/**/*.stories.ts",
+    "src/**/*.stories.tsx",
+    "src/styles/color/ColorPalette.tsx",
+    "src/build-entry.ts"
+  ]
 }

@@ -52,7 +52,7 @@ export default defineConfig({
   plugins: [react(), emitPretendardFont()],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
+      entry: resolve(dirname, "src/build-entry.ts"),
       formats: ["es"],
       fileName: "index",
     },
