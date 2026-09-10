@@ -46,7 +46,10 @@ interface HoldState {
   overdue: boolean;
 }
 
-type ToastTypedShowFn = (message: string, options?: Omit<ToastOptions, "message" | "type">) => string;
+type ToastTypedShowFn = (
+  message: string,
+  options?: Omit<ToastOptions, "message" | "type">,
+) => string;
 
 export interface ToastApi {
   /** 메시지 표시. type 기본값 default(아이콘 없음) */
@@ -113,10 +116,12 @@ export function Toast({
       ? styles.exitTop
       : styles.exitBottom
     : position === "top"
-    ? styles.enterTop
-    : styles.enterBottom;
+      ? styles.enterTop
+      : styles.enterBottom;
 
-  const toastClass = [styles.toast, type !== "default" && styles[type], motionClass].filter(Boolean).join(" ");
+  const toastClass = [styles.toast, type !== "default" && styles[type], motionClass]
+    .filter(Boolean)
+    .join(" ");
   const showIcon = type !== "default";
   const pauseOnInteract = Boolean(action && onHoldStart && onHoldEnd);
 
@@ -137,9 +142,14 @@ export function Toast({
       onBlur={pauseOnInteract ? handleBlur : undefined}
       onAnimationEnd={() => {
         if (exiting) onExitComplete?.();
-      }}>
+      }}
+    >
       {showIcon && (
-        <Icon path={ICON_BY_TYPE[type]} size={20} className={[styles.icon, ICON_CLASS_BY_TYPE[type]].join(" ")} />
+        <Icon
+          path={ICON_BY_TYPE[type]}
+          size={20}
+          className={[styles.icon, ICON_CLASS_BY_TYPE[type]].join(" ")}
+        />
       )}
       <p className={styles.message}>{message}</p>
       {action ? (
@@ -150,7 +160,8 @@ export function Toast({
           onClick={() => {
             action.onClick();
             onAction?.();
-          }}>
+          }}
+        >
           {action.label}
         </button>
       ) : null}
@@ -166,7 +177,11 @@ export interface ToastProviderProps {
   position?: ToastPosition;
 }
 
-export function ToastProvider({ children, defaultDuration = DEFAULT_DURATION, position = "top" }: ToastProviderProps) {
+export function ToastProvider({
+  children,
+  defaultDuration = DEFAULT_DURATION,
+  position = "top",
+}: ToastProviderProps) {
   const [items, setItems] = useState<ToastItemData[]>([]);
   const itemsRef = useRef(items);
   const timersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
@@ -190,7 +205,7 @@ export function ToastProvider({ children, defaultDuration = DEFAULT_DURATION, po
       holdRef.current.delete(id);
       setItems((prev) => prev.filter((item) => item.id !== id));
     },
-    [clearTimer]
+    [clearTimer],
   );
 
   const beginExit = useCallback(
@@ -206,7 +221,7 @@ export function ToastProvider({ children, defaultDuration = DEFAULT_DURATION, po
       const fallback = setTimeout(() => remove(id), EXIT_MS + 50);
       timersRef.current.set(id, fallback);
     },
-    [clearTimer, remove]
+    [clearTimer, remove],
   );
 
   const tryClose = useCallback(
@@ -218,7 +233,7 @@ export function ToastProvider({ children, defaultDuration = DEFAULT_DURATION, po
       }
       beginExit(id);
     },
-    [beginExit]
+    [beginExit],
   );
 
   const holdStart = useCallback((id: string) => {
@@ -234,7 +249,7 @@ export function ToastProvider({ children, defaultDuration = DEFAULT_DURATION, po
       hold.holds = Math.max(0, hold.holds - 1);
       if (hold.holds === 0 && hold.overdue) beginExit(id);
     },
-    [beginExit]
+    [beginExit],
   );
 
   const dismiss = useCallback(
@@ -245,7 +260,7 @@ export function ToastProvider({ children, defaultDuration = DEFAULT_DURATION, po
       }
       itemsRef.current.forEach((item) => beginExit(item.id));
     },
-    [beginExit]
+    [beginExit],
   );
 
   const show = useCallback(
@@ -266,7 +281,7 @@ export function ToastProvider({ children, defaultDuration = DEFAULT_DURATION, po
 
       return id;
     },
-    [defaultDuration, idPrefix, tryClose]
+    [defaultDuration, idPrefix, tryClose],
   );
 
   useEffect(() => {
@@ -278,7 +293,8 @@ export function ToastProvider({ children, defaultDuration = DEFAULT_DURATION, po
   }, []);
 
   const toast = useMemo<ToastApi>(() => {
-    const api = ((message: string, options?: Omit<ToastOptions, "message">) => show(message, options)) as ToastApi;
+    const api = ((message: string, options?: Omit<ToastOptions, "message">) =>
+      show(message, options)) as ToastApi;
 
     api.success = (message, options) => show(message, { ...options, type: "success" });
     api.info = (message, options) => show(message, { ...options, type: "info" });
@@ -312,7 +328,7 @@ export function ToastProvider({ children, defaultDuration = DEFAULT_DURATION, po
               />
             ))}
           </div>,
-          document.body
+          document.body,
         )}
     </ToastContext.Provider>
   );

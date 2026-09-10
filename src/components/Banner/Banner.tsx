@@ -35,15 +35,23 @@ export function Banner({ message, type, detailMessage, className, style }: Banne
 
   return (
     <div role="status" aria-live="polite" className={bannerClass} style={style}>
-      <Icon path={ICON_BY_TYPE[type]} size={20} className={[styles.icon, ICON_CLASS_BY_TYPE[type]].join(" ")} />
+      <Icon
+        path={ICON_BY_TYPE[type]}
+        size={20}
+        className={[styles.icon, ICON_CLASS_BY_TYPE[type]].join(" ")}
+      />
       <div className={styles.body}>
         <p className={styles.message}>{message}</p>
 
         {detailMessage ? (
           <div
-            className={["text-caption1", typeof detailMessage === "string" ? styles.detailString : ""]
+            className={[
+              "text-caption1",
+              typeof detailMessage === "string" ? styles.detailString : "",
+            ]
               .filter(Boolean)
-              .join(" ")}>
+              .join(" ")}
+          >
             {detailMessage}
           </div>
         ) : null}

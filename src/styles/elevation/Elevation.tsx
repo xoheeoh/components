@@ -81,7 +81,9 @@ export function Elevation() {
       map.set(family, list);
     }
     return [...map.entries()].map(([family, tokens]) => {
-      const sorted = [...tokens].sort((a, b) => SIZE_ORDER.indexOf(tokenSize(a)) - SIZE_ORDER.indexOf(tokenSize(b)));
+      const sorted = [...tokens].sort(
+        (a, b) => SIZE_ORDER.indexOf(tokenSize(a)) - SIZE_ORDER.indexOf(tokenSize(b)),
+      );
       return [family, sorted] as const;
     });
   }, [names]);
@@ -98,7 +100,8 @@ export function Elevation() {
         <div>
           <h1 className={styles.title}>Elevation</h1>
           <p className={styles.subtitle}>
-            그림자로 높이를 표현합니다. 카드의 <code>box-shadow</code>에 토큰을 넣으세요. 클릭하면 이름을 복사합니다.
+            그림자로 높이를 표현합니다. 카드의 <code>box-shadow</code>에 토큰을 넣으세요. 클릭하면
+            이름을 복사합니다.
           </p>
         </div>
       </header>

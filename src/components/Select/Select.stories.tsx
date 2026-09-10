@@ -20,7 +20,13 @@ const fruitOptions = [
 function SelectStory(args: SelectProps) {
   const isMultiple = args.multiple || args.type === "chip";
   const [value, setValue] = useState<string | string[]>(() =>
-    isMultiple ? (Array.isArray(args.value) ? args.value : []) : typeof args.value === "string" ? args.value : ""
+    isMultiple
+      ? Array.isArray(args.value)
+        ? args.value
+        : []
+      : typeof args.value === "string"
+        ? args.value
+        : "",
   );
 
   if (isMultiple) {

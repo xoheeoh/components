@@ -38,8 +38,7 @@ export const MultilineLabel: Story = {
     label: (
       <>
         기본 요금제
-        <br />
-        월 9,900원
+        <br />월 9,900원
       </>
     ),
   },

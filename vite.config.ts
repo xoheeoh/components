@@ -7,7 +7,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { playwright } from "@vitest/browser-playwright";
-const dirname = typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+const dirname =
+  typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 /** Vite lib 모드는 CSS url()을 data URI로 인라인하므로, 폰트는 별도 파일로 내보낸다. */
 function emitPretendardFont(): Plugin {
@@ -27,13 +28,20 @@ function emitPretendardFont(): Plugin {
       this.emitFile({
         type: "asset",
         fileName: "fonts.css",
-        source: readFileSync(fontsCssPath, "utf8").replace("./fonts/PretendardVariable.woff2", `./${fileName}`),
+        source: readFileSync(fontsCssPath, "utf8").replace(
+          "./fonts/PretendardVariable.woff2",
+          `./${fileName}`,
+        ),
       });
       for (const item of Object.values(bundle)) {
         if (item.type !== "asset" || !item.fileName.endsWith(".css")) continue;
-        const source = typeof item.source === "string" ? item.source : new TextDecoder().decode(item.source);
+        const source =
+          typeof item.source === "string" ? item.source : new TextDecoder().decode(item.source);
         if (!source.includes("data:font/woff2")) continue;
-        item.source = source.replace(/url\(data:font\/woff2;base64,[A-Za-z0-9+/]+=*\)/g, `url(./${fileName})`);
+        item.source = source.replace(
+          /url\(data:font\/woff2;base64,[A-Za-z0-9+/]+=*\)/g,
+          `url(./${fileName})`,
+        );
       }
     },
   };
@@ -60,7 +68,8 @@ export default defineConfig({
       ],
       output: {
         assetFileNames: (assetInfo) => {
-          if (assetInfo.names?.includes("fonts.css") || assetInfo.name === "fonts.css") return "fonts.css";
+          if (assetInfo.names?.includes("fonts.css") || assetInfo.name === "fonts.css")
+            return "fonts.css";
           if (assetInfo.name?.endsWith(".css")) return "styles.css";
           return "assets/[name][extname]";
         },

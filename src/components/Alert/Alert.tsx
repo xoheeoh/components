@@ -43,7 +43,8 @@ export function Alert({
   const destructiveVariant = hasThreeActions ? "outlined" : "solid";
 
   const body =
-    message == null || message === false || message === "" ? undefined : typeof message === "string" ? (
+    message == null || message === false || message === "" ? undefined : typeof message ===
+      "string" ? (
       <p style={{ margin: 0, whiteSpace: "pre-line" }}>{message}</p>
     ) : (
       message
@@ -88,7 +89,8 @@ export function Alert({
             />
           ) : null}
         </>
-      }>
+      }
+    >
       {body}
     </Dialog>
   );

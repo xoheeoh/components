@@ -47,12 +47,20 @@ export function Tooltip({
   const tooltipId = useId();
   const resolvedAlign = align ?? (arrow === "vertical" ? "leading" : "top");
   const rootClass = [styles.root, className].filter(Boolean).join(" ");
-  const tipClass = [styles.tooltip, styles[position], styles[size], styles[theme]].filter(Boolean).join(" ");
+  const tipClass = [styles.tooltip, styles[position], styles[size], styles[theme]]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <span className={rootClass} {...rest} aria-describedby={tooltipId}>
       {children}
-      <span id={tooltipId} role="tooltip" className={tipClass} data-arrow={arrow} data-align={resolvedAlign}>
+      <span
+        id={tooltipId}
+        role="tooltip"
+        className={tipClass}
+        data-arrow={arrow}
+        data-align={resolvedAlign}
+      >
         {content}
       </span>
     </span>

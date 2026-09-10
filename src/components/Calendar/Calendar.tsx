@@ -65,7 +65,13 @@ function DateCalendar({
   );
 }
 
-function MonthCalendar({ selected, onSelect, year: controlledYear, onYearChange, className }: MonthCalendarProps) {
+function MonthCalendar({
+  selected,
+  onSelect,
+  year: controlledYear,
+  onYearChange,
+  className,
+}: MonthCalendarProps) {
   const selectedYear = selected?.getFullYear();
   const [internalYear, setInternalYear] = useState(() => selectedYear ?? new Date().getFullYear());
   const year = controlledYear ?? internalYear;
@@ -78,17 +84,28 @@ function MonthCalendar({ selected, onSelect, year: controlledYear, onYearChange,
   return (
     <div className={[styles.root, styles.monthRoot, className].filter(Boolean).join(" ")}>
       <div className={styles.monthNav}>
-        <button type="button" className="rdp-button_previous" aria-label="이전 해" onClick={() => setYear(year - 1)}>
+        <button
+          type="button"
+          className="rdp-button_previous"
+          aria-label="이전 해"
+          onClick={() => setYear(year - 1)}
+        >
           <CalendarChevron orientation="left" className="rdp-chevron" />
         </button>
         <span className={styles.monthCaption}>{year}년</span>
-        <button type="button" className="rdp-button_next" aria-label="다음 해" onClick={() => setYear(year + 1)}>
+        <button
+          type="button"
+          className="rdp-button_next"
+          aria-label="다음 해"
+          onClick={() => setYear(year + 1)}
+        >
           <CalendarChevron orientation="right" className="rdp-chevron" />
         </button>
       </div>
       <div className={styles.monthGrid} role="listbox" aria-label="월 선택">
         {MONTHS.map((month) => {
-          const isSelected = selected != null && selected.getFullYear() === year && selected.getMonth() === month;
+          const isSelected =
+            selected != null && selected.getFullYear() === year && selected.getMonth() === month;
           const label = format(new Date(year, month, 1), "M월", { locale: dateFnsKo });
 
           return (
@@ -97,8 +114,11 @@ function MonthCalendar({ selected, onSelect, year: controlledYear, onYearChange,
               type="button"
               role="option"
               aria-selected={isSelected}
-              className={[styles.monthCell, isSelected ? styles.monthSelected : ""].filter(Boolean).join(" ")}
-              onClick={() => onSelect?.(new Date(year, month, 1))}>
+              className={[styles.monthCell, isSelected ? styles.monthSelected : ""]
+                .filter(Boolean)
+                .join(" ")}
+              onClick={() => onSelect?.(new Date(year, month, 1))}
+            >
               {label}
             </button>
           );

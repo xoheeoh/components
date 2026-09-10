@@ -43,7 +43,7 @@ export const DEFAULT_MONTH_SHORTCUTS = MONTH_SHORTCUT_LIST;
 /** to 날짜(없으면 오늘)를 종료일로 두고 숏컷 기간을 계산 */
 export function resolveDayShortcut(
   value: string,
-  options: ResolveShortcutOptions = {}
+  options: ResolveShortcutOptions = {},
 ): { from: string; to: string } | null {
   const now = startOfDay(options.now ?? new Date());
   const anchor = fromDateValue(options.to) ?? now;
@@ -71,7 +71,7 @@ export function resolveDayShortcut(
 /** to 월(없으면 당월)을 종료월로 두고 숏컷 기간을 계산 */
 export function resolveMonthShortcut(
   value: string,
-  options: ResolveShortcutOptions = {}
+  options: ResolveShortcutOptions = {},
 ): { from: string; to: string } | null {
   const now = startOfMonth(options.now ?? new Date());
   const anchor = fromMonthValue(options.to) ?? now;
@@ -96,7 +96,7 @@ export function resolveMonthShortcut(
 export function resolveShortcutOptions(
   shortcuts: Array<DateFieldShortcut | string> | undefined,
   fallback: DateFieldShortcut[] = DEFAULT_DAY_SHORTCUTS,
-  catalog: DateFieldShortcut[] = DAY_SHORTCUT_LIST
+  catalog: DateFieldShortcut[] = DAY_SHORTCUT_LIST,
 ): DateFieldShortcut[] {
   const normalize = (item: DateFieldShortcut | string): DateFieldShortcut => {
     if (typeof item !== "string") return item;

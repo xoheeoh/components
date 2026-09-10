@@ -66,7 +66,8 @@
 }
 
 .track[data-state="checked"] .thumb {
-  transform: translateY(-50%) translateX(calc(var(--switch-width) - var(--thumb-size) - var(--switch-inset) * 2));
+  transform: translateY(-50%)
+    translateX(calc(var(--switch-width) - var(--thumb-size) - var(--switch-inset) * 2));
 }
 
 .root:hover:not(:disabled) .track[data-state="unchecked"] {

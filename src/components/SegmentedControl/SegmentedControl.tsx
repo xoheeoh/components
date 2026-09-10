@@ -13,7 +13,10 @@ export interface SegmentedControlOption {
   iconPosition?: "left" | "right";
 }
 
-export interface SegmentedControlProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue"> {
+export interface SegmentedControlProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "onChange" | "defaultValue"
+> {
   type?: SegmentedControlType;
   /** 그룹 라벨. 빈 값인 경우 숨김 처리 */
   label?: ReactNode;
@@ -57,7 +60,13 @@ export function SegmentedControl({
     onChange?.(optionValue, event);
   };
 
-  const rootClass = [styles.root, styles[type], styles[size], fullWidth ? styles.fullWidth : "", className]
+  const rootClass = [
+    styles.root,
+    styles[type],
+    styles[size],
+    fullWidth ? styles.fullWidth : "",
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 
@@ -80,7 +89,8 @@ export function SegmentedControl({
               role="radio"
               className={styles.segment}
               aria-checked={selected}
-              onClick={handleSelect(opt.value)}>
+              onClick={handleSelect(opt.value)}
+            >
               {opt.icon && opt.iconPosition !== "right" && (
                 <span className={styles.segmentIcon} aria-hidden>
                   {opt.icon}

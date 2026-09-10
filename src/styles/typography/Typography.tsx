@@ -136,12 +136,21 @@ export function Typography() {
         <section key={group} className={styles.group}>
           <h2 className={styles.groupTitle}>{group.charAt(0).toUpperCase() + group.slice(1)}</h2>
           {groupRoles.map((role) => (
-            <button key={role.name} type="button" className={styles.row} onClick={() => copy(role.name)}>
-              <span className={styles.role}>{copied === role.name ? "Copied" : `text-${role.name}`}</span>
+            <button
+              key={role.name}
+              type="button"
+              className={styles.row}
+              onClick={() => copy(role.name)}
+            >
+              <span className={styles.role}>
+                {copied === role.name ? "Copied" : `text-${role.name}`}
+              </span>
               <span>
                 <p className={`${styles.sample} text-${role.name}`}>{SAMPLE}</p>
                 <span className={styles.meta}>
-                  {[role.size, role.weight, role.tracking, role.lineHeight].filter(Boolean).join(" / ")}
+                  {[role.size, role.weight, role.tracking, role.lineHeight]
+                    .filter(Boolean)
+                    .join(" / ")}
                 </span>
               </span>
             </button>

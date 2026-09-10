@@ -82,7 +82,12 @@ export const FixedWidth: Story = {
 export const HasAccessibleName: Story = {
   tags: ["!autodocs"],
   parameters: { controls: { disable: true } },
-  args: { label: "이메일", required: true, status: "negative", description: "형식이 올바르지 않습니다" },
+  args: {
+    label: "이메일",
+    required: true,
+    status: "negative",
+    description: "형식이 올바르지 않습니다",
+  },
   play: async ({ canvas }) => {
     // 이름으로 조회되면 label이 프로그램적으로 연결됐다는 뜻이다.
     const input = canvas.getByRole("textbox", { name: "이메일" });

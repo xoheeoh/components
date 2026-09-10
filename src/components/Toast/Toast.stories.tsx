@@ -45,14 +45,24 @@ function TypeButtons() {
         label="Default"
         onClick={() => toast("아이콘이 없는 기본 토스트입니다.")}
       />
-      <Button variant="outlined" color="neutral" label="Success" onClick={() => toast.success("저장되었습니다.")} />
+      <Button
+        variant="outlined"
+        color="neutral"
+        label="Success"
+        onClick={() => toast.success("저장되었습니다.")}
+      />
       <Button
         variant="outlined"
         color="neutral"
         label="Info"
         onClick={() => toast.info("새로운 업데이트가 있습니다.")}
       />
-      <Button variant="outlined" color="neutral" label="Warning" onClick={() => toast.warning("주의가 필요합니다.")} />
+      <Button
+        variant="outlined"
+        color="neutral"
+        label="Warning"
+        onClick={() => toast.warning("주의가 필요합니다.")}
+      />
       <Button
         variant="outlined"
         color="neutral"

@@ -34,20 +34,35 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(functio
     style,
     ...rest
   },
-  ref
+  ref,
 ) {
-  const classes = [styles.textButton, styles[color], styles[size], className].filter(Boolean).join(" ");
+  const classes = [styles.textButton, styles[color], styles[size], className]
+    .filter(Boolean)
+    .join(" ");
   const spinnerSize = size === "md" ? "sm" : "xs";
 
   return (
-    <button ref={ref} type={type} className={classes} style={style} onClick={onClick} disabled={disabled} {...rest}>
+    <button
+      ref={ref}
+      type={type}
+      className={classes}
+      style={style}
+      onClick={onClick}
+      disabled={disabled}
+      {...rest}
+    >
       <span className={styles.label}>
-        <span className={loading ? styles.labelHidden : styles.labelContent} aria-hidden={loading || undefined}>
+        <span
+          className={loading ? styles.labelHidden : styles.labelContent}
+          aria-hidden={loading || undefined}
+        >
           {icon && iconPosition === "left" && icon}
           {label}
           {icon && iconPosition === "right" && icon}
         </span>
-        {loading ? <Spinner size={spinnerSize} color="current" className={styles.loadingSpinner} /> : null}
+        {loading ? (
+          <Spinner size={spinnerSize} color="current" className={styles.loadingSpinner} />
+        ) : null}
       </span>
     </button>
   );

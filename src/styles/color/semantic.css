@@ -75,7 +75,19 @@
    * error가 3.16:1로 가장 빠듯해 먼저 깨진다.
    * 어두운 배경은 현재 지원 대상이 아니며, 도입 시 neutral(2.25:1)부터 재검토가 필요하다.
    */
-  --semantic-focus-ring-primary: color-mix(in srgb, var(--semantic-primary-fg) 75%, var(--semantic-static-white));
-  --semantic-focus-ring-neutral: color-mix(in srgb, var(--semantic-neutral-fg) 75%, var(--semantic-static-white));
-  --semantic-focus-ring-error: color-mix(in srgb, var(--semantic-error-fg) 75%, var(--semantic-static-white));
+  --semantic-focus-ring-primary: color-mix(
+    in srgb,
+    var(--semantic-primary-fg) 75%,
+    var(--semantic-static-white)
+  );
+  --semantic-focus-ring-neutral: color-mix(
+    in srgb,
+    var(--semantic-neutral-fg) 75%,
+    var(--semantic-static-white)
+  );
+  --semantic-focus-ring-error: color-mix(
+    in srgb,
+    var(--semantic-error-fg) 75%,
+    var(--semantic-static-white)
+  );
 }

@@ -129,7 +129,7 @@ const DateFieldSingle = forwardRef<HTMLInputElement, DateFieldSingleProps>(funct
     name,
     defaultToday = false,
   },
-  ref
+  ref,
 ) {
   const generatedId = useId();
   const inputId = id ?? generatedId;
@@ -161,7 +161,13 @@ const DateFieldSingle = forwardRef<HTMLInputElement, DateFieldSingleProps>(funct
     .join(" ");
 
   return (
-    <FieldChrome label={label} required={required} htmlFor={inputId} className={fieldClass} size={size}>
+    <FieldChrome
+      label={label}
+      required={required}
+      htmlFor={inputId}
+      className={fieldClass}
+      size={size}
+    >
       <DateFieldInput
         ref={ref}
         id={inputId}
@@ -204,7 +210,11 @@ function DateFieldRange({
   const labelId = useId();
   const isDate = granularity === "date";
   const shortcutDefaults = isDate ? DEFAULT_DAY_SHORTCUTS : DEFAULT_MONTH_SHORTCUTS;
-  const shortcutOptions: SelectOption[] = resolveShortcutOptions(shortcuts, shortcutDefaults, shortcutDefaults);
+  const shortcutOptions: SelectOption[] = resolveShortcutOptions(
+    shortcuts,
+    shortcutDefaults,
+    shortcutDefaults,
+  );
 
   const isShortcutControlled = shortcutProp !== undefined;
   const [internalShortcut, setInternalShortcut] = useState("");
@@ -275,7 +285,8 @@ function DateFieldRange({
       ]
         .filter(Boolean)
         .join(" ")}
-      size={size}>
+      size={size}
+    >
       <div className={styles.row} role="group" aria-labelledby={label ? labelId : undefined}>
         <div className={styles.picker}>
           <DateFieldInput
@@ -324,9 +335,11 @@ function DateFieldRange({
   );
 }
 
-export const DateField = forwardRef<HTMLInputElement, DateFieldProps>(function DateField(props, ref) {
-  if (props.mode === "range") {
-    return <DateFieldRange {...props} />;
-  }
-  return <DateFieldSingle {...props} ref={ref} />;
-});
+export const DateField = forwardRef<HTMLInputElement, DateFieldProps>(
+  function DateField(props, ref) {
+    if (props.mode === "range") {
+      return <DateFieldRange {...props} />;
+    }
+    return <DateFieldSingle {...props} ref={ref} />;
+  },
+);

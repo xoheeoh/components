@@ -35,7 +35,9 @@
   line-height: var(--tab-line-height);
   white-space: nowrap;
   cursor: pointer;
-  transition: color 100ms ease, border-color 100ms ease;
+  transition:
+    color 100ms ease,
+    border-color 100ms ease;
 }
 
 .tab:hover:not(:disabled):not([aria-selected="true"]) {

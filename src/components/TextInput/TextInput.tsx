@@ -96,7 +96,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
     "aria-invalid": ariaInvalid,
     ...rest
   },
-  ref
+  ref,
 ) {
   const inputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
@@ -107,7 +107,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
   const descriptionId = `${inputId}-description`;
 
   // 소비자가 넘긴 aria-describedby를 덮지 않고 뒤에 이어 붙인다.
-  const describedBy = [description ? descriptionId : null, ariaDescribedBy].filter(Boolean).join(" ") || undefined;
+  const describedBy =
+    [description ? descriptionId : null, ariaDescribedBy].filter(Boolean).join(" ") || undefined;
 
   /**
    * file / 일반 두 입력 분기에 동일하게 적용되는 접근성 속성.
@@ -126,7 +127,9 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
   const emptyFileLabel = placeholder ?? "파일을 선택하세요.";
   const [fileLabel, setFileLabel] = useState(emptyFileLabel);
   const [pwVisible, setPwVisible] = useState(false);
-  const [uncontrolledHasValue, setUncontrolledHasValue] = useState(() => parseHasValue(defaultValue));
+  const [uncontrolledHasValue, setUncontrolledHasValue] = useState(() =>
+    parseHasValue(defaultValue),
+  );
   const hasValue = value != null ? parseHasValue(value) : uncontrolledHasValue;
 
   const showBadge = statusBadge && status !== "default" && !disabled;
@@ -141,8 +144,15 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
   const trailingBadgeClass = [styles.trailing, styles.statusBadge, styles[size], styles[status]]
     .filter(Boolean)
     .join(" ");
-  const trailingButtonClass = [styles.trailing, styles.actionButton, styles[size]].filter(Boolean).join(" ");
-  const trailingClearClass = [styles.trailing, styles.actionButton, styles.clearButton, styles[size]]
+  const trailingButtonClass = [styles.trailing, styles.actionButton, styles[size]]
+    .filter(Boolean)
+    .join(" ");
+  const trailingClearClass = [
+    styles.trailing,
+    styles.actionButton,
+    styles.clearButton,
+    styles[size],
+  ]
     .filter(Boolean)
     .join(" ");
 
@@ -163,8 +173,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
         !files?.length
           ? emptyFileLabel
           : files.length === 1
-          ? files[0].name
-          : `${files[0].name} 외 ${files.length - 1}개`
+            ? files[0].name
+            : `${files[0].name} 외 ${files.length - 1}개`,
       );
     } else {
       setUncontrolledHasValue(parseHasValue(event.target.value));
@@ -195,16 +205,25 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
         className={trailingButtonClass}
         disabled={disabled}
         aria-label={pwVisible ? "비밀번호 숨기기" : "비밀번호 보기"}
-        onClick={handleTogglePwVisible}>
+        onClick={handleTogglePwVisible}
+      >
         <Icon path={pwVisible ? mdiEyeOffOutline : mdiEyeOutline} size={ICON_SIZE[size]} />
       </button>
     ) : trailing === "status" ? (
       // 텍스트 대안이 없는 장식이다. 상태의 의미는 aria-invalid와 description이 전달한다.
       <div className={trailingBadgeClass} aria-hidden>
-        <Icon path={status === "positive" ? mdiCheckCircle : mdiAlertCircle} size={ICON_SIZE[size]} />
+        <Icon
+          path={status === "positive" ? mdiCheckCircle : mdiAlertCircle}
+          size={ICON_SIZE[size]}
+        />
       </div>
     ) : trailing === "clear" ? (
-      <button type="button" className={trailingClearClass} aria-label="입력 지우기" onClick={handleClear}>
+      <button
+        type="button"
+        className={trailingClearClass}
+        aria-label="입력 지우기"
+        onClick={handleClear}
+      >
         <Icon path={mdiCloseCircle} size={ICON_SIZE[size]} />
       </button>
     ) : null;
@@ -235,15 +254,22 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
               {...rest}
               onChange={handleChange}
             />
-            <div className={[inputClass, styles.fileField].join(" ")} onClick={openFilePicker} aria-hidden>
-              <span className={fileLabel === emptyFileLabel ? styles.fileNameEmpty : undefined}>{fileLabel}</span>
+            <div
+              className={[inputClass, styles.fileField].join(" ")}
+              onClick={openFilePicker}
+              aria-hidden
+            >
+              <span className={fileLabel === emptyFileLabel ? styles.fileNameEmpty : undefined}>
+                {fileLabel}
+              </span>
             </div>
             <button
               type="button"
               className={fileTriggerClass}
               disabled={disabled}
               aria-label="파일 선택"
-              onClick={openFilePicker}>
+              onClick={openFilePicker}
+            >
               <Icon path={mdiPaperclip} size={ICON_SIZE[size]} />
             </button>
           </>

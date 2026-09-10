@@ -100,7 +100,9 @@
   background: var(--dot-color);
   opacity: var(--dot-opacity);
   transform: scale(var(--dot-scale));
-  transition: transform 220ms ease, opacity 220ms ease;
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease;
 }
 
 .dot[data-distance="0"] {

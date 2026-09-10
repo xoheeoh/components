@@ -1,4 +1,12 @@
-import { ChangeEvent, CSSProperties, forwardRef, InputHTMLAttributes, useId, useState, type ReactNode } from "react";
+import {
+  ChangeEvent,
+  CSSProperties,
+  forwardRef,
+  InputHTMLAttributes,
+  useId,
+  useState,
+  type ReactNode,
+} from "react";
 import styles from "./Radio.module.css";
 
 export type RadioSize = "sm" | "md";
@@ -32,7 +40,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
     className,
     ...rest
   },
-  ref
+  ref,
 ) {
   const generatedId = useId();
   const inputId = id ?? generatedId;
@@ -47,7 +55,9 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   };
 
   const visualState = isChecked ? "checked" : "unchecked";
-  const rootClass = [styles.root, styles[size], disabled ? styles.disabled : "", className].filter(Boolean).join(" ");
+  const rootClass = [styles.root, styles[size], disabled ? styles.disabled : "", className]
+    .filter(Boolean)
+    .join(" ");
   const labelClass = [styles.label, labelClassName].filter(Boolean).join(" ");
 
   return (

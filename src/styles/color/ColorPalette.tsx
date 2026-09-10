@@ -153,7 +153,12 @@ export function ColorPalette({ prefix, title, description }: ColorPaletteProps) 
               const token = resolved[name];
               const isBase = tokenStep(name, prefix) === BASE_STEP;
               return (
-                <button key={name} type="button" className={styles.swatch} onClick={() => copy(name)}>
+                <button
+                  key={name}
+                  type="button"
+                  className={styles.swatch}
+                  onClick={() => copy(name)}
+                >
                   <span className={styles.chip} style={{ background: `var(${name})` }}>
                     {isBase ? <span className={styles.dot} /> : null}
                   </span>

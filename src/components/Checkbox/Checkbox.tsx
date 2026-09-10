@@ -20,7 +20,10 @@ const ICON_SIZE: Record<CheckboxSize, number> = {
   md: 14,
 };
 
-export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
+export interface CheckboxProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "size"
+> {
   /** 옵션 라벨. 빈 값인 경우 숨김 처리. */
   label?: ReactNode;
   size?: CheckboxSize;
@@ -52,7 +55,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
     className,
     ...rest
   },
-  ref
+  ref,
 ) {
   const generatedId = useId();
   const inputId = id ?? generatedId;
@@ -70,7 +73,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
   // 체크박스 변경
   const visualState = indeterminate ? "indeterminate" : isChecked ? "checked" : "unchecked";
 
-  const rootClass = [styles.root, styles[size], disabled ? styles.disabled : "", className].filter(Boolean).join(" ");
+  const rootClass = [styles.root, styles[size], disabled ? styles.disabled : "", className]
+    .filter(Boolean)
+    .join(" ");
   const labelClass = [styles.label, labelClassName].filter(Boolean).join(" ");
 
   const innerRef = useRef<HTMLInputElement>(null);

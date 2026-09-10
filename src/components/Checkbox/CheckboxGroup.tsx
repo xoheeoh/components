@@ -1,4 +1,11 @@
-import { CSSProperties, useId, useState, type ChangeEvent, type HTMLAttributes, type ReactNode } from "react";
+import {
+  CSSProperties,
+  useId,
+  useState,
+  type ChangeEvent,
+  type HTMLAttributes,
+  type ReactNode,
+} from "react";
 import { Checkbox, type CheckboxSize } from "./Checkbox";
 import styles from "./Checkbox.module.css";
 
@@ -10,7 +17,10 @@ export interface CheckboxGroupOption {
   disabled?: boolean;
 }
 
-export interface CheckboxGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue"> {
+export interface CheckboxGroupProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "onChange" | "defaultValue"
+> {
   /** 옵션 그룹 라벨. 빈 값인 경우 숨김 처리 */
   label?: ReactNode;
   /** 옵션 목록 */
@@ -79,7 +89,8 @@ export function CheckboxGroup({
       style={style}
       role="group"
       aria-labelledby={labelId}
-      aria-disabled={disabled || undefined}>
+      aria-disabled={disabled || undefined}
+    >
       {label && (
         <span id={labelId} className={groupLabelClass}>
           {label}

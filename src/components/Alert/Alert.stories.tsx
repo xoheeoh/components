@@ -85,7 +85,12 @@ export const Destructive: Story = {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <Button variant="solid" color="destructive" label="회원 탈퇴" onClick={() => setOpen(true)} />
+        <Button
+          variant="solid"
+          color="destructive"
+          label="회원 탈퇴"
+          onClick={() => setOpen(true)}
+        />
         <Alert
           open={open}
           onClose={() => setOpen(false)}
@@ -104,7 +109,12 @@ export const ThreeActions: Story = {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <Button variant="outlined" color="neutral" label="세 가지 행동" onClick={() => setOpen(true)} />
+        <Button
+          variant="outlined"
+          color="neutral"
+          label="세 가지 행동"
+          onClick={() => setOpen(true)}
+        />
         <Alert
           open={open}
           onClose={() => setOpen(false)}

@@ -88,6 +88,9 @@ export const RespectsExplicitType: Story = {
   parameters: { controls: { disable: true } },
   render: (args) => <IconButton {...args} type="submit" aria-label="제출 버튼" />,
   play: async ({ canvas }) => {
-    await expect(canvas.getByRole("button", { name: "제출 버튼" })).toHaveAttribute("type", "submit");
+    await expect(canvas.getByRole("button", { name: "제출 버튼" })).toHaveAttribute(
+      "type",
+      "submit",
+    );
   },
 };

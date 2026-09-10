@@ -135,19 +135,26 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
     "aria-labelledby": ariaLabelledBy,
     ...rest
   },
-  ref
+  ref,
 ) {
   const isChip = type === "chip";
   const isMultiple = multiple || isChip;
   const labelClass = [styles.label, styles[size]].filter(Boolean).join(" ");
-  const triggerClass = [styles.select, styles[size], styles[status], overflow && styles.selectOverflow]
+  const triggerClass = [
+    styles.select,
+    styles[size],
+    styles[status],
+    overflow && styles.selectOverflow,
+  ]
     .filter(Boolean)
     .join(" ");
   const descriptionClass = [styles.description, styles[status]].filter(Boolean).join(" ");
 
   // 상태 뱃지
   const showBadge = statusBadge && status !== "default" && !disabled;
-  const statusBadgeClass = [styles.statusBadge, styles[size], styles[status]].filter(Boolean).join(" ");
+  const statusBadgeClass = [styles.statusBadge, styles[size], styles[status]]
+    .filter(Boolean)
+    .join(" ");
   const statusBadgeIcon = showBadge ? (
     // 텍스트 대안이 없는 장식이다. 상태의 의미는 aria-invalid와 description이 전달한다.
     <span className={statusBadgeClass} aria-hidden>
@@ -170,7 +177,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
       if (typeof ref === "function") ref(node);
       else if (ref) ref.current = node;
     },
-    [ref]
+    [ref],
   );
 
   const [open, setOpen] = useState(false);
@@ -190,7 +197,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
    */
   const isControlled = value !== undefined;
   const [uncontrolledValue, setUncontrolledValue] = useState<string | string[]>(
-    () => defaultValue ?? (isMultiple ? [] : "")
+    () => defaultValue ?? (isMultiple ? [] : ""),
   );
   const currentValue = isControlled ? value : uncontrolledValue;
   const selectedValues = selectedValuesOf(isMultiple, currentValue);
@@ -217,7 +224,9 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
       // scroll 리스너가 capture라서 목록 내부 스크롤(활성 옵션 scrollIntoView)도 이 콜백을
       // 재실행한다. 값이 같으면 새 객체를 만들지 않아 불필요한 리렌더를 막는다.
       setListPos((prev) =>
-        prev && prev.top === next.top && prev.left === next.left && prev.width === next.width ? prev : next
+        prev && prev.top === next.top && prev.left === next.left && prev.width === next.width
+          ? prev
+          : next,
       );
     };
 
@@ -234,7 +243,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
   useEffect(() => {
     if (!open) return;
 
-    const isInside = (target: Node) => Boolean(triggerRef.current?.contains(target) || listRef.current?.contains(target));
+    const isInside = (target: Node) =>
+      Boolean(triggerRef.current?.contains(target) || listRef.current?.contains(target));
 
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target as Node;
@@ -292,7 +302,9 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
 
   /** 키보드로 열었을 때의 기본 활성 항목 — 선택된 옵션, 없으면 첫 enabled 옵션. */
   const initialActiveIndex = () => {
-    const selected = options.findIndex((opt) => !opt.disabled && selectedValues.includes(opt.value));
+    const selected = options.findIndex(
+      (opt) => !opt.disabled && selectedValues.includes(opt.value),
+    );
     return normalizeIndex(selected >= 0 ? selected : firstEnabledIndex());
   };
 
@@ -342,10 +354,17 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
     .filter((opt): opt is SelectOption => opt != null);
   const hasValue = selectedOptions.length > 0;
   const displayValue = hasValue ? selectedOptions.map((opt) => opt.label).join(", ") : placeholder;
-  const valueClass = [styles.value, styles[size], !hasValue && styles.placeholder, overflow && styles.valueOverflow]
+  const valueClass = [
+    styles.value,
+    styles[size],
+    !hasValue && styles.placeholder,
+    overflow && styles.valueOverflow,
+  ]
     .filter(Boolean)
     .join(" ");
-  const chipsClass = [styles.chips, styles[size], overflow && styles.chipsOverflow].filter(Boolean).join(" ");
+  const chipsClass = [styles.chips, styles[size], overflow && styles.chipsOverflow]
+    .filter(Boolean)
+    .join(" ");
   const chipClass = [styles.chip, styles[size]].filter(Boolean).join(" ");
   const optionClass = [styles.option, styles[size]].filter(Boolean).join(" ");
 
@@ -360,7 +379,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
   const optionId = (optionValue: string) => `${triggerId}-option-${optionValue}`;
 
   // 소비자가 넘긴 aria-describedby를 덮지 않고 뒤에 이어 붙인다.
-  const describedBy = [description ? descriptionId : null, ariaDescribedBy].filter(Boolean).join(" ") || undefined;
+  const describedBy =
+    [description ? descriptionId : null, ariaDescribedBy].filter(Boolean).join(" ") || undefined;
 
   /**
    * 트리거가 <button>이라 <label htmlFor>만으로는 접근 가능한 이름이 만들어지지 않는다.
@@ -381,8 +401,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
   const labelledBy = label
     ? [labelId, ...valueRefIds].join(" ")
     : ariaLabel != null || ariaLabelledBy != null
-    ? undefined
-    : valueRefIds.join(" ");
+      ? undefined
+      : valueRefIds.join(" ");
 
   /**
    * 접근성 속성.
@@ -416,7 +436,9 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
     }, 500);
 
     const query = searchRef.current;
-    const found = options.findIndex((opt) => !opt.disabled && opt.label.toLocaleLowerCase().startsWith(query));
+    const found = options.findIndex(
+      (opt) => !opt.disabled && opt.label.toLocaleLowerCase().startsWith(query),
+    );
     if (found !== -1) setActiveIndex(found);
   };
 
@@ -505,7 +527,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
             // 이 핸들러는 마우스·터치 전용이다. 활성 항목을 만들지 않는다.
             if (open) closeList(false);
             else openList("none");
-          }}>
+          }}
+        >
           <span className={styles.trailing}>
             {statusBadgeIcon}
             <Icon
@@ -528,8 +551,13 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
                       disabled={disabled}
                       aria-label={`${opt.label} 삭제`}
                       onClick={(event) => removeChip(opt.value, event)}
-                      onPointerDown={(event) => event.stopPropagation()}>
-                      <Icon path={mdiClose} size={CHIP_REMOVE_SIZE[size]} className={styles.chipRemoveIcon} />
+                      onPointerDown={(event) => event.stopPropagation()}
+                    >
+                      <Icon
+                        path={mdiClose}
+                        size={CHIP_REMOVE_SIZE[size]}
+                        className={styles.chipRemoveIcon}
+                      />
                     </button>
                   </span>
                 ))}
@@ -561,7 +589,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
                 top: listPos.top,
                 left: listPos.left,
                 width: listPos.width,
-              }}>
+              }}
+            >
               {options.map((opt, index) => {
                 const isSelected = selectedValues.includes(opt.value);
                 return (
@@ -579,14 +608,17 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
                     ]
                       .filter(Boolean)
                       .join(" ")}
-                    onClick={() => selectOption(opt)}>
+                    onClick={() => selectOption(opt)}
+                  >
                     {opt.label}
-                    {isSelected && <Icon path={mdiCheck} size={ICON_SIZE[size]} className={styles.optionCheck} />}
+                    {isSelected && (
+                      <Icon path={mdiCheck} size={ICON_SIZE[size]} className={styles.optionCheck} />
+                    )}
                   </li>
                 );
               })}
             </ul>,
-            document.body
+            document.body,
           )}
       </div>
 

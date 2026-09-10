@@ -1,6 +1,11 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Pagination, type PaginationDotColor, type PaginationDotSize, type PaginationType } from "./Pagination";
+import {
+  Pagination,
+  type PaginationDotColor,
+  type PaginationDotSize,
+  type PaginationType,
+} from "./Pagination";
 
 type PaginationStoryArgs = {
   type: PaginationType;

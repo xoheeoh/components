@@ -12,7 +12,7 @@ const PERIODS = [
 
 function SegmentedControlStory(args: SegmentedControlProps) {
   const [selected, setSelected] = useState<string | undefined>(
-    () => args.value ?? args.defaultValue ?? PERIODS[0]?.value
+    () => args.value ?? args.defaultValue ?? PERIODS[0]?.value,
   );
 
   return (
@@ -65,7 +65,12 @@ export const WithIcon: Story = {
     options: [
       { value: "day", label: "일", icon: <Icon path={mdiCalendar} /> },
       { value: "week", label: "주", icon: <Icon path={mdiCalendarWeek} /> },
-      { value: "month", label: "월", icon: <Icon path={mdiCalendarMonth} />, iconPosition: "right" },
+      {
+        value: "month",
+        label: "월",
+        icon: <Icon path={mdiCalendarMonth} />,
+        iconPosition: "right",
+      },
     ],
   },
 };
