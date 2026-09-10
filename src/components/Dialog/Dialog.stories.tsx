@@ -185,7 +185,7 @@ export const StaysOpenWhenDragEndsOnOverlay: Story = {
     await fireEvent.click(overlay);
     await expect(dialog).toBeInTheDocument();
 
-    // 오버레이에서 누르기 시작해 그 자리에서 놓으면 닫혀야 한다
+    // 오버레이에서 누르기 시작해 그 자리에서 놓으면 닫혀야 한다.
     await fireEvent.pointerDown(overlay);
     await fireEvent.click(overlay);
     await expect(dialog).not.toBeInTheDocument();

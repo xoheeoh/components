@@ -28,7 +28,7 @@ export interface SegmentedControlProps extends Omit<
   "onChange" | "defaultValue"
 > {
   type?: SegmentedControlType;
-  /** 그룹 라벨. 빈 값인 경우 숨김 처리 */
+  /** 그룹 라벨. 빈 값이면 숨긴다. */
   label?: ReactNode;
   /** 세그먼트 목록 */
   options: SegmentedControlOption[];
@@ -38,7 +38,7 @@ export interface SegmentedControlProps extends Omit<
   defaultValue?: string;
   onChange?: (value: string, event: MouseEvent<HTMLButtonElement>) => void;
   size?: SegmentedControlSize;
-  /** true면 컨테이너 너비에 맞춰 세그먼트가 균등 분배 */
+  /** true면 컨테이너 너비에 맞춰 세그먼트를 균등 분배한다. */
   fullWidth?: boolean;
 }
 
@@ -86,7 +86,7 @@ export function SegmentedControl({
     next.click();
   };
 
-  // 라디오 그룹의 Tab 키 정지점은 하나 — 선택된 세그먼트, 없으면 첫 번째.
+  // 라디오 그룹의 Tab 키 정지점은 하나다 — 선택된 세그먼트, 없으면 첫 번째.
   const hasSelection = options.some((opt) => opt.value === currentValue);
 
   const rootClass = [

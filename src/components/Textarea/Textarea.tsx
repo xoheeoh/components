@@ -24,11 +24,11 @@ const ICON_SIZE: Record<TextareaSize, number> = {
 };
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  /** 라벨값. 빈 값인 경우 자동 숨김처리 */
+  /** 라벨값. 빈 값이면 자동으로 숨긴다. */
   label?: string;
   /** 입력 필드 상태값. (예: error 발생 시 negative 사용) */
   status?: TextareaStatus;
-  /** 상태값에 따른 뱃지. status가 default인 경우엔 보이지 않음 */
+  /** 상태값에 따른 뱃지. status가 default면 보이지 않는다. */
   statusBadge?: boolean;
   size?: TextareaSize;
   /** 필수 입력 필드 여부 */
@@ -37,12 +37,12 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   description?: string;
   disabled?: boolean;
   placeholder?: string;
-  /** 영역 크기 동작. resizable이면 입력에 따라 높이가 늘어남
-   * fixed의 경우 높이값이 고정되며, fixedHeight와 함께 사용해야 함
+  /** 영역 크기 동작. resizable이면 입력에 따라 높이가 늘어난다.
+   * fixed면 높이가 고정되며, fixedHeight와 함께 써야 한다.
    */
   resize?: TextareaResize;
   fixedHeight?: number;
-  /** 최대 글자 수 카운트 표시 여부. maxLength와 함께 사용해야 0 / maxLength 형태로 표시됨 */
+  /** 최대 글자 수 카운트 표시 여부. maxLength와 함께 써야 0 / maxLength 형태로 표시된다. */
   characterCount?: boolean;
   maxLength?: number;
   /** inline style. 예: `{ width: 200 }` */
@@ -154,7 +154,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       {label && (
         <label className={labelClass} htmlFor={textareaId}>
           {label}
-          {/* 필수 여부는 aria-required가 전달하므로 별표는 읽히지 않게 한다 */}
+          {/* 필수 여부는 aria-required가 전달하므로 별표는 읽히지 않게 한다. */}
           {required && (
             <span className={styles.required} aria-hidden>
               *

@@ -212,7 +212,7 @@ export const DateFieldInput = forwardRef<HTMLInputElement, DateFieldInputProps>(
             className={[styles.trigger, styles[size]].join(" ")}
             disabled={disabled}
             aria-label="달력 열기"
-            // 팝오버를 여는 컨트롤은 이 버튼이므로 열림 상태 속성도 여기에 둔다
+            // 팝오버를 여는 컨트롤은 이 버튼이므로 열림 상태 속성도 여기에 둔다.
             aria-expanded={open}
             aria-haspopup="dialog"
             aria-controls={open ? popoverId : undefined}

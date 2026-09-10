@@ -14,17 +14,17 @@ export interface SwitchProps extends Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   "onChange" | "type"
 > {
-  /** 옵션 라벨. 빈 값인 경우 숨김 처리. */
+  /** 옵션 라벨. 빈 값이면 숨긴다. */
   label?: ReactNode;
   size?: SwitchSize;
   /** 제어 모드 선택 여부 */
   checked?: boolean;
   /** 비제어 모드 초기 선택 여부 */
   defaultChecked?: boolean;
-  /** 선택 변경 시 다음 checked 값을 전달 */
+  /** 선택이 바뀌면 다음 checked 값을 전달한다. */
   onChange?: (checked: boolean, event: MouseEvent<HTMLButtonElement>) => void;
 
-  /** 라벨 color, fontWeight 등의 변경이 필요한 경우 */
+  /** 라벨 color, fontWeight 등을 바꿀 때 쓴다. */
   labelStyle?: CSSProperties;
   labelClassName?: string;
 }

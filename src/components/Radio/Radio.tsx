@@ -12,15 +12,15 @@ import styles from "./Radio.module.css";
 export type RadioSize = "sm" | "md";
 
 export interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
-  /** 옵션 라벨. 빈 값인 경우 숨김 처리. */
+  /** 옵션 라벨. 빈 값이면 숨긴다. */
   label?: ReactNode;
   size?: RadioSize;
 
-  /** 라벨 color, fontWeight 등의 변경이 필요한 경우 */
+  /** 라벨 color, fontWeight 등을 바꿀 때 쓴다. */
   labelStyle?: CSSProperties;
   labelClassName?: string;
 
-  /** 라디오 + 라벨 전체 스타일 변경이 필요한 경우 */
+  /** 라디오 + 라벨 전체 스타일을 바꿀 때 쓴다. */
   style?: CSSProperties;
   className?: string;
 }

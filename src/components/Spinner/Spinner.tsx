@@ -8,7 +8,7 @@ export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
   size?: SpinnerSize;
   /** 단독 사용 시 primary. 버튼 loading은 current(부모 글자색) */
   color?: SpinnerColor;
-  /** 접근성용 라벨. 화면에 표시되지 않음 */
+  /** 접근성용 라벨. 화면에 표시되지 않는다. */
   label?: string;
 }
 

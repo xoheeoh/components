@@ -54,11 +54,11 @@ function resolveTrailingSlot({
 }
 
 export interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
-  /** 라벨값. 빈 값인 경우 자동 숨김처리 */
+  /** 라벨값. 빈 값이면 자동으로 숨긴다. */
   label?: string;
   /** 입력 필드 상태값. (예: error 발생 시 negative 사용) */
   status?: TextInputStatus;
-  /** 상태값에 따른 뱃지. status가 default인 경우엔 보이지 않음 */
+  /** 상태값에 따른 뱃지. status가 default면 보이지 않는다. */
   statusBadge?: boolean;
   size?: TextInputSize;
   /** 필수 입력 필드 여부 */
@@ -233,7 +233,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
       {label && (
         <label className={labelClass} htmlFor={inputId}>
           {label}
-          {/* 필수 여부는 aria-required가 전달하므로 별표는 읽히지 않게 한다 */}
+          {/* 필수 여부는 aria-required가 전달하므로 별표는 읽히지 않게 한다. */}
           {required && (
             <span className={styles.required} aria-hidden>
               *

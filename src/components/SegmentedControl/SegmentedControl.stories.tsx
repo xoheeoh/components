@@ -112,7 +112,7 @@ export const KeyboardNavigation: Story = {
     await userEvent.keyboard("{End}");
     await expect(month).toHaveFocus();
 
-    // Tab 키는 그룹을 빠져나간다
+    // Tab 키는 그룹을 빠져나간다.
     await userEvent.tab();
     await expect(day).not.toHaveFocus();
     await expect(week).not.toHaveFocus();

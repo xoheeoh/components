@@ -55,13 +55,13 @@ export interface DialogProps {
   open: boolean;
   onClose: () => void;
 
-  /** 제목. 없으면 헤더에서 숨김 */
+  /** 제목. 없으면 헤더에서 숨긴다. */
   title?: string;
   /** 제목 아래 보조 설명 */
   description?: ReactNode;
   /** 하단 버튼 영역 */
   footer?: ReactNode;
-  /** 본문. 없으면 제목·설명·푸터만 표시 */
+  /** 본문. 없으면 제목·설명·푸터만 표시한다. */
   children?: ReactNode;
   /** 패널 너비. 기본값 md */
   size?: DialogSize;

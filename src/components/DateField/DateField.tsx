@@ -32,7 +32,7 @@ interface DateFieldSharedProps {
   /** true면 부모 너비에 맞춤. range 기본값 false */
   fullWidth?: boolean;
   /**
-   * true면 값이 비어 있을 때 오늘로 초기화.
+   * true면 값이 비어 있을 때 오늘로 초기화한다.
    * - single: 오늘(또는 이번 달)
    * - range: from=to=오늘(또는 이번 달), 일 단위는 숏컷 "당일"
    */
@@ -44,9 +44,9 @@ export interface DateFieldSingleProps extends DateFieldSharedProps {
   value: string;
   onValueChange: (value: string) => void;
   required?: boolean;
-  /** 팝오버에서 선택 가능한 최소일 (YYYY-MM-DD). granularity="date"일 때만 유효 */
+  /** 팝오버에서 선택 가능한 최소일 (YYYY-MM-DD). granularity="date"일 때만 유효하다. */
   min?: string;
-  /** 팝오버에서 선택 가능한 최대일 (YYYY-MM-DD). granularity="date"일 때만 유효 */
+  /** 팝오버에서 선택 가능한 최대일 (YYYY-MM-DD). granularity="date"일 때만 유효하다. */
   max?: string;
   placeholder?: string;
   id?: string;
@@ -68,7 +68,7 @@ export interface DateFieldRangeProps extends DateFieldSharedProps {
    * - month: DEFAULT_MONTH_SHORTCUTS
    */
   shortcuts?: Array<DateFieldShortcut | string>;
-  /** range 모드에서 숏컷 Select 표시 여부. */
+  /** range 모드에서 숏컷 Select 표시 여부 */
   showShortcuts?: boolean;
   /** 시작 입력의 스크린리더용 이름. 기본값: 일 단위 "시작일", 월 단위 "시작월" */
   fromLabel?: string;

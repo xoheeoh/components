@@ -20,13 +20,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 
   loading?: boolean;
-  /** 버튼 아이콘. 버튼 라벨 옆에 표시됨 */
+  /** 버튼 아이콘. 버튼 라벨 옆에 표시된다. */
   icon?: ReactNode;
   iconPosition?: "left" | "right";
   iconOnly?: boolean;
 }
 
-/** 공용 버튼 컴포넌트 — Input, Select와 size(height) 동일 */
+/** 공용 버튼 컴포넌트 — Input, Select와 size(height)가 같다. */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
     label,

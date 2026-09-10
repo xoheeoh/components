@@ -24,7 +24,7 @@ export interface MonthCalendarProps {
   year?: number;
   onYearChange?: (year: number) => void;
   className?: string;
-  /** true면 마운트 시 선택된 월(없으면 첫 월) 버튼에 포커스. DayPicker의 autoFocus와 같은 역할 */
+  /** true면 마운트 시 선택된 월(없으면 첫 월) 버튼에 포커스한다. DayPicker의 autoFocus와 같은 역할이다. */
   autoFocus?: boolean;
 }
 

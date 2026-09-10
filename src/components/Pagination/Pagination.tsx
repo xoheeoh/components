@@ -12,7 +12,7 @@ type PaginationBaseProps = Omit<HTMLAttributes<HTMLElement>, "onChange"> & {
   count: number;
   /** 한 번에 보여줄 페이지 개수. 기본값 5. number는 숫자 칸, dot은 점 개수 */
   visibleCount?: number;
-  /** 제어 모드 현재 페이지. 1부터 시작 */
+  /** 제어 모드 현재 페이지. 1부터 시작한다. */
   page?: number;
   /** 비제어 모드 초기 페이지. 기본값 1 */
   defaultPage?: number;
@@ -98,7 +98,7 @@ function getInitialDotStart(current: number, count: number, visibleCount: number
   return Math.min(Math.max(1, current - Math.floor((visibleCount - 1) / 2)), maxStart);
 }
 
-/** 선택된 페이지가 창 안에 있는 한 창을 유지하고, 밖으로 나가거나 끝 칸이면 그때만 민다 */
+/** 선택된 페이지가 창 안에 있는 한 창을 유지하고, 밖으로 나가거나 끝 칸이면 그때만 민다. */
 function adjustDotStart(prev: number, current: number, count: number, visibleCount: number) {
   if (count <= visibleCount) return 1;
 

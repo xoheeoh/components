@@ -65,7 +65,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-/** hug에서 탭이 목록보다 넓으면 가로 스크롤이 생깁니다. */
+/** hug에서 탭이 목록보다 넓으면 가로 스크롤이 생긴다. */
 export const Scroll: Story = {
   args: {
     resize: "hug",
@@ -91,7 +91,7 @@ export const Scroll: Story = {
   ),
 };
 
-/** disabled 탭은 클릭해도 선택되지 않습니다. */
+/** disabled 탭은 클릭해도 선택되지 않는다. */
 export const Disabled: Story = {
   render: (args) => (
     <Tabs {...args} style={{ width: 400 }}>
@@ -127,7 +127,7 @@ export const KeyboardNavigation: Story = {
   play: async ({ canvas }) => {
     const [tab1, tab2, tab3] = canvas.getAllByRole("tab");
 
-    // 선택된 탭만 Tab 키로 도달할 수 있다
+    // 선택된 탭만 Tab 키로 도달할 수 있다.
     await expect(tab1).toHaveAttribute("tabindex", "0");
     await expect(tab2).toHaveAttribute("tabindex", "-1");
     await expect(tab3).toHaveAttribute("tabindex", "-1");
@@ -152,7 +152,7 @@ export const KeyboardNavigation: Story = {
     await userEvent.keyboard("{Home}");
     await expect(tab1).toHaveFocus();
 
-    // Tab 키는 목록을 빠져나간다 — 다른 탭에 멈추지 않는다
+    // Tab 키는 목록을 빠져나간다 — 다른 탭에 멈추지 않는다.
     await userEvent.tab();
     await expect(tab1).not.toHaveFocus();
     await expect(tab2).not.toHaveFocus();

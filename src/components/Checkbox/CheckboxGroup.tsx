@@ -21,7 +21,7 @@ export interface CheckboxGroupProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   "onChange" | "defaultValue"
 > {
-  /** 옵션 그룹 라벨. 빈 값인 경우 숨김 처리 */
+  /** 옵션 그룹 라벨. 빈 값이면 숨긴다. */
   label?: ReactNode;
   /** 옵션 목록 */
   options: CheckboxGroupOption[];
@@ -30,7 +30,7 @@ export interface CheckboxGroupProps extends Omit<
   value?: string[];
   defaultValue?: string[];
   onChange?: (value: string[], event: ChangeEvent<HTMLInputElement>) => void;
-  /** true일 경우 하위 모든 옵션 비활성화 처리 */
+  /** true면 하위 모든 옵션을 비활성화한다. */
   disabled?: boolean;
   size?: CheckboxSize;
   /** 폼 제출 시 각 Checkbox에 공유되는 name */
@@ -38,7 +38,7 @@ export interface CheckboxGroupProps extends Omit<
   /** 각 옵션 간의 간격 커스텀이 필요할 때 사용. 기본값 12 */
   optionGap?: number;
 
-  /** 옵션 그룹 전체에 스타일 추가가 필요한 경우 */
+  /** 옵션 그룹 전체에 스타일을 추가할 때 쓴다. */
   style?: CSSProperties;
   className?: string;
 }

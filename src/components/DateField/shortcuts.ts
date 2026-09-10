@@ -7,7 +7,7 @@ export interface DateFieldShortcut {
 }
 
 export interface ResolveShortcutOptions {
-  /** 기간 계산 기준이 되는 종료일. 없거나 유효하지 않으면 오늘/당월 */
+  /** 기간 계산 기준이 되는 종료일. 없거나 유효하지 않으면 오늘/당월을 쓴다. */
   to?: string;
   now?: Date;
 }
@@ -40,7 +40,7 @@ export const DEFAULT_DAY_SHORTCUTS = DAY_SHORTCUT_LIST;
 /** 월 단위 기본 숏컷. 전월, 당월, 3개월, 6개월 */
 export const DEFAULT_MONTH_SHORTCUTS = MONTH_SHORTCUT_LIST;
 
-/** to 날짜(없으면 오늘)를 종료일로 두고 숏컷 기간을 계산 */
+/** to 날짜(없으면 오늘)를 종료일로 두고 숏컷 기간을 계산한다. */
 export function resolveDayShortcut(
   value: string,
   options: ResolveShortcutOptions = {},
@@ -68,7 +68,7 @@ export function resolveDayShortcut(
   }
 }
 
-/** to 월(없으면 당월)을 종료월로 두고 숏컷 기간을 계산 */
+/** to 월(없으면 당월)을 종료월로 두고 숏컷 기간을 계산한다. */
 export function resolveMonthShortcut(
   value: string,
   options: ResolveShortcutOptions = {},
@@ -92,7 +92,7 @@ export function resolveMonthShortcut(
   }
 }
 
-/** 부모가 넘긴 숏컷을 정규화. 미지정 시 fallback 사용. */
+/** 부모가 넘긴 숏컷을 정규화한다. 없으면 fallback을 쓴다. */
 export function resolveShortcutOptions(
   shortcuts: Array<DateFieldShortcut | string> | undefined,
   fallback: DateFieldShortcut[] = DEFAULT_DAY_SHORTCUTS,
