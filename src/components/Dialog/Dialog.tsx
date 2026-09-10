@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useRef, type ReactNode } from "react";
+import { useCallback, useEffect, useId, useRef, type PointerEvent, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { mdiClose } from "@mdi/js";
 import { Icon } from "../Icon";
@@ -95,6 +95,9 @@ export function Dialog({
   const instanceId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   const restoreFocusRef = useRef<HTMLElement | null>(null);
+  // 패널 안에서 텍스트를 드래그하다 오버레이 위에서 놓으면 click은 오버레이에서 발생한다.
+  // 그 경우 닫히지 않게, "누르기 시작한 곳"이 오버레이였는지를 기억한다.
+  const pointerDownOnOverlayRef = useRef(false);
   const hasTitle = title != null && title !== "";
   const hasDescription = description != null && description !== false && description !== "";
   const hasContent = children != null && children !== false;
@@ -166,14 +169,24 @@ export function Dialog({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [open, closeOnEscape, onClose, instanceId]);
 
+  const handleOverlayPointerDown = useCallback((event: PointerEvent<HTMLDivElement>) => {
+    pointerDownOnOverlayRef.current = event.target === event.currentTarget;
+  }, []);
+
   const handleOverlayClick = useCallback(() => {
-    if (closeOnOverlayClick) onClose();
+    const startedOnOverlay = pointerDownOnOverlayRef.current;
+    pointerDownOnOverlayRef.current = false;
+    if (startedOnOverlay && closeOnOverlayClick) onClose();
   }, [closeOnOverlayClick, onClose]);
 
   if (!open || typeof document === "undefined") return null;
 
   return createPortal(
-    <div className={styles.overlay} onClick={handleOverlayClick}>
+    <div
+      className={styles.overlay}
+      onPointerDown={handleOverlayPointerDown}
+      onClick={handleOverlayClick}
+    >
       <div
         ref={panelRef}
         role={role}

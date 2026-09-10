@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import type { ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 import { mdiInformationOutline } from "@mdi/js";
 import { Icon } from "../Icon";
 import {
@@ -11,9 +11,15 @@ import {
   type VerticalAlign,
 } from "./Tooltip";
 
-function DemoTrigger({ children }: { children: ReactNode }) {
+/** Tooltip이 넘기는 aria-describedby를 실제 span에 전달하고, 키보드로도 띄울 수 있게 포커스를 받는다 */
+function DemoTrigger({
+  children,
+  ...rest
+}: { children: ReactNode } & HTMLAttributes<HTMLSpanElement>) {
   return (
     <span
+      {...rest}
+      tabIndex={0}
       style={{
         display: "inline-flex",
         alignItems: "center",

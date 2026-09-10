@@ -70,6 +70,10 @@ export interface DateFieldRangeProps extends DateFieldSharedProps {
   shortcuts?: Array<DateFieldShortcut | string>;
   /** range 모드에서 숏컷 Select 표시 여부. */
   showShortcuts?: boolean;
+  /** 시작 입력의 스크린리더용 이름. 기본값: 일 단위 "시작일", 월 단위 "시작월" */
+  fromLabel?: string;
+  /** 종료 입력의 스크린리더용 이름. 기본값: 일 단위 "종료일", 월 단위 "종료월" */
+  toLabel?: string;
 }
 
 export type DateFieldProps = DateFieldSingleProps | DateFieldRangeProps;
@@ -202,6 +206,8 @@ function DateFieldRange({
   onShortcutChange,
   shortcuts,
   showShortcuts = true,
+  fromLabel,
+  toLabel,
   defaultToday = false,
   fullWidth = false,
   disabled,
@@ -209,6 +215,9 @@ function DateFieldRange({
 }: DateFieldRangeProps) {
   const labelId = useId();
   const isDate = granularity === "date";
+  // 그룹 라벨(예: "조회 기간")과 합쳐져 "조회 기간 시작일"처럼 읽힌다.
+  const resolvedFromLabel = fromLabel ?? (isDate ? "시작일" : "시작월");
+  const resolvedToLabel = toLabel ?? (isDate ? "종료일" : "종료월");
   const shortcutDefaults = isDate ? DEFAULT_DAY_SHORTCUTS : DEFAULT_MONTH_SHORTCUTS;
   const shortcutOptions: SelectOption[] = resolveShortcutOptions(
     shortcuts,
@@ -294,6 +303,7 @@ function DateFieldRange({
             size={size}
             value={from}
             disabled={disabled}
+            aria-label={resolvedFromLabel}
             onValueChange={(next) => {
               appliedByDefaultToday.current = false;
               clearShortcut();
@@ -310,6 +320,7 @@ function DateFieldRange({
             size={size}
             value={to}
             disabled={disabled}
+            aria-label={resolvedToLabel}
             onValueChange={(next) => {
               appliedByDefaultToday.current = false;
               clearShortcut();
