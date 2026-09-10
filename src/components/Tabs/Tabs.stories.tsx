@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent } from "storybook/test";
 import { Tabs, TabList, Tab, TabPanel } from "./Tabs";
 
 const DEFAULT_TABS = [
@@ -114,4 +115,62 @@ export const Disabled: Story = {
       </TabPanel>
     </Tabs>
   ),
+};
+
+/**
+ * 탭 목록은 Tab 키 정지점이 하나이고, 안에서는 ←→ / Home / End로 이동하며
+ * 이동한 탭이 바로 선택된다 (APG tabs 패턴). 양끝에서는 반대편으로 순환한다.
+ */
+export const KeyboardNavigation: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  play: async ({ canvas }) => {
+    const [tab1, tab2, tab3] = canvas.getAllByRole("tab");
+
+    // 선택된 탭만 Tab 키로 도달할 수 있다
+    await expect(tab1).toHaveAttribute("tabindex", "0");
+    await expect(tab2).toHaveAttribute("tabindex", "-1");
+    await expect(tab3).toHaveAttribute("tabindex", "-1");
+
+    await userEvent.click(tab1);
+    await userEvent.keyboard("{ArrowRight}");
+    await expect(tab2).toHaveFocus();
+    await expect(tab2).toHaveAttribute("aria-selected", "true");
+    await expect(canvas.getByRole("tabpanel")).toHaveTextContent("두 번째");
+
+    await userEvent.keyboard("{End}");
+    await expect(tab3).toHaveFocus();
+    await expect(tab3).toHaveAttribute("aria-selected", "true");
+
+    // 마지막에서 → 는 첫 번째로 순환
+    await userEvent.keyboard("{ArrowRight}");
+    await expect(tab1).toHaveFocus();
+
+    await userEvent.keyboard("{ArrowLeft}");
+    await expect(tab3).toHaveFocus();
+
+    await userEvent.keyboard("{Home}");
+    await expect(tab1).toHaveFocus();
+
+    // Tab 키는 목록을 빠져나간다 — 다른 탭에 멈추지 않는다
+    await userEvent.tab();
+    await expect(tab1).not.toHaveFocus();
+    await expect(tab2).not.toHaveFocus();
+    await expect(tab3).not.toHaveFocus();
+  },
+};
+
+/** 화살표 이동은 disabled 탭을 건너뛴다. */
+export const KeyboardSkipsDisabled: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  render: Disabled.render,
+  play: async ({ canvas }) => {
+    const [tab1, , tab3] = canvas.getAllByRole("tab");
+
+    await userEvent.click(tab1);
+    await userEvent.keyboard("{ArrowRight}");
+    await expect(tab3).toHaveFocus();
+    await expect(tab3).toHaveAttribute("aria-selected", "true");
+  },
 };

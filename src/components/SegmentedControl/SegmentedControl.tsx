@@ -1,5 +1,15 @@
-import { useId, useState, type HTMLAttributes, type MouseEvent, type ReactNode } from "react";
+import {
+  useId,
+  useState,
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactNode,
+} from "react";
+import { findNextByArrowKey } from "../../utils";
 import styles from "./SegmentedControl.module.css";
+
+const ENABLED_RADIO_SELECTOR = '[role="radio"]:not([disabled])';
 
 export type SegmentedControlSize = "sm" | "md" | "lg";
 export type SegmentedControlType = "solid" | "outlined";
@@ -60,6 +70,25 @@ export function SegmentedControl({
     onChange?.(optionValue, event);
   };
 
+  /**
+   * 화살표 / Home / End로 세그먼트를 이동하면서 바로 선택한다 (네이티브 라디오 그룹과 같은 동작).
+   * 선택은 click()으로 처리해 마우스와 같은 경로(handleSelect)를 탄다.
+   */
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const radios = Array.from(
+      event.currentTarget.querySelectorAll<HTMLElement>(ENABLED_RADIO_SELECTOR),
+    );
+    const next = findNextByArrowKey(radios, document.activeElement, event.key, "both");
+    if (!next) return;
+
+    event.preventDefault();
+    next.focus();
+    next.click();
+  };
+
+  // 라디오 그룹의 Tab 키 정지점은 하나 — 선택된 세그먼트, 없으면 첫 번째.
+  const hasSelection = options.some((opt) => opt.value === currentValue);
+
   const rootClass = [
     styles.root,
     styles[type],
@@ -78,9 +107,15 @@ export function SegmentedControl({
         </span>
       )}
 
-      <div className={styles.control} role="radiogroup" aria-labelledby={labelId}>
-        {options.map((opt) => {
+      <div
+        className={styles.control}
+        role="radiogroup"
+        aria-labelledby={labelId}
+        onKeyDown={handleKeyDown}
+      >
+        {options.map((opt, index) => {
           const selected = currentValue === opt.value;
+          const tabIndex = selected || (!hasSelection && index === 0) ? 0 : -1;
 
           return (
             <button
@@ -89,6 +124,7 @@ export function SegmentedControl({
               role="radio"
               className={styles.segment}
               aria-checked={selected}
+              tabIndex={tabIndex}
               onClick={handleSelect(opt.value)}
             >
               {opt.icon && opt.iconPosition !== "right" && (

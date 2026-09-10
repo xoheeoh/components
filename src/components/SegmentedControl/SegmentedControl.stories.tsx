@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent } from "storybook/test";
 import { mdiCalendar, mdiCalendarMonth, mdiCalendarWeek } from "@mdi/js";
 import { Icon } from "../Icon";
 import { SegmentedControl, type SegmentedControlProps } from "./index";
@@ -77,4 +78,44 @@ export const WithIcon: Story = {
 
 export const FullWidth: Story = {
   args: { fullWidth: true },
+};
+
+/**
+ * 라디오 그룹처럼 Tab 키 정지점은 하나(선택된 세그먼트)이고,
+ * 안에서는 화살표 / Home / End로 이동하면서 바로 선택된다. 양끝에서는 순환한다.
+ */
+export const KeyboardNavigation: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  play: async ({ canvas }) => {
+    const [day, week, month] = canvas.getAllByRole("radio");
+
+    await expect(day).toHaveAttribute("tabindex", "0");
+    await expect(week).toHaveAttribute("tabindex", "-1");
+    await expect(month).toHaveAttribute("tabindex", "-1");
+
+    await userEvent.click(day);
+    await userEvent.keyboard("{ArrowRight}");
+    await expect(week).toHaveFocus();
+    await expect(week).toHaveAttribute("aria-checked", "true");
+
+    // ↓도 다음으로 이동 (라디오 그룹 관례)
+    await userEvent.keyboard("{ArrowDown}");
+    await expect(month).toHaveFocus();
+    await expect(month).toHaveAttribute("aria-checked", "true");
+
+    // 마지막에서 → 는 첫 번째로 순환
+    await userEvent.keyboard("{ArrowRight}");
+    await expect(day).toHaveFocus();
+    await expect(day).toHaveAttribute("aria-checked", "true");
+
+    await userEvent.keyboard("{End}");
+    await expect(month).toHaveFocus();
+
+    // Tab 키는 그룹을 빠져나간다
+    await userEvent.tab();
+    await expect(day).not.toHaveFocus();
+    await expect(week).not.toHaveFocus();
+    await expect(month).not.toHaveFocus();
+  },
 };
