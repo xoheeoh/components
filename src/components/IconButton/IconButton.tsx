@@ -14,6 +14,11 @@ export type IconButtonSize = "sm" | "md";
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
+  /**
+   * 버튼 이름. 아이콘은 스크린리더에 읽히지 않으므로(aria-hidden) 이 값이 유일한 이름이다.
+   * 툴팁 등 다른 요소로 이름을 붙이더라도 이 값은 필요하다.
+   */
+  "aria-label": string;
   type?: "button" | "submit" | "reset";
   variant?: IconButtonVariant;
   /** sm(32) / md(40). `48px`처럼 길이 값도 가능 */

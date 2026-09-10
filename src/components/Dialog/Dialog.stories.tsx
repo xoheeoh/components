@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { expect, fn, screen, userEvent, waitFor } from "storybook/test";
+import { expect, fireEvent, fn, screen, userEvent, waitFor } from "storybook/test";
 import { Button } from "../Button";
 import { Dialog } from "./Dialog";
 
@@ -152,6 +152,42 @@ export const ClosesOnEscape: Story = {
     const dialog = await screen.findByRole("dialog");
 
     await userEvent.keyboard("{Escape}");
+    await expect(dialog).not.toBeInTheDocument();
+  },
+};
+
+/**
+ * 패널 안 텍스트를 드래그로 선택하다 오버레이 위에서 마우스를 놓으면 click 이벤트는
+ * 오버레이에서 발생한다. 이때 닫히면 사용자가 입력 중인 내용을 잃는다.
+ * "누르기 시작한 곳"이 오버레이일 때만 닫혀야 한다.
+ */
+export const StaysOpenWhenDragEndsOnOverlay: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  render: function Render(args) {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button label="다이얼로그 열기" onClick={() => setOpen(true)} />
+        <Dialog {...args} open={open} onClose={() => setOpen(false)} title="드래그 확인">
+          <p style={{ margin: 0 }}>이 문장을 드래그로 선택합니다.</p>
+        </Dialog>
+      </>
+    );
+  },
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole("button", { name: "다이얼로그 열기" }));
+    const dialog = await screen.findByRole("dialog");
+    const overlay = dialog.parentElement!;
+
+    // 패널 안에서 누르기 시작 → 오버레이에서 click 발생 (브라우저는 공통 조상에 click을 보낸다)
+    await fireEvent.pointerDown(dialog);
+    await fireEvent.click(overlay);
+    await expect(dialog).toBeInTheDocument();
+
+    // 오버레이에서 누르기 시작해 그 자리에서 놓으면 닫혀야 한다
+    await fireEvent.pointerDown(overlay);
+    await fireEvent.click(overlay);
     await expect(dialog).not.toBeInTheDocument();
   },
 };
