@@ -233,9 +233,15 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
     updatePosition();
     window.addEventListener("resize", updatePosition);
     window.addEventListener("scroll", updatePosition, true);
+    // 칩을 고르다 트리거가 두 줄로 늘어나면(overflow) 목록이 트리거를 덮는다.
+    // 창 크기가 아니라 트리거 자체의 크기 변화도 따라가야 한다.
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined" ? new ResizeObserver(updatePosition) : undefined;
+    if (triggerRef.current) resizeObserver?.observe(triggerRef.current);
     return () => {
       window.removeEventListener("resize", updatePosition);
       window.removeEventListener("scroll", updatePosition, true);
+      resizeObserver?.disconnect();
     };
   }, [open]);
 
@@ -383,8 +389,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
     [description ? descriptionId : null, ariaDescribedBy].filter(Boolean).join(" ") || undefined;
 
   /**
-   * 트리거가 <button>이라 <label htmlFor>만으로는 접근 가능한 이름이 만들어지지 않는다.
-   * button의 이름은 내용(= 선택값)에서 나오므로, 필드명과 선택값을 함께 읽히게 하려면
+   * 트리거가 <div role="combobox">라 <label htmlFor>로는 이름이 연결되지 않는다
+   * (label은 input·button 같은 폼 요소에만 붙는다). 필드명과 선택값을 함께 읽히게 하려면
    * aria-labelledby로 직접 엮어야 한다.
    *
    * chip 표시일 때는 칩 라벨만 참조한다. 칩 컨테이너를 참조하면 삭제 컨트롤의

@@ -99,7 +99,11 @@ export interface ToastProps {
   onAction?: () => void;
 }
 
-/** 단일 토스트 UI — 보통 ToastProvider + useToast로 사용 */
+/**
+ * 단일 토스트 UI — 보통 ToastProvider + useToast로 사용.
+ * 스크린리더 읽어주기(aria-live)는 ToastProvider의 viewport가 맡는다.
+ * 라이브 영역은 미리 존재해야 그 안의 변화를 확실히 읽으므로, 토스트마다 새로 만들지 않는다.
+ */
 export function Toast({
   message,
   type = "default",
@@ -133,8 +137,6 @@ export function Toast({
 
   return (
     <div
-      role="status"
-      aria-live="polite"
       className={toastClass}
       onMouseEnter={pauseOnInteract ? onHoldStart : undefined}
       onMouseLeave={pauseOnInteract ? onHoldEnd : undefined}
@@ -312,7 +314,7 @@ export function ToastProvider({
       {children}
       {typeof document !== "undefined" &&
         createPortal(
-          <div className={viewportClass} aria-label="알림">
+          <div className={viewportClass} role="status" aria-live="polite" aria-label="알림">
             {items.map((item) => (
               <Toast
                 key={item.id}
