@@ -32,6 +32,10 @@
   cursor: not-allowed;
 }
 
+.textButton[aria-busy="true"] {
+  cursor: progress;
+}
+
 .textButton:active:not(:disabled) {
   transform: scale(var(--press-scale));
 }

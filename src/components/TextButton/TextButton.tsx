@@ -47,8 +47,16 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(functio
       type={type}
       className={classes}
       style={style}
-      onClick={onClick}
+      // loading 중에는 클릭(Enter/Space 포함)과 폼 제출을 막는다. Button과 같은 이유로 disabled는 쓰지 않는다.
+      onClick={(event) => {
+        if (loading) {
+          event.preventDefault();
+          return;
+        }
+        onClick?.();
+      }}
       disabled={disabled}
+      aria-busy={loading || undefined}
       {...rest}
     >
       <span className={styles.label}>
