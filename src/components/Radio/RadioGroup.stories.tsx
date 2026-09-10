@@ -9,7 +9,9 @@ const PLANS = [
 ];
 
 function RadioGroupStory(args: RadioGroupProps) {
-  const [selected, setSelected] = useState<string | undefined>(() => args.value ?? args.defaultValue);
+  const [selected, setSelected] = useState<string | undefined>(
+    () => args.value ?? args.defaultValue,
+  );
 
   return (
     <RadioGroup

@@ -86,7 +86,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
     "aria-invalid": ariaInvalid,
     ...rest
   },
-  ref
+  ref,
 ) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   useImperativeHandle(ref, () => textareaRef.current as HTMLTextAreaElement);
@@ -97,7 +97,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
   const descriptionId = `${textareaId}-description`;
 
   // 소비자가 넘긴 aria-describedby를 덮지 않고 뒤에 이어 붙인다.
-  const describedBy = [description ? descriptionId : null, ariaDescribedBy].filter(Boolean).join(" ") || undefined;
+  const describedBy =
+    [description ? descriptionId : null, ariaDescribedBy].filter(Boolean).join(" ") || undefined;
 
   /**
    * 접근성 속성.
@@ -135,7 +136,13 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
   };
 
   const labelClass = [styles.label, styles[size]].filter(Boolean).join(" ");
-  const textareaClass = [styles.textarea, styles[size], styles[status], styles[resize], showFooter && styles.hasFooter]
+  const textareaClass = [
+    styles.textarea,
+    styles[size],
+    styles[status],
+    styles[resize],
+    showFooter && styles.hasFooter,
+  ]
     .filter(Boolean)
     .join(" ");
   const descriptionClass = [styles.description, styles[status]].filter(Boolean).join(" ");
@@ -183,7 +190,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
             {showBadge && (
               // 텍스트 대안이 없는 장식이다. 상태의 의미는 aria-invalid와 description이 전달한다.
               <div className={badgeClass} aria-hidden>
-                <Icon path={status === "positive" ? mdiCheckCircle : mdiAlertCircle} size={ICON_SIZE[size]} />
+                <Icon
+                  path={status === "positive" ? mdiCheckCircle : mdiAlertCircle}
+                  size={ICON_SIZE[size]}
+                />
               </div>
             )}
           </div>

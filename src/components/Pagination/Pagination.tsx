@@ -137,14 +137,16 @@ export function Pagination({
     size?: PaginationDotSize;
     color?: PaginationDotColor;
   };
-  const size = type === "dot" ? dotSize ?? "md" : "md";
-  const color = type === "dot" ? dotColor ?? "primary" : "primary";
+  const size = type === "dot" ? (dotSize ?? "md") : "md";
+  const color = type === "dot" ? (dotColor ?? "primary") : "primary";
   const isControlled = page !== undefined;
   const [uncontrolledPage, setUncontrolledPage] = useState(defaultPage);
   const currentPage = clampPage(isControlled ? page : uncontrolledPage, count);
   const windowSize = Math.max(1, visibleCount);
   const total = Math.max(0, count);
-  const [dotStart, setDotStart] = useState(() => getInitialDotStart(currentPage, total, windowSize));
+  const [dotStart, setDotStart] = useState(() =>
+    getInitialDotStart(currentPage, total, windowSize),
+  );
 
   const setPage = (next: number) => {
     const clamped = clampPage(next, count);
@@ -160,7 +162,9 @@ export function Pagination({
 
   const numberItems = type === "number" ? getNumberItems(currentPage, total, windowSize) : [];
   const visibleDots = Math.min(windowSize, Math.max(total, 1));
-  const rootClass = [styles.root, type === "number" ? styles.number : "", className].filter(Boolean).join(" ");
+  const rootClass = [styles.root, type === "number" ? styles.number : "", className]
+    .filter(Boolean)
+    .join(" ");
   const dotTrackStyle: DotTrackStyle = {
     "--dot-start": String(dotStart),
     "--dot-visible": String(visibleDots),
@@ -174,13 +178,17 @@ export function Pagination({
           className={styles.navButton}
           aria-label="이전 페이지"
           disabled={currentPage <= 1}
-          onClick={() => setPage(currentPage - 1)}>
+          onClick={() => setPage(currentPage - 1)}
+        >
           <Icon path={mdiChevronLeft} size={20} />
         </button>
       )}
 
       {type === "dot" ? (
-        <div className={[styles.dotViewport, styles[size], styles[color]].join(" ")} style={dotTrackStyle}>
+        <div
+          className={[styles.dotViewport, styles[size], styles[color]].join(" ")}
+          style={dotTrackStyle}
+        >
           <ul className={styles.list}>
             {Array.from({ length: total }, (_, i) => i + 1).map((item) => {
               const selected = item === currentPage;
@@ -221,7 +229,8 @@ export function Pagination({
                   className={styles.page}
                   aria-label={`${item}페이지`}
                   aria-current={selected ? "page" : undefined}
-                  onClick={() => setPage(item)}>
+                  onClick={() => setPage(item)}
+                >
                   {item}
                 </button>
               </li>
@@ -236,7 +245,8 @@ export function Pagination({
           className={styles.navButton}
           aria-label="다음 페이지"
           disabled={currentPage >= count}
-          onClick={() => setPage(currentPage + 1)}>
+          onClick={() => setPage(currentPage + 1)}
+        >
           <Icon path={mdiChevronRight} size={20} />
         </button>
       )}

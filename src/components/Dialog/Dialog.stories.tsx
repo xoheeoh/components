@@ -29,7 +29,11 @@ const meta = {
   argTypes: {
     title: { control: "text", description: "다이얼로그 제목" },
     description: { control: "text", description: "제목 아래 보조 설명. 비우면 숨김." },
-    size: { control: "inline-radio", options: ["sm", "md", "lg"], description: "패널 너비 (기본값 md)" },
+    size: {
+      control: "inline-radio",
+      options: ["sm", "md", "lg"],
+      description: "패널 너비 (기본값 md)",
+    },
     closeOnOverlayClick: { control: "boolean", description: "오버레이 클릭 시 닫힘 여부" },
     showCloseButton: { control: "boolean", description: "헤더 오른쪽 닫기 버튼 표시 여부" },
     footer: {
@@ -65,10 +69,16 @@ export const Playground: Story = {
           onClose={() => setOpen(false)}
           footer={
             <>
-              <Button variant="outlined" color="neutral" label="취소" onClick={() => setOpen(false)} />
+              <Button
+                variant="outlined"
+                color="neutral"
+                label="취소"
+                onClick={() => setOpen(false)}
+              />
               <Button variant="solid" color="primary" label="확인" onClick={() => setOpen(false)} />
             </>
-          }>
+          }
+        >
           <p className="text-body2" style={{ margin: 0 }}>
             본문 영역입니다. 폼이나 긴 내용이 들어갑니다.
           </p>
@@ -95,7 +105,15 @@ export const Sizes: Story = {
             onClose={() => setSize(null)}
             size={size}
             title={`${size.toUpperCase()} 크기`}
-            footer={<Button variant="outlined" color="neutral" label="닫기" onClick={() => setSize(null)} />}>
+            footer={
+              <Button
+                variant="outlined"
+                color="neutral"
+                label="닫기"
+                onClick={() => setSize(null)}
+              />
+            }
+          >
             <p className="text-body2" style={{ margin: 0 }}>
               size=&quot;{size}&quot;
             </p>
@@ -157,7 +175,8 @@ export const DoesNotTrapKeyboard: Story = {
           onClose={() => setOpen(false)}
           showCloseButton={false}
           title="포커스 가능 요소 없음"
-          footer={undefined}>
+          footer={undefined}
+        >
           <p style={{ margin: 0 }}>텍스트만 있습니다.</p>
         </Dialog>
       </>
@@ -200,7 +219,8 @@ export const FocusesFirstVisibleField: Story = {
           open={open}
           onClose={() => setOpen(false)}
           showCloseButton={false}
-          title="hidden 필드가 앞에 있는 폼">
+          title="hidden 필드가 앞에 있는 폼"
+        >
           <form onSubmit={(event) => event.preventDefault()}>
             <input type="hidden" name="csrf" />
             <div style={{ display: "none" }}>
@@ -220,6 +240,8 @@ export const FocusesFirstVisibleField: Story = {
 
     // hidden / display:none / visibility:hidden / disabled 를 모두 건너뛰어야 한다.
     // 초기 포커스는 requestAnimationFrame에서 일어나므로 기다린다.
-    await waitFor(() => expect(screen.getByRole("textbox", { name: "첫 보이는 필드" })).toHaveFocus());
+    await waitFor(() =>
+      expect(screen.getByRole("textbox", { name: "첫 보이는 필드" })).toHaveFocus(),
+    );
   },
 };

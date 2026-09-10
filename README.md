@@ -85,27 +85,27 @@ import "./theme.css";
 
 ### Semantic 토큰
 
-| 그룹 | 토큰 | 용도 |
-| --- | --- | --- |
-| Static | `--semantic-static-white`, `--semantic-static-black` | 고정 흰/검 |
-| Dimmer | `--semantic-dimmer` | 모달 오버레이 |
-| Primary | `--semantic-primary-bg/fg/border` + `hover-*` | 강조, 포커스 |
-| Neutral | `--semantic-neutral-bg/fg/border` + `hover-*` | 기본 면·선 |
-| Error | `--semantic-error-bg/fg/border` + `hover-*` | 위험, destructive |
-| Positive | `--semantic-positive-bg/fg/border` | 성공 |
-| Info | `--semantic-info-bg/fg/border` | 안내 |
-| Warning | `--semantic-warning-bg/fg/border` | 경고 |
-| Disabled | `--semantic-disabled-bg/fg/border`, `--semantic-disabled-fg-assistive` | 비활성 |
-| Label | `--semantic-label-normal/alternative/assistive` | 본문·보조 텍스트 |
+| 그룹     | 토큰                                                                   | 용도              |
+| -------- | ---------------------------------------------------------------------- | ----------------- |
+| Static   | `--semantic-static-white`, `--semantic-static-black`                   | 고정 흰/검        |
+| Dimmer   | `--semantic-dimmer`                                                    | 모달 오버레이     |
+| Primary  | `--semantic-primary-bg/fg/border` + `hover-*`                          | 강조, 포커스      |
+| Neutral  | `--semantic-neutral-bg/fg/border` + `hover-*`                          | 기본 면·선        |
+| Error    | `--semantic-error-bg/fg/border` + `hover-*`                            | 위험, destructive |
+| Positive | `--semantic-positive-bg/fg/border`                                     | 성공              |
+| Info     | `--semantic-info-bg/fg/border`                                         | 안내              |
+| Warning  | `--semantic-warning-bg/fg/border`                                      | 경고              |
+| Disabled | `--semantic-disabled-bg/fg/border`, `--semantic-disabled-fg-assistive` | 비활성            |
+| Label    | `--semantic-label-normal/alternative/assistive`                        | 본문·보조 텍스트  |
 
 atomic 스케일(`--atomic-blue-50` … `--atomic-blue-900` 등)을 바꾸면 그걸 가리키는 semantic 값도 따라갑니다. 컴포넌트에서는 atomic을 직접 쓰지 않는 것을 권장합니다.
 
 ### 그 외 토큰
 
-| 종류 | 예시 |
-| --- | --- |
-| Radius | `--r-xs` `4px` … `--r-full` |
-| Motion | `--press-scale` `0.97` |
+| 종류   | 예시                                                                 |
+| ------ | -------------------------------------------------------------------- |
+| Radius | `--r-xs` `4px` … `--r-full`                                          |
+| Motion | `--press-scale` `0.97`                                               |
 | Shadow | `--shadow-normal-xs` … `--shadow-normal-xl`, `--shadow-spread-sm/md` |
 
 ## 타이포그래피
@@ -118,12 +118,12 @@ atomic 스케일(`--atomic-blue-50` … `--atomic-blue-900` 등)을 바꾸면 �
 <p className="text-caption1">보조</p>
 ```
 
-| 클래스 | 용도 |
-| --- | --- |
-| `text-heading1` … `text-heading3` | 제목 |
+| 클래스                              | 용도   |
+| ----------------------------------- | ------ |
+| `text-heading1` … `text-heading3`   | 제목   |
 | `text-subtitle1` … `text-subtitle4` | 소제목 |
-| `text-body1`, `text-body2` | 본문 |
-| `text-caption1`, `text-caption2` | 캡션 |
+| `text-body1`, `text-body2`          | 본문   |
+| `text-caption1`, `text-caption2`    | 캡션   |
 
 각 역할은 `--text-{role}-size|weight|letter-spacing|line-height`로도 참조할 수 있습니다.
 

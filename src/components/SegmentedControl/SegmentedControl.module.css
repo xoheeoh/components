@@ -62,7 +62,10 @@
   cursor: pointer;
   white-space: nowrap;
   box-shadow: var(--segment-shadow);
-  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .segmentIcon {

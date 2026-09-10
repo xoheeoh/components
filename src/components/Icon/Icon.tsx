@@ -27,7 +27,8 @@ export function Icon({ path, size = 24, className = "", color, style, ...rest }:
       className={["mdi-icon", className].filter(Boolean).join(" ")}
       style={mergedStyle}
       aria-hidden
-      {...rest}>
+      {...rest}
+    >
       <path d={path} fill={color ?? "currentColor"} />
     </svg>
   );

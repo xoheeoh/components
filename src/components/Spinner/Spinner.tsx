@@ -14,12 +14,21 @@ export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
 
 export const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(function Spinner(
   { size = "md", color = "primary", label = "로딩 중", className, ...rest },
-  ref
+  ref,
 ) {
-  const classes = [styles.spinner, styles[size], styles[color], className].filter(Boolean).join(" ");
+  const classes = [styles.spinner, styles[size], styles[color], className]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <span ref={ref} className={classes} role="status" aria-live="polite" aria-label={label} {...rest}>
+    <span
+      ref={ref}
+      className={classes}
+      role="status"
+      aria-live="polite"
+      aria-label={label}
+      {...rest}
+    >
       <span className={styles.visuallyHidden}>{label}</span>
     </span>
   );

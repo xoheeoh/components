@@ -32,7 +32,10 @@ function useTabsContext(component: string): TabsContextValue {
   return ctx;
 }
 
-export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue"> {
+export interface TabsProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "onChange" | "defaultValue"
+> {
   /** hug는 라벨 너비, fill은 목록을 탭 개수만큼 균등 분할 */
   resize: TabsResize;
   /** 탭 버튼 크기. 기본값 md */
@@ -69,12 +72,12 @@ export function Tabs({
       if (!isControlled) setUncontrolledValue(next);
       onChange?.(next);
     },
-    [isControlled, onChange]
+    [isControlled, onChange],
   );
 
   const ctx = useMemo(
     () => ({ value: currentValue, setValue, baseId, size, resize }),
-    [currentValue, setValue, baseId, size, resize]
+    [currentValue, setValue, baseId, size, resize],
   );
   const rootClass = [styles.root, className].filter(Boolean).join(" ");
 
@@ -104,7 +107,10 @@ export function TabList({ className, children, ...rest }: TabListProps) {
   );
 }
 
-export interface TabProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "value" | "onClick"> {
+export interface TabProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  "value" | "onClick"
+> {
   /** 탭 식별값. 같은 value의 TabPanel과 짝을 이룸 */
   value: string;
   children?: ReactNode;
@@ -129,7 +135,8 @@ export function Tab({ value, disabled, className, children, ...rest }: TabProps)
       onClick={() => {
         if (!disabled) setValue(value);
       }}
-      {...rest}>
+      {...rest}
+    >
       {children}
     </button>
   );
@@ -143,7 +150,13 @@ export interface TabPanelProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-export function TabPanel({ value, forceMount = false, className, children, ...rest }: TabPanelProps) {
+export function TabPanel({
+  value,
+  forceMount = false,
+  className,
+  children,
+  ...rest
+}: TabPanelProps) {
   const { value: selected, baseId } = useTabsContext("TabPanel");
   const isSelected = selected === value;
   const tabId = `${baseId}-tab-${value}`;
@@ -151,10 +164,19 @@ export function TabPanel({ value, forceMount = false, className, children, ...re
 
   if (!forceMount && !isSelected) return null;
 
-  const panelClass = [!isSelected && forceMount ? styles.panelHidden : "", className].filter(Boolean).join(" ");
+  const panelClass = [!isSelected && forceMount ? styles.panelHidden : "", className]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <div role="tabpanel" id={panelId} className={panelClass} aria-labelledby={tabId} hidden={!isSelected} {...rest}>
+    <div
+      role="tabpanel"
+      id={panelId}
+      className={panelClass}
+      aria-labelledby={tabId}
+      hidden={!isSelected}
+      {...rest}
+    >
       {children}
     </div>
   );

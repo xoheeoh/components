@@ -42,7 +42,11 @@ const meta = {
       description: "일 단위(date) / 월 단위(month) 달력",
       table: { defaultValue: { summary: "date" } },
     },
-    size: { control: "inline-radio", options: ["sm", "md", "lg"], table: { defaultValue: { summary: "md" } } },
+    size: {
+      control: "inline-radio",
+      options: ["sm", "md", "lg"],
+      table: { defaultValue: { summary: "md" } },
+    },
     label: { control: "text" },
     disabled: { control: "boolean", table: { defaultValue: { summary: "false" } } },
     fullWidth: {

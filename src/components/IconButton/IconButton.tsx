@@ -62,11 +62,17 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(functio
     style,
     ...rest
   },
-  ref
+  ref,
 ) {
   const isPreset = size === "sm" || size === "md";
   const iconPx = toPx(iconSize) ?? defaultIconPx(size);
-  const classes = [styles.iconButton, styles[variant], styles[color], isPreset && styles[size], className]
+  const classes = [
+    styles.iconButton,
+    styles[variant],
+    styles[color],
+    isPreset && styles[size],
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 
@@ -74,7 +80,11 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(functio
   if (!isPreset) {
     mergedStyle["--btn-size"] = size;
     mergedStyle["--icon-size"] =
-      iconSize != null ? toCssLength(iconSize) : iconPx != null ? `${iconPx}px` : `calc(${size} * 0.6)`;
+      iconSize != null
+        ? toCssLength(iconSize)
+        : iconPx != null
+          ? `${iconPx}px`
+          : `calc(${size} * 0.6)`;
   } else if (iconSize != null) {
     mergedStyle["--icon-size"] = toCssLength(iconSize);
   }
@@ -84,12 +94,21 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(functio
         icon,
         iconPx != null
           ? { size: iconPx }
-          : { style: { width: "var(--icon-size)", height: "var(--icon-size)", ...icon.props.style } }
+          : {
+              style: { width: "var(--icon-size)", height: "var(--icon-size)", ...icon.props.style },
+            },
       )
     : icon;
 
   return (
-    <button ref={ref} type={type} className={classes} style={mergedStyle} disabled={disabled} {...rest}>
+    <button
+      ref={ref}
+      type={type}
+      className={classes}
+      style={mergedStyle}
+      disabled={disabled}
+      {...rest}
+    >
       <span className={styles.icon}>{renderedIcon}</span>
     </button>
   );

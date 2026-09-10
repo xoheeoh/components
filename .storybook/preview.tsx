@@ -10,7 +10,8 @@ const preview: Preview = {
         style={{
           background: "var(--semantic-neutral-bg)",
           color: "var(--semantic-label-normal)",
-        }}>
+        }}
+      >
         <Story />
       </div>
     ),

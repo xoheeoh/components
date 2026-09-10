@@ -102,14 +102,16 @@ export function Dialog({
 
   useEffect(() => {
     if (!open) return;
-    restoreFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    restoreFocusRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
     pushDialog(instanceId);
 
     const id = window.requestAnimationFrame(() => {
       const panel = panelRef.current;
       if (!panel) return;
       const autofocus = panel.querySelector<HTMLElement>("[autofocus]");
-      const target = (autofocus && isFocusable(autofocus) ? autofocus : null) ?? getFocusable(panel)[0] ?? panel;
+      const target =
+        (autofocus && isFocusable(autofocus) ? autofocus : null) ?? getFocusable(panel)[0] ?? panel;
       target.focus();
       // 대상이 실제로 포커스를 받지 못했으면 패널로 되돌린다.
       // 그러지 않으면 포커스가 오버레이 뒤 요소에 남는다.
@@ -180,7 +182,8 @@ export function Dialog({
         aria-describedby={hasDescription ? descriptionId : undefined}
         tabIndex={-1}
         className={[styles.panel, styles[size], className].filter(Boolean).join(" ")}
-        onClick={(event) => event.stopPropagation()}>
+        onClick={(event) => event.stopPropagation()}
+      >
         {hasHeader ? (
           <div className={styles.header}>
             <div className={styles.heading}>
@@ -202,7 +205,12 @@ export function Dialog({
               ) : null}
             </div>
             {showCloseButton ? (
-              <button type="button" className={styles.closeButton} aria-label="닫기" onClick={onClose}>
+              <button
+                type="button"
+                className={styles.closeButton}
+                aria-label="닫기"
+                onClick={onClose}
+              >
                 <Icon path={mdiClose} size={20} />
               </button>
             ) : null}

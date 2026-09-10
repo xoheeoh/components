@@ -44,9 +44,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     iconOnly = false,
     ...rest
   },
-  ref
+  ref,
 ) {
-  const classes = [styles.button, styles[variant], styles[size], styles[color], iconOnly && styles.iconOnly, className]
+  const classes = [
+    styles.button,
+    styles[variant],
+    styles[size],
+    styles[color],
+    iconOnly && styles.iconOnly,
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
   const spinnerSize = size === "lg" ? "md" : size === "sm" ? "xs" : "sm";
@@ -60,14 +67,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       onClick={onClick}
       disabled={disabled}
       aria-label={iconOnly ? label : undefined}
-      {...rest}>
+      {...rest}
+    >
       <span className={styles.label}>
-        <span className={loading ? styles.labelHidden : undefined} aria-hidden={loading || undefined}>
+        <span
+          className={loading ? styles.labelHidden : undefined}
+          aria-hidden={loading || undefined}
+        >
           {icon && iconPosition === "left" && icon}
           {iconOnly ? null : label}
           {icon && iconPosition === "right" && icon}
         </span>
-        {loading ? <Spinner size={spinnerSize} color="current" className={styles.loadingSpinner} /> : null}
+        {loading ? (
+          <Spinner size={spinnerSize} color="current" className={styles.loadingSpinner} />
+        ) : null}
       </span>
     </button>
   );

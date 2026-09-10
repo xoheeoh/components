@@ -10,7 +10,10 @@ import styles from "./Switch.module.css";
 
 export type SwitchSize = "sm" | "md";
 
-export interface SwitchProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onChange" | "type"> {
+export interface SwitchProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  "onChange" | "type"
+> {
   /** 옵션 라벨. 빈 값인 경우 숨김 처리. */
   label?: ReactNode;
   size?: SwitchSize;
@@ -42,7 +45,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch
     className,
     ...rest
   },
-  ref
+  ref,
 ) {
   const isControlled = checked !== undefined;
   const [uncontrolledChecked, setUncontrolledChecked] = useState(Boolean(defaultChecked));
@@ -57,7 +60,9 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch
     onClick?.(event);
   };
 
-  const rootClass = [styles.root, styles[size], disabled ? styles.disabled : "", className].filter(Boolean).join(" ");
+  const rootClass = [styles.root, styles[size], disabled ? styles.disabled : "", className]
+    .filter(Boolean)
+    .join(" ");
   const labelClass = [styles.label, labelClassName].filter(Boolean).join(" ");
 
   return (
@@ -71,7 +76,8 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch
       disabled={disabled}
       className={rootClass}
       style={style}
-      onClick={handleClick}>
+      onClick={handleClick}
+    >
       <span className={styles.track} data-state={visualState} aria-hidden>
         <span className={styles.thumb} />
       </span>

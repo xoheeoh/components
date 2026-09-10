@@ -23,7 +23,8 @@ function DemoTrigger({ children }: { children: ReactNode }) {
         border: "1px dashed var(--semantic-neutral-border)",
         borderRadius: "var(--r-sm)",
         padding: "16px",
-      }}>
+      }}
+    >
       {children}
     </span>
   );
@@ -112,7 +113,8 @@ export const Positions: Story = {
         alignItems: "center",
         justifyItems: "center",
         width: 360,
-      }}>
+      }}
+    >
       <div style={{ gridColumn: 2, gridRow: 1 }}>
         <Tooltip content="위쪽" position="top" arrow="vertical" align="center">
           <DemoTrigger>Top</DemoTrigger>
@@ -168,7 +170,8 @@ export const AlignHorizontal: Story = {
         }
         position="right"
         arrow="horizontal"
-        align="top">
+        align="top"
+      >
         <DemoTrigger>Top</DemoTrigger>
       </Tooltip>
       <Tooltip
@@ -183,7 +186,8 @@ export const AlignHorizontal: Story = {
         }
         position="right"
         arrow="horizontal"
-        align="center">
+        align="center"
+      >
         <DemoTrigger>Center</DemoTrigger>
       </Tooltip>
       <Tooltip
@@ -198,7 +202,8 @@ export const AlignHorizontal: Story = {
         }
         position="right"
         arrow="horizontal"
-        align="bottom">
+        align="bottom"
+      >
         <DemoTrigger>Bottom</DemoTrigger>
       </Tooltip>
     </div>
