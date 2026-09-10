@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
 import { ko as dateFnsKo } from "date-fns/locale";
 import { mdiChevronDown, mdiChevronLeft, mdiChevronRight, mdiChevronUp } from "@mdi/js";
@@ -24,6 +24,8 @@ export interface MonthCalendarProps {
   year?: number;
   onYearChange?: (year: number) => void;
   className?: string;
+  /** true면 마운트 시 선택된 월(없으면 첫 월) 버튼에 포커스. DayPicker의 autoFocus와 같은 역할 */
+  autoFocus?: boolean;
 }
 
 export type CalendarProps = DateCalendarProps | MonthCalendarProps;
@@ -71,10 +73,22 @@ function MonthCalendar({
   year: controlledYear,
   onYearChange,
   className,
+  autoFocus = false,
 }: MonthCalendarProps) {
   const selectedYear = selected?.getFullYear();
   const [internalYear, setInternalYear] = useState(() => selectedYear ?? new Date().getFullYear());
   const year = controlledYear ?? internalYear;
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!autoFocus) return;
+    const grid = gridRef.current;
+    if (!grid) return;
+    const target =
+      grid.querySelector<HTMLElement>('[aria-selected="true"]') ??
+      grid.querySelector<HTMLElement>("button");
+    target?.focus();
+  }, [autoFocus]);
 
   const setYear = (next: number) => {
     if (controlledYear == null) setInternalYear(next);
@@ -102,7 +116,7 @@ function MonthCalendar({
           <CalendarChevron orientation="right" className="rdp-chevron" />
         </button>
       </div>
-      <div className={styles.monthGrid} role="listbox" aria-label="월 선택">
+      <div ref={gridRef} className={styles.monthGrid} role="listbox" aria-label="월 선택">
         {MONTHS.map((month) => {
           const isSelected =
             selected != null && selected.getFullYear() === year && selected.getMonth() === month;
