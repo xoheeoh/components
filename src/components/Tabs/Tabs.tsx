@@ -7,9 +7,13 @@ import {
   useState,
   type ButtonHTMLAttributes,
   type HTMLAttributes,
+  type KeyboardEvent,
   type ReactNode,
 } from "react";
+import { findNextByArrowKey } from "../../utils";
 import styles from "./Tabs.module.css";
+
+const ENABLED_TAB_SELECTOR = '[role="tab"]:not([disabled])';
 
 export type TabsResize = "hug" | "fill";
 export type TabsSize = "sm" | "md" | "lg";
@@ -96,12 +100,31 @@ export interface TabListProps extends HTMLAttributes<HTMLDivElement> {
   "aria-label"?: string;
 }
 
-export function TabList({ className, children, ...rest }: TabListProps) {
+export function TabList({ className, children, onKeyDown, ...rest }: TabListProps) {
   const { resize } = useTabsContext("TabList");
   const listClass = [styles.list, styles[resize], className].filter(Boolean).join(" ");
 
+  /**
+   * ←→ / Home / End로 탭 사이를 이동하고, 이동한 탭을 바로 선택한다 (APG tabs, 자동 활성화).
+   * 선택은 click()으로 처리해 마우스 클릭과 같은 경로(Tab의 onClick)를 탄다.
+   */
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    onKeyDown?.(event);
+    if (event.defaultPrevented) return;
+
+    const tabs = Array.from(
+      event.currentTarget.querySelectorAll<HTMLElement>(ENABLED_TAB_SELECTOR),
+    );
+    const next = findNextByArrowKey(tabs, document.activeElement, event.key, "horizontal");
+    if (!next) return;
+
+    event.preventDefault();
+    next.focus();
+    next.click();
+  };
+
   return (
-    <div role="tablist" className={listClass} {...rest}>
+    <div role="tablist" className={listClass} {...rest} onKeyDown={handleKeyDown}>
       {children}
     </div>
   );
@@ -122,6 +145,11 @@ export function Tab({ value, disabled, className, children, ...rest }: TabProps)
   const tabId = `${baseId}-tab-${value}`;
   const panelId = `${baseId}-panel-${value}`;
   const tabClass = [styles.tab, styles[size], className].filter(Boolean).join(" ");
+  /**
+   * 탭 목록의 Tab 키 정지점은 하나여야 한다 — 선택된 탭만 0, 나머지는 -1 (안에서는 화살표로 이동).
+   * 아무 탭도 선택되지 않았을 때(value "")는 모두 0으로 두어 도달 불가 상태를 피한다.
+   */
+  const tabIndex = isSelected || selected === "" ? 0 : -1;
 
   return (
     <button
@@ -131,6 +159,7 @@ export function Tab({ value, disabled, className, children, ...rest }: TabProps)
       className={tabClass}
       aria-selected={isSelected}
       aria-controls={panelId}
+      tabIndex={tabIndex}
       disabled={disabled}
       onClick={() => {
         if (!disabled) setValue(value);
