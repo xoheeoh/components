@@ -19,7 +19,7 @@ export type {
 } from "./IconButton";
 
 export { TextInput } from "./TextInput";
-export type { TextInputProps, TextInputSize } from "./TextInput";
+export type { TextInputProps, TextInputSize, TextInputAlign } from "./TextInput";
 
 export { Icon } from "./Icon";
 export type { IconProps, IconPath } from "./Icon";

@@ -23,6 +23,7 @@ import {
 
 export type TextInputStatus = "default" | "positive" | "negative";
 export type TextInputSize = "sm" | "md" | "lg";
+export type TextInputAlign = "left" | "center" | "right";
 
 type TrailingSlot = "password" | "status" | "clear" | null;
 
@@ -61,6 +62,8 @@ export interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   /** 상태값에 따른 뱃지. status가 default면 보이지 않는다. */
   statusBadge?: boolean;
   size?: TextInputSize;
+  /** 입력값 정렬. 금액·수량 같은 숫자는 right를 쓴다. 기본값 left */
+  align?: TextInputAlign;
   /** 필수 입력 필드 여부 */
   required?: boolean;
   /** 도움말 텍스트 */
@@ -80,6 +83,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
     status = "default",
     statusBadge = true,
     size = "md",
+    align = "left",
     required = false,
     description,
     disabled = false,
@@ -137,7 +141,11 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
   const trailing = resolveTrailingSlot({ isPassword, showBadge, canClear });
 
   const labelClass = [styles.label, styles[size]].filter(Boolean).join(" ");
-  const inputClass = [styles.input, styles[size], styles[status]].filter(Boolean).join(" ");
+  const alignClass =
+    align === "left" ? null : align === "center" ? styles.alignCenter : styles.alignRight;
+  const inputClass = [styles.input, styles[size], styles[status], alignClass]
+    .filter(Boolean)
+    .join(" ");
   const descriptionClass = [styles.description, styles[status]].filter(Boolean).join(" ");
   const iconClass = [styles.icon, styles[size]].filter(Boolean).join(" ");
   const fileTriggerClass = [styles.fileTrigger, styles[size]].filter(Boolean).join(" ");

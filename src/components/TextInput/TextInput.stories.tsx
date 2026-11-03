@@ -32,6 +32,7 @@ const meta = {
     status: { control: "select", options: ["default", "positive", "negative"] },
     statusBadge: { control: "boolean" },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+    align: { control: "inline-radio", options: ["left", "center", "right"] },
     required: { control: "boolean" },
     description: { control: "text" },
     disabled: { table: { disable: true } },
@@ -67,6 +68,10 @@ export const TypePassword: Story = {
 
 export const FixedWidth: Story = {
   args: { style: { width: 200 } },
+};
+
+export const AlignRight: Story = {
+  args: { label: "금액 (원)", align: "right", defaultValue: "1,000,000", style: { width: 200 } },
 };
 
 /*

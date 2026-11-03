@@ -39,6 +39,14 @@
   line-height: var(--input-line-height);
 }
 
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: right;
+}
+
 .control:has(.trailing) .input {
   padding-inline-end: calc(var(--status-badge-inset-end) + var(--status-badge-size));
 }
