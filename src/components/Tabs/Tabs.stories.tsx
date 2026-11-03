@@ -174,3 +174,37 @@ export const KeyboardSkipsDisabled: Story = {
     await expect(tab3).toHaveAttribute("aria-selected", "true");
   },
 };
+
+/**
+ * forceMount 패널에 display: flex를 주면 숨김 규칙을 덮어써서 선택되지 않은 패널까지 보였다.
+ * 소비자가 패널에 레이아웃용 className·style을 붙여도 선택된 패널만 보여야 한다.
+ */
+export const ForceMountStaysHidden: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  render: (args) => (
+    <Tabs {...args} style={{ width: 400 }}>
+      <TabList aria-label="forceMount 예시">
+        <Tab value="tab1">탭 1</Tab>
+        <Tab value="tab2">탭 2</Tab>
+      </TabList>
+      <TabPanel value="tab1" forceMount style={{ display: "flex" }}>
+        첫 번째 탭 내용입니다.
+      </TabPanel>
+      <TabPanel value="tab2" forceMount style={{ display: "flex" }}>
+        두 번째 탭 내용입니다.
+      </TabPanel>
+    </Tabs>
+  ),
+  play: async ({ canvas }) => {
+    // toBeVisible은 hidden 속성만 보고 숨김으로 판단하므로, 실제 적용된 display 값을 확인한다.
+    const displayOf = (text: string) => getComputedStyle(canvas.getByText(text)).display;
+
+    await expect(displayOf("첫 번째 탭 내용입니다.")).toBe("flex");
+    await expect(displayOf("두 번째 탭 내용입니다.")).toBe("none");
+
+    await userEvent.click(canvas.getByRole("tab", { name: "탭 2" }));
+    await expect(displayOf("첫 번째 탭 내용입니다.")).toBe("none");
+    await expect(displayOf("두 번째 탭 내용입니다.")).toBe("flex");
+  },
+};

@@ -67,8 +67,9 @@
   cursor: not-allowed;
 }
 
+/* 소비자가 패널에 display를 바꾸는 className(예: flex)을 붙여도 숨김이 풀리지 않게 한다. */
 .panelHidden {
-  display: none;
+  display: none !important;
 }
 
 .fill .tab {
