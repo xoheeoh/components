@@ -10,10 +10,14 @@ import { playwright } from "@vitest/browser-playwright";
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
-/** Vite lib 모드는 CSS url()을 data URI로 인라인하므로, 폰트는 별도 파일로 내보낸다. */
+/**
+ * Vite lib 모드는 CSS url()을 data URI로 인라인하므로, 폰트는 별도 파일로 내보낸다.
+ * 폰트를 재배포하려면 OFL 라이선스 문구를 함께 넣어야 해서 OFL.txt도 옆에 둔다.
+ */
 function emitPretendardFont(): Plugin {
   const fileName = "assets/PretendardVariable.woff2";
   const sourcePath = resolve(dirname, "src/styles/fonts/PretendardVariable.woff2");
+  const licensePath = resolve(dirname, "src/styles/fonts/OFL.txt");
   const fontsCssPath = resolve(dirname, "src/styles/fonts.css");
   return {
     name: "emit-pretendard-font",
@@ -24,6 +28,11 @@ function emitPretendardFont(): Plugin {
         type: "asset",
         fileName,
         source: readFileSync(sourcePath),
+      });
+      this.emitFile({
+        type: "asset",
+        fileName: "assets/OFL.txt",
+        source: readFileSync(licensePath, "utf8"),
       });
       this.emitFile({
         type: "asset",
