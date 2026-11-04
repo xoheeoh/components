@@ -403,12 +403,17 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(function Select(
    * role="combobox"는 Name From: author라서 <button>과 달리 내용에서 이름이 만들어지지 않는다.
    * label이 없을 때 그냥 비워두면 접근 가능한 이름이 아예 없어지므로,
    * 소비자가 준 이름이 없을 때만 선택값을 이름으로 삼는다.
+   *
+   * 소비자가 aria-labelledby로 바깥 라벨을 가리키면 그 라벨 뒤에 선택값을 이어 붙인다.
+   * (label prop을 쓸 때와 같은 읽기: "발행처, 서울특별시")
    */
   const labelledBy = label
     ? [labelId, ...valueRefIds].join(" ")
-    : ariaLabel != null || ariaLabelledBy != null
-      ? undefined
-      : valueRefIds.join(" ");
+    : ariaLabelledBy != null
+      ? [ariaLabelledBy, ...valueRefIds].join(" ")
+      : ariaLabel != null
+        ? undefined
+        : valueRefIds.join(" ");
 
   /**
    * 접근성 속성.

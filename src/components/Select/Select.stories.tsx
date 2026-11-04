@@ -271,3 +271,23 @@ export const SelectsWithoutValueProp: Story = {
     await expect(trigger).toHaveAttribute("aria-expanded", "false");
   },
 };
+
+/**
+ * label prop 없이 바깥 글자를 aria-labelledby로 가리키는 경우다. (표 형태 폼에서 라벨을 왼쪽 칸에 둘 때)
+ * 그 글자 뒤에 선택값이 이어져 "발행처 사과"로 읽혀야 한다.
+ * 이전에는 넘긴 aria-labelledby가 버려져 이름이 없었다.
+ */
+export const NamedByExternalLabel: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <span id="select-external-label">발행처</span>
+      <Select aria-labelledby="select-external-label" options={options} value="apple" />
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    const trigger = canvas.getByRole("combobox", { name: /발행처/ });
+    await expect(trigger).toHaveAccessibleName("발행처 사과");
+  },
+};

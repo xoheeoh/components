@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { RadioGroup, type RadioGroupProps } from "./index";
+import { expect } from "storybook/test";
 
 const PLANS = [
   { value: "basic", label: "Basic" },
@@ -62,4 +63,22 @@ export const Horizontal: Story = {
 
 export const Disabled: Story = {
   args: { disabled: true, defaultValue: "pro" },
+};
+
+/**
+ * label prop 없이 바깥 글자를 aria-labelledby로 가리키는 경우다.
+ * 이전에는 넘긴 aria-labelledby가 덮어써져 그룹 이름이 없었다.
+ */
+export const NamedByExternalLabel: Story = {
+  tags: ["!autodocs"],
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <span id="radio-group-external-label">요금제</span>
+      <RadioGroup aria-labelledby="radio-group-external-label" direction="horizontal" options={PLANS} defaultValue="basic" />
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole("radiogroup", { name: "요금제" })).toBeInTheDocument();
+  },
 };

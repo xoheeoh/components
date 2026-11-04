@@ -57,11 +57,14 @@ export function CheckboxGroup({
   id,
   className,
   style,
+  "aria-labelledby": ariaLabelledBy,
   ...rest
 }: CheckboxGroupProps) {
   const generatedId = useId();
   const groupId = id ?? generatedId;
+  // label prop이 없으면 소비자가 바깥 라벨을 aria-labelledby로 가리킬 수 있다.
   const labelId = label ? `${groupId}-label` : undefined;
+  const labelledBy = labelId ?? ariaLabelledBy;
 
   const isControlled = value !== undefined;
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
@@ -88,7 +91,7 @@ export function CheckboxGroup({
       className={rootClass}
       style={style}
       role="group"
-      aria-labelledby={labelId}
+      aria-labelledby={labelledBy}
       aria-disabled={disabled || undefined}
     >
       {label && (

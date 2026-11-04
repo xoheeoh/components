@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Checkbox, CheckboxGroup, type CheckboxGroupProps } from "./index";
+import { expect } from "storybook/test";
 
 const INTERESTS = [
   { value: "item1", label: "E-mail" },
@@ -96,5 +97,9 @@ export const WithSelectAll: Story = {
         />
       </div>
     );
+  },
+  // 바깥 글자를 aria-labelledby로 가리키면 그게 그룹 이름이 된다. 이전에는 덮어써져 이름이 없었다.
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole("group", { name: "약관동의" })).toBeInTheDocument();
   },
 };

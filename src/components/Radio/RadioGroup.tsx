@@ -57,11 +57,14 @@ export function RadioGroup({
   id,
   className,
   style,
+  "aria-labelledby": ariaLabelledBy,
   ...rest
 }: RadioGroupProps) {
   const generatedId = useId();
   const groupId = id ?? generatedId;
+  // label prop이 없으면 소비자가 바깥 라벨을 aria-labelledby로 가리킬 수 있다.
   const labelId = label ? `${groupId}-label` : undefined;
+  const labelledBy = labelId ?? ariaLabelledBy;
   const groupName = name ?? `${groupId}-radio`;
 
   const isControlled = value !== undefined;
@@ -84,7 +87,7 @@ export function RadioGroup({
       className={rootClass}
       style={style}
       role="radiogroup"
-      aria-labelledby={labelId}
+      aria-labelledby={labelledBy}
       aria-disabled={disabled || undefined}
     >
       {label && (
