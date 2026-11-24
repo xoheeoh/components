@@ -1,0 +1,57 @@
+# main 브랜치에 push하면 스토리북을 빌드해서 GitHub Pages에 올린다.
+# 배포 주소: https://xoheeoh.github.io/components/
+name: 스토리북 배포
+
+on:
+  push:
+    branches: [main]
+  # GitHub 웹의 Actions 탭에서 버튼으로 직접 실행할 수도 있게 한다.
+  workflow_dispatch:
+
+# 이 작업이 GitHub Pages에 올릴 수 있도록 허용하는 권한이다.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 배포가 겹치면 진행 중인 것은 끝까지 두고, 대기 중인 것 중 최신 것만 실행한다.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: 스토리북 빌드
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 코드 내려받기
+        uses: actions/checkout@v5
+
+      - name: Node.js 준비
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 패키지 설치
+        run: npm ci
+
+      - name: 스토리북 빌드
+        run: npm run build-storybook
+
+      - name: 빌드 결과(storybook-static) 올릴 준비
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: storybook-static
+
+  deploy:
+    name: GitHub Pages에 배포
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 배포
+        id: deployment
+        uses: actions/deploy-pages@v4
