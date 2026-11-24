@@ -80,7 +80,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     >
       <span className={styles.label}>
         <span
-          className={loading ? styles.labelHidden : undefined}
+          // loading 중에도 labelContent를 유지해야 버튼 너비가 변하지 않는다.
+          className={loading ? `${styles.labelContent} ${styles.labelHidden}` : styles.labelContent}
           aria-hidden={loading || undefined}
         >
           {icon && iconPosition === "left" && icon}

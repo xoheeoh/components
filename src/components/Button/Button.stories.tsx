@@ -72,7 +72,7 @@ export const WithIcon: Story = {
       {...args}
       size="md"
       label="추가하기"
-      icon={<Icon path={mdiPlus} size={20} style={{ marginBottom: 1 }} />}
+      icon={<Icon path={mdiPlus} size={20} />}
       iconPosition="right"
     />
   ),

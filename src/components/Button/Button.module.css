@@ -59,6 +59,13 @@
   gap: 4px;
 }
 
+/* 아이콘과 글자를 세로 가운데에 맞추고 4px 띄운다. */
+.labelContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .labelHidden {
   visibility: hidden;
 }
