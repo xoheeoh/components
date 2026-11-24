@@ -39,6 +39,7 @@
     "prepublishOnly": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "preview:capture": "storybook build && node scripts/capture-preview.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

@@ -2,6 +2,10 @@
 
 React + TypeScript UI 컴포넌트 라이브러리입니다. 스타일은 CSS Modules와 디자인 토큰(`--semantic-*`, `--text-*` 등)으로 구성됩니다.
 
+**[Storybook에서 모든 컴포넌트 직접 써 보기 →](https://xoheeoh.github.io/components/)**
+
+[![버튼, 입력칸, 배너, 탭, 달력 등 컴포넌트 미리보기](https://raw.githubusercontent.com/xoheeoh/components/main/docs/preview.png)](https://xoheeoh.github.io/components/)
+
 Peer: `react`, `react-dom` (^18).
 
 ## Install
@@ -129,7 +133,7 @@ atomic 스케일(`--atomic-blue-50` … `--atomic-blue-900` 등)을 바꾸면 �
 
 ## 컴포넌트
 
-자세한 props는 패키지 타입과 Storybook을 보면 됩니다. 자주 쓰는 패턴만 적습니다.
+자세한 props는 패키지 타입과 [Storybook](https://xoheeoh.github.io/components/)을 보면 됩니다. 자주 쓰는 패턴만 적습니다.
 
 ### Button / TextButton / IconButton
 
@@ -294,7 +298,7 @@ import { mdiHome } from "@mdi/js";
 
 ## 로컬 미리보기
 
-이 저장소에서 컴포넌트를 보려면:
+배포된 Storybook은 <https://xoheeoh.github.io/components/> 에서 볼 수 있습니다. 이 저장소를 내려받아 직접 띄우려면:
 
 ```bash
 npm install
